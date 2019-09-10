@@ -15,7 +15,11 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
+import MyClubs from '../MyClubs/MyClubs';
 import InfoPage from '../InfoPage/InfoPage';
+import ClubPage from '../ClubPage/ClubPage';
+import CreateNew from '../CreateNew/CreateNew';
+import EditDetails from '../EditDetails/EditDetails';
 
 import './App.css';
 
@@ -54,6 +58,28 @@ class App extends Component {
               exact
               path="/info"
               component={InfoPage}
+            />
+            <ProtectedRoute
+              exact
+              path="/createnew"
+              component={CreateNew}
+            />
+            <ProtectedRoute
+            exact
+            path="/myclubs"
+            component={MyClubs}
+            />
+
+            <ProtectedRoute
+              exact
+              path="/club"
+              component={ClubPage}
+            />
+
+            <ProtectedRoute
+              exact
+              path="/edit"
+              component={EditDetails}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />

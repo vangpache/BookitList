@@ -15,7 +15,7 @@ class RegisterPage extends Component {
         type: 'REGISTER',
         payload: {
           username: this.state.username,
-          password: this.state.password,
+          password: this.state.password
         },
       });
     } else {
@@ -41,7 +41,7 @@ class RegisterPage extends Component {
           </h2>
         )}
         <form onSubmit={this.registerUser}>
-          <h1>Register User</h1>
+          <h1>Create a user account:</h1>
           <div>
             <label htmlFor="username">
               Username:
@@ -53,6 +53,7 @@ class RegisterPage extends Component {
               />
             </label>
           </div>
+
           <div>
             <label htmlFor="password">
               Password:
