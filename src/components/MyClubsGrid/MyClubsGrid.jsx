@@ -19,10 +19,9 @@ class MyClubsGrid extends Component {
     render() {
         return (
             <div className={classes.root}>
+                
                 <Grid container spacing={3}>
-                    
                     <Grid item xs={6}>
-
                         <Paper className={classes.paper}>
                             <h3>Current Clubs</h3>
                             <Grid container spacing={3}>
@@ -44,21 +43,22 @@ class MyClubsGrid extends Component {
                                 </Grid>
                             </Grid>
                             </Paper>
-
                     </Grid>
+
                     <Grid item xs={6}>
                         <Paper className={classes.paper}>
+                          
                             <Card>
-                                <h3>Hi, there you are.</h3>
+                                <h3>Hi, there you are.</h3>   
                                 <p>List of clubs here by date</p>
                                 <ul>
                                     <Link to="/club"><li>Book 1</li></Link>
-                                    
                                     <li>Book 2</li>
                                     <li>Book 3</li>
                                     <li>Book 4</li>
                                 </ul>
                             </Card>
+                  
                         </Paper>
                     </Grid>
                     
