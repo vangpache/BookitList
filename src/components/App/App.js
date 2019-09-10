@@ -22,8 +22,24 @@ import CreateNew from '../CreateNew/CreateNew';
 import EditDetails from '../EditDetails/EditDetails';
 
 
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import { createMuiTheme } from '@material-ui/core/styles';
+import green from '@material-ui/core/colors/green';
+import pink from '@material-ui/core/colors/pink';
 
 import './App.css';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: green
+  }
+  
+})
+
+
+
+
+
 
 class App extends Component {
   componentDidMount () {
@@ -32,8 +48,11 @@ class App extends Component {
 
   render() {
     return (
+      <MuiThemeProvider theme={theme}>
+
+      
       <Router>
-        <div>
+        <div className="appContainer" >
           <Nav />
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
@@ -89,6 +108,7 @@ class App extends Component {
           <Footer />
         </div>
       </Router>
+      </MuiThemeProvider>
   )}
 }
 

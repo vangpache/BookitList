@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { InputBase, Paper, IconButton } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import Book from '@material-ui/icons/Book';
+import { textAlign } from '@material-ui/system';
 
 
 const styles = theme => ({
@@ -17,6 +18,9 @@ const styles = theme => ({
     paper: {
         width: 375
     },
+    divContainer: {
+        margin: 20,
+    }
 });
 
 
@@ -27,14 +31,16 @@ class CreateNewSearchBar extends Component {
         const { classes } = this.props;
 
         return (
-
-            <Paper className={classes.paper}>
-                <Book />
-                <InputBase className={classes.input} placeholder="search books..." />
-                <IconButton className={classes.iconButton}>
-                    <SearchIcon   />
-                </IconButton>
-           </Paper>   
+            <div className={classes.divContainer} >
+                <Paper className={classes.paper}>
+                    <Book />
+                    <InputBase className={classes.input} placeholder="search books..." />
+                    <IconButton className={classes.iconButton}>
+                        <SearchIcon />
+                    </IconButton>
+                </Paper> 
+            </div>
+              
          
         )
     }

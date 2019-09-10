@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
+import { Paper, Grid, Card, CardContent, CardActions } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import green from '@material-ui/core/colors/green';
 
 const styles = theme => ({
     root: {
@@ -10,7 +11,6 @@ const styles = theme => ({
     paper: {
         padding: theme.spacing(2),
         textAlign: 'center',
-        color: theme.palette.text.secondary,
     },
 });
 
@@ -24,21 +24,42 @@ class MyClubsGrid extends Component {
                     <Grid item xs={6}>
 
                         <Paper className={classes.paper}>
-                            <h3>Hi, here I am.</h3>
+                            <h3>Current Clubs</h3>
                             <Grid container spacing={3}>
                                 <Grid item xs>
-                                    <h4>most current club here</h4>
+                                    <Card >
+                                        <h4>most current club here</h4>
+                                    </Card>
+                                    
                                 </Grid>
                                 <Grid item xs>
-                                    <h4>Details of most current club here</h4>
+                                    <Card>
+                                        <CardContent>
+                                            <h4>Details of most current club here</h4>
+                                            <h6>Book:</h6>
+                                            <h6>Author:</h6>
+                                        </CardContent>
+                                    </Card>
+                                    
                                 </Grid>
                             </Grid>
                             </Paper>
 
                     </Grid>
                     <Grid item xs={6}>
-                        <Paper className={classes.paper}><h3>Hi, there you are.</h3></Paper>
-
+                        <Paper className={classes.paper}>
+                            <Card>
+                                <h3>Hi, there you are.</h3>
+                                <p>List of clubs here by date</p>
+                                <ul>
+                                    <Link to="/club"><li>Book 1</li></Link>
+                                    
+                                    <li>Book 2</li>
+                                    <li>Book 3</li>
+                                    <li>Book 4</li>
+                                </ul>
+                            </Card>
+                        </Paper>
                     </Grid>
                     
                 </Grid>
