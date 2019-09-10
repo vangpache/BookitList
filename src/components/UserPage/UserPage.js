@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
+import Home from '../Home/Home';
 
 // this could also be written with destructuring parameters as:
 // const UserPage = ({ user }) => (
@@ -11,6 +12,7 @@ const UserPage = (props) => (
       Welcome, { props.user.username }!
     </h1>
     <p>Your ID is: {props.user.id}</p>
+    <Home />
     <LogOutButton className="log-in" />
   </div>
 );
