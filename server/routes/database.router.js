@@ -6,10 +6,10 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 
 //GET TOP THREE MOST RECENT BOOKCLUB DETAILS FOR HOME PAGE CARDS
 router.get('/', (req, res) => {
-    console.log('in databaseRouter details GET:', req.user_id);
+    console.log('in databaseRouter details GET:', req.user.id);
     
     let user_id = req.user.id
-    let queryText = `SELECT "book_title", "author", "image_url", "name", "username", "published" FROM "user_clubs"
+    let queryText = `SELECT "book_title", "author", "image_url", "name", "username", "published", "clubs_id" FROM "user_clubs"
                     JOIN "user" ON "user"."id" = "user_clubs"."user_id"
                     JOIN "clubs" ON "clubs"."id" = "user_clubs"."clubs_id"
                     WHERE "user_clubs"."user_id" = $1 ORDER BY "date" DESC LIMIT 3 ;`;
@@ -23,6 +23,8 @@ router.get('/', (req, res) => {
         res.sendStatus(500);
     })
 })
+
+
 
 
 

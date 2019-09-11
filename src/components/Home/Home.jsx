@@ -1,24 +1,34 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, Card, CardActions, CardContent, Grid,Paper } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import { Button, Card, CardActions, CardContent, Grid, Paper } from '@material-ui/core';
 
 
 
 class Home extends Component {
-
+    //ON LOAD: RUN THESE FUNCTIONS TO GET DATA
     componentDidMount() {
         this.getDetails();
+       
     }
 
+    //GETS THE DETAILS FOR MOST RECENT THREE CLUBS
     getDetails = () => {
         this.props.dispatch({
             type: 'GET_CLUB_DETAILS'
         })
     }
 
+    handleClick = () => {
+        console.log('book clicked');
+        
+    }
+  
+
 
     render() {
 
+           
 
         return (
 
@@ -31,42 +41,61 @@ class Home extends Component {
 
 
                     {this.props.clubDetails.map(club => (
-                        <Grid item xs={2} >
+                        <Grid item xs={1.5} >
                             <Paper>
-                                <Card>
-                                    <CardContent>
+                                <Card onClick={this.handleClick}>
+                                    <CardContent >
+                                        <CardActions >
                                         <p>{club.name}</p>
+                                            <img src={club.image_url} alt={club.book_title}/>
                                         <p>Book: {club.book_title}</p>
                                         <p>By: {club.author}</p>
-                                        <img src={club.image_url} alt={club.book_title} />
+                                        </CardActions>
                                     </CardContent>
                                 </Card>
                             </Paper>
                         </Grid>
                     ))}
 
-
-                    <Grid item xs={6} >
+                    
+                    <Grid item xs={4.25} >
+                        
                         <Paper>
                             <Card>
                                 <CardContent>
                                     <h4>Notifications</h4>
                                     <ul>
                                         <li>invites go here
-                                            <CardActions>
+                       
                                                 <Button variant="outlined" size="small">Accept Invite</Button>
                                                 <Button variant="outlined" size="small">Decline Invite</Button>
-                                            </CardActions>  
+                                       
                                         </li>
                                     </ul>
                                       
                                 </CardContent>
                             </Card>
                         </Paper>
-
                     </Grid>
 
-                </Grid>
+                        <Grid item xs={4.25}>
+                            <Paper>
+                            <Card>
+                                <CardContent>
+                                    <h3>Bookit List:</h3>
+                                    <ul>
+                                        <Link to="/club"><li>Book 1</li></Link>
+                                        <li>Book 2</li>
+                                        <li>Book 3</li>
+                                        <li>Book 4</li>
+                                    </ul>
+                                </CardContent>
+                            </Card>
+                        </Paper>
+                        
+                    </Grid>
+                    </Grid>
+               
 
             </div>
         )

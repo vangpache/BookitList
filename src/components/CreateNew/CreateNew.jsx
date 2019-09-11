@@ -16,6 +16,7 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 
 
 
+
 const styles = theme => ({
     root: {
         // flexGrow: 1,
@@ -51,6 +52,59 @@ const styles = theme => ({
 class CreateNew extends Component {
 
 
+    state = {
+        selectedBook: {
+            book_title: '',
+            author: '',
+            image_url: '',
+            pub_day: 0,
+            pub_month: 0,
+            pub_year: 0
+        },
+        newClub: {
+            name: '',
+            description: '',
+            notes: '',
+            invite_accepted: true,
+            admin_status: true
+        }
+    }
+
+    handleClick = (tile) => {
+        console.log('book clicked');
+        this.setState({
+            selectedBook: {
+                book_title: tile.best_book.title._text,
+                author: tile.best_book.author.name._text,
+                image_url: tile.best_book.image_url._text,
+                pub_day: tile.original_publication_day._text,
+                pub_month: tile.original_publication_month._text,
+                pub_year: tile.original_publication_year._text
+            }
+        })
+        console.log('show me THE MONEYYY:', this.state.selectedBook);        
+    }
+
+    //SET THE NEW CLUB DETAILS STATE
+    handleChange = (propertyName, event) => {
+        this.setState({
+            newClub: {
+                ...this.state.newClub,
+                [propertyName]: event.target.value
+            } 
+        })
+        console.log('show state:', this.state);   
+    }
+
+
+    //DISPATCH THE STATE TO SAGA
+    handleCreate = () => {
+        this.props.dispatch({
+            type: 'POST_NEWCLUB',
+            payload: this.state
+        })
+    }
+
     render() {
 
       
@@ -79,11 +133,11 @@ class CreateNew extends Component {
 
                             
                     <Grid  item xs={6}>
-                        <div className={classes.gridListPaper}>
+                        <div>
                                     <Paper >
                                 <GridList className={classes.gridList} cols={5} rows={1}>
                                     {this.props.booksList.map(tile => (
-                                        <GridListTile key={tile}>
+                                        <GridListTile key={tile} onClick={() => this.handleClick(tile)} >
                                             <img src={tile.best_book.image_url._text} alt={tile.best_book.title._text} />
                                             <GridListTileBar
                                                 title={tile.best_book.title._text}
@@ -91,11 +145,7 @@ class CreateNew extends Component {
                                                     root: classes.titleBar,
                                                     title: classes.title,
                                                 }}
-                                                // actionIcon={
-                                                //     <IconButton aria-label={`star ${tile.title}`}>
-                                                //         <StarBorderIcon className={classes.title} />
-                                                //     </IconButton>
-                                                // }
+                                            
                                             />
                                         </GridListTile>
                                     ))}
@@ -116,12 +166,26 @@ class CreateNew extends Component {
                 <Grid container spacing={3}>
                     <Grid item xs={6}>
                         <Paper>
-                        <div>
-                            <TextField variant="filled" type="text" placeholder="Name of cirlce / book title" /><br /><br />
-                            <TextField variant="filled" type="text" placeholder="Description" /><br /><br />
+                            <div>
+                                          
+                            <TextField  variant="filled" type="text" 
+                                        placeholder="Name of cirlce / book title"
+                                        // value={this.state.newClub.name}
+                                        onChange={(event) => this.handleChange('name', event)} />
+                            <br /><br />
+                            <TextField  variant="filled" type="text" 
+                                        placeholder="Description"
+                                        // value={this.state.newClub.description}
+                                        onChange={(event) => this.handleChange('description', event)} />
+                            <br /><br />
                             Notes:<br />
-                            <TextField variant="filled" type="text" placeholder="let clubbers know when and where to meet" /><br /><br />
-                        </div>
+                            <TextField  variant="filled" type="text" 
+                                        placeholder="let clubbers know when and where to meet"
+                                        // value={this.state.newClub.notes}
+                                        onChange={(event) => this.handleChange('notes', event)} />
+                            <br /><br />
+                        
+                            </div>
                         </Paper>
                     </Grid>
 
@@ -135,7 +199,7 @@ class CreateNew extends Component {
                 </Grid>
                 <div>
                     <Button variant="outlined" color="primary">Cancel</Button>
-                    <Button variant="outlined">Create New</Button>
+                    <Button variant="outlined" onClick={this.handleCreate} >Create New</Button>
                 </div>
             </div>
         )
