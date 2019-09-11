@@ -3,6 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const axios = require('axios');
 const convert = require('xml-js');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 require('dotenv').config();
 
 //GET RESULTS FROM GOODREADS API WITH SEARCH QUERY
