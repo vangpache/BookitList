@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
     let queryText = `SELECT "book_title", "author", "image_url", "name", "username", "published" FROM "user_clubs"
                     JOIN "user" ON "user"."id" = "user_clubs"."user_id"
                     JOIN "clubs" ON "clubs"."id" = "user_clubs"."clubs_id"
-                    WHERE "user_clubs"."user_id" = $1;`;
+                    WHERE "user_clubs"."user_id" = $1 ORDER BY "date" DESC LIMIT 3 ;`;
     pool.query(queryText, [user_id])
     .then((result) => {
         console.log('in GET details:', result);

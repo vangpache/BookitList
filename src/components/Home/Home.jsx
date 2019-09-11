@@ -46,42 +46,6 @@ class Home extends Component {
                     ))}
 
 
-                    <Grid item xs={2} >
-                        <Paper>
-                            <Card>
-                                <CardContent>
-                                    <p>list 1</p>
-                                </CardContent>
-                            </Card>
-                        </Paper>
-                    </Grid>
-
-                    <Grid item xs={2} >
-                        <Paper>
-                            <Card>
-                                <CardContent>
-                                    <p>list 2</p>
-                                </CardContent>
-                            </Card>
-                        </Paper>
-                    </Grid>
-
-                    <Grid item xs={2} >
-                        <Paper>
-                            <Card>
-                                <CardContent>
-                                    <p>list 3</p>
-                                </CardContent>
-                            </Card>
-                        </Paper>
-                    </Grid>
-
-
-
-
-
-
-
                     <Grid item xs={6} >
                         <Paper>
                             <Card>
