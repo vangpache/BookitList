@@ -115,22 +115,9 @@ class CreateNew extends Component {
                         </Paper>
                     </Grid>
                             
-                                {/* {this.props.booksList.map(each => {
-                                    return (
-                                        <>
-                                            <p>{each.best_book.title._text}</p>
-                                            <p>by: {each.best_book.author.name._text}</p>
-                                            <img src={each.best_book.image_url._text} alt="insert description of book here" />
-                                        </>
-                                    )
-                                })} */}
-
-                                {/* {JSON.stringify(this.props.booksList)} */}
-                    
-
-                            
                     <Grid  item xs={6}>
                         <div>
+                            
                                     <Paper >
                                 <GridList className={classes.gridList} cols={5} rows={1}>
                                     {this.props.booksList.map(tile => (
@@ -149,7 +136,7 @@ class CreateNew extends Component {
                                 </GridList>
                             
                         </Paper>
-                        {/* </div> */}
+                                
                         </div>
                     </Grid>
                     

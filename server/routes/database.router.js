@@ -30,7 +30,9 @@ router.get('/:id', (req, res) => {
 
     let user_id = req.user.id
     let club_id = req.params.id
-    let queryText = `SELECT * FROM "clubs" WHERE "id" = $1;`;
+    let queryText = `SELECT "name", "book_title", "author", "image_url", "published", "description", "admin_status" FROM "clubs"
+                    JOIN "user_clubs" ON "user_clubs"."clubs_id" = "clubs"."id"
+                    WHERE "clubs_id" = $1;`;
     pool.query(queryText, [club_id])
     .then((result) => {
         console.log('in GET CLUB ID response:', result.rows);
