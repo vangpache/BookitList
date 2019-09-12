@@ -2,6 +2,17 @@ import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 
+
+function* postNewClub(action) {
+    try {
+        yield axios.post(`/database`, action.payload)
+        // INSERT A GET TO RETRIEVE THE CLUB INFO AND ID
+    } catch (error) {
+        console.log('in postNewClub error:', error);
+    }
+}
+
+
 function* searchGoodReads(action) {
     try {
         let response = yield axios.get(`/books/${action.payload}`)
@@ -18,6 +29,7 @@ function* searchGoodReads(action) {
 //WATCHER SAGA
 function* createNewSaga() {
     yield takeLatest ('SEARCH_GOODREADS', searchGoodReads);
+    yield takeLatest('POST_NEWCLUB', postNewClub)
 }
 
 export default createNewSaga;

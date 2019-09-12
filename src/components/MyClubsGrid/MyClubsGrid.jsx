@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { Paper, Grid, Card, CardContent, CardActions } from '@material-ui/core';
+import { Paper, Grid, Card, CardContent } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
 

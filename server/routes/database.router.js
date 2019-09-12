@@ -24,6 +24,29 @@ router.get('/', (req, res) => {
     })
 })
 
+//POST NEW CLUB AND INSERT DATA INTO JUNCTION TABLE
+router.post('/', (req, res) => {
+    console.log('in databaseRouter POST new club:', req.body);
+    
+    let user_id = req.user.id
+    let book = req.body
+    let queryText = `WITH rows AS(
+                    INSERT INTO "clubs" ("name", "book_title", "author", "image_url", "description")
+                    VALUES ($1, $2, $3, $4, $5)
+                    RETURNING id)
+                    INSERT INTO "user_clubs" ("clubs_id", "user_id", "invite_accepted", "admin_status")
+                    VALUES((SELECT id FROM rows), $6, $7, $8 ) RETURNING id;`;
+    pool.query(queryText, [book.name, book.book_title, book.author, book.image_url, book.description, user_id, book.invite_accepted, book.admin_status])
+    .then((result) => {
+        console.log('in POST:', result);
+        res.sendStatus(200);
+        
+    }).catch((err) => {
+        console.log('in POST error:', err);
+        res.sendStatus(500);
+    })
+})
+
 
 
 
