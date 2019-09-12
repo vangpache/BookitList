@@ -47,7 +47,8 @@ class ClubPage extends Component {
                         <DiscussionBoard />
                     </Grid>
                 </Grid>
-                <Button variant="outlined">Edit</Button>
+                {this.props.details.admin_status ? <Button variant="outlined">Edit</Button> : <span></span>}
+                
                 {JSON.stringify(this.props.details)}
             
                 
