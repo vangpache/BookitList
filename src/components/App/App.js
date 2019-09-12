@@ -92,7 +92,7 @@ class App extends Component {
 
             <ProtectedRoute
               exact
-              path="/club"
+              path="/club/:id"
               component={ClubPage}
             />
 

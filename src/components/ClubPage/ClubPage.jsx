@@ -7,11 +7,29 @@ import { Button, Grid } from '@material-ui/core';
 
 
 class ClubPage extends Component {
+    // COMPONENT DID MOUNT TO GET CURRENT BOOK CLUB BASED ON ID
+    componentDidMount() {
+        this.getClubPageDetails();
+    }
+
+    getClubPageDetails = () => {
+        console.log('in get club page details');
+        //take the club Id passed and dispatch it to GET book details
+        this.props.dispatch({
+            type: 'USE_BOOK_ID',
+            payload: this.props.match.params.id
+        })
+    }
+
+    
 
 
 
     render() {
 
+        const { id } = this.props.match.params
+        console.log('the book id is:', id);
+        
 
 
         return (
@@ -19,9 +37,10 @@ class ClubPage extends Component {
 
             <div className="" >
                 <h1>Name of Club/book</h1>
+                
                 <Grid container spacing={3}>
                     <Grid item xs={5} >
-                        <BookDetails />
+                        <BookDetails details={this.props.details} />
                     </Grid>
                     
                     <Grid item xs={7}>
@@ -29,7 +48,8 @@ class ClubPage extends Component {
                     </Grid>
                 </Grid>
                 <Button variant="outlined">Edit</Button>
-                {JSON.stringify(this.props.clubId)}
+                {JSON.stringify(this.props.details)}
+            
                 
             </div>
         )
@@ -38,7 +58,7 @@ class ClubPage extends Component {
 
 const mapStateToProps = reduxStore => {
     return {
-        clubId: reduxStore.newClubReducer
+        details: reduxStore.singleBookReducer
     }
 }
 

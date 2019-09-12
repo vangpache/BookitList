@@ -93,11 +93,11 @@ class Home extends Component {
                                 <CardContent>
                                     <h3>Bookit List:</h3>
                                     <ul>
-                                    {this.props.clubDetails.map(club => {
+                                    {this.props.clubDetails.map(club => (
                                         
-                                        <Link to="/club" key={club.club_id}><li>{club.name}</li></Link>
+                                        <Link to={`/club/${club.clubs_id}`} ><li key={club.clubs_id}>{club.name}</li></Link>
                                         
-                                    })}
+                                    ))}
                                     </ul>
                                 </CardContent>
                             </Card>
@@ -106,7 +106,7 @@ class Home extends Component {
                     </Grid>
                     </Grid>
                
-
+                    {/* {JSON.stringify(this.props.clubDetails)} */}
             </div>
         )
     }

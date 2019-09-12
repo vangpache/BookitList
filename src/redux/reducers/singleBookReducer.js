@@ -1,12 +1,14 @@
 //CURRENTLY NOT ASSIGNED TO ANY SAGASSS
 
-const newClubReducer = (state = [], action) => {
+const singleBookReducer = (state = [], action) => {
     switch(action.type) {
-        case 'SET_NEW_CLUB' :
+        case 'SET_SINGLEBOOK_DETAILS' :
             return action.payload
         default:
             return state
     }
 }
 
-export default newClubReducer;
+
+
+export default singleBookReducer;

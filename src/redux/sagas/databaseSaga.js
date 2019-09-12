@@ -27,12 +27,27 @@ function* getClubDetail(action) {
     }
 }
 
+function* useBookId(action) {
+    try {
+        let response = yield axios.get(`/database/${action.payload}`)
+        console.log('in useBookId:', response.data[0]);
+        yield put({
+            type: 'SET_SINGLEBOOK_DETAILS',
+            payload: response.data[0]
+        })
+    } catch (error) {
+        console.log('in useBookId:', error);
+        
+    }
+}
+
 
 //WATCHER
 function* databaseSaga() {
     //GETS TOP 3 CLUB DETAILS FOR THE HOME PAGE RENDER
     yield takeLatest('GET_CLUB_DETAILS', getClubDetail);
     // yield takeLatest('GET_ALL_CLUBS', getAllClubs)
+    yield takeLatest('USE_BOOK_ID', useBookId)
 }
 
 export default databaseSaga;

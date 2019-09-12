@@ -10,12 +10,12 @@ function* postNewClub(action) {
         console.log('in postNewClub club id:', response.data);
         console.log('in postNewClub history:', action.history);
         //MOVE LOCATION
-        yield action.history.push(`/club`)
+        yield action.history.push(`/club/${response.data[0].id}`)
         // DISPATCH THE ID TO THE NEW CLUB'S PAGE VIEW THROUGH SET NEW CLUB REDUCER
-        yield put ({
-            type: 'SET_NEW_CLUB',
-            payload: response.data
-        })
+        // yield put ({
+        //     type: 'SET_NEW_CLUB',
+        //     payload: response.data
+        // })
     } catch (error) {
         console.log('in postNewClub error:', error);
     }
