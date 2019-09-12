@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Button, Card, CardActions, CardContent, Grid, Paper } from '@material-ui/core';
+import { Button, Card, CardContent, Grid, Paper } from '@material-ui/core';
 
 
 
@@ -9,16 +9,10 @@ class Home extends Component {
     //ON LOAD: RUN THESE FUNCTIONS TO GET DATA
     componentDidMount() {
         this.getDetails();
-        // this.getBookitList();
        
     }
 
-    //GET ALL THE BOOK CLUBS TO DISPLAY ON HOME PAGE
-    // getBookitList = () => {
-    //     this.props.dispatch({
-    //         type: 'GET_ALL_CLUBS'
-    //     })
-    // }
+  
 
 
     //GETS THE DETAILS FOR MOST RECENT THREE CLUBS
@@ -30,6 +24,10 @@ class Home extends Component {
 
     handleClick = () => {
         console.log('book clicked');
+    }
+
+    handleDelete = () =>{
+        console.log('delete button clicked');
         
     }
   
@@ -54,12 +52,12 @@ class Home extends Component {
                             <Paper>
                                 <Card onClick={this.handleClick}>
                                     <CardContent >
-                                        <CardActions >
+                                        {/* <CardActions > */}
                                         <p>{club.name}</p>
                                             <img src={club.image_url} alt={club.book_title}/>
                                         <p>Book: {club.book_title}</p>
                                         <p>By: {club.author}</p>
-                                        </CardActions>
+                                        {/* </CardActions> */}
                                     </CardContent>
                                 </Card>
                             </Paper>
@@ -94,9 +92,12 @@ class Home extends Component {
                                     <h3>Bookit List:</h3>
                                     <ul>
                                     {this.props.clubDetails.map(club => (
-                                        
-                                        <Link to={`/club/${club.clubs_id}`} ><li key={club.clubs_id}>{club.name}</li></Link>
-                                        
+                                        <>
+                                        <Link to={`/club/${club.clubs_id}`} ><li >{club.name}</li></Link>
+                                            {club.admin_status ? <Button key={club.clubs_id} onClick={this.handleDelete}>Delete</Button> : 
+                                            <Button key={club.clubs_id} onClick={this.handleLeave}>Leave Club</Button>}
+                                            
+                                        </>
                                     ))}
                                     </ul>
                                 </CardContent>
@@ -106,7 +107,7 @@ class Home extends Component {
                     </Grid>
                     </Grid>
                
-                    {/* {JSON.stringify(this.props.clubDetails)} */}
+                    {JSON.stringify(this.props.clubDetails)}
             </div>
         )
     }

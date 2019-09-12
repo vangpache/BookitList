@@ -27,6 +27,16 @@ function* getClubDetail(action) {
     }
 }
 
+//DELETE USER FROM USER_CLUBS TABLE: LEAVE A BOOK CLUB
+function* leaveBook(action) {
+    try {
+        yield axios.delete(`/database/${action.payload}`)
+        yield action.history.push('/');
+    } catch (error) {
+        console.log('in leaveBook Error:', error);
+    }
+}
+
 function* useBookId(action) {
     try {
         let response = yield axios.get(`/database/${action.payload}`)
@@ -48,6 +58,7 @@ function* databaseSaga() {
     yield takeLatest('GET_CLUB_DETAILS', getClubDetail);
     // yield takeLatest('GET_ALL_CLUBS', getAllClubs)
     yield takeLatest('USE_BOOK_ID', useBookId)
+    yield takeLatest('LEAVE_BOOK', leaveBook)
 }
 
 export default databaseSaga;

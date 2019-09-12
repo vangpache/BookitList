@@ -21,6 +21,15 @@ class ClubPage extends Component {
         })
     }
 
+    handleLeave = (id) => {
+        console.log('leave button clicked:', id);
+        this.props.dispatch({
+            type: 'LEAVE_BOOK',
+            payload: id,
+            history: this.props.history
+        })   
+    }
+
     
 
 
@@ -35,8 +44,8 @@ class ClubPage extends Component {
         return (
 
 
-            <div className="" >
-                <h1>Name of Club/book</h1>
+            <div >
+                <h1>{this.props.details.name}</h1>
                 
                 <Grid container spacing={3}>
                     <Grid item xs={5} >
@@ -47,7 +56,9 @@ class ClubPage extends Component {
                         <DiscussionBoard />
                     </Grid>
                 </Grid>
-                {this.props.details.admin_status ? <Button variant="outlined">Edit</Button> : <span></span>}
+                {this.props.details.admin_status ? 
+                <Button variant="outlined">Edit</Button> : 
+                <Button onClick={() => this.handleLeave(id)}>Leave Club</Button>}
                 
                 {JSON.stringify(this.props.details)}
             

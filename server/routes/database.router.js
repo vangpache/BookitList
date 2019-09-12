@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
     console.log('in databaseRouter details GET:', req.user.id);
     
     let user_id = req.user.id
-    let queryText = `SELECT "book_title", "author", "image_url", "name", "username", "published", "clubs_id" FROM "user_clubs"
+    let queryText = `SELECT "book_title", "author", "image_url", "name", "username", "published", "clubs_id", "admin_status" FROM "user_clubs"
                     JOIN "user" ON "user"."id" = "user_clubs"."user_id"
                     JOIN "clubs" ON "clubs"."id" = "user_clubs"."clubs_id"
                     WHERE "user_clubs"."user_id" = $1 ORDER BY "date" DESC ;`;
@@ -32,8 +32,8 @@ router.get('/:id', (req, res) => {
     let club_id = req.params.id
     let queryText = `SELECT "name", "book_title", "author", "image_url", "published", "description", "admin_status" FROM "clubs"
                     JOIN "user_clubs" ON "user_clubs"."clubs_id" = "clubs"."id"
-                    WHERE "clubs_id" = $1;`;
-    pool.query(queryText, [club_id])
+                    WHERE "clubs_id" = $1 AND "user_id" = $2;`;
+    pool.query(queryText, [club_id, user_id])
     .then((result) => {
         console.log('in GET CLUB ID response:', result.rows);
         res.send(result.rows)
@@ -64,6 +64,23 @@ router.post('/', (req, res) => {
     }).catch((err) => {
         console.log('in POST error:', err);
         res.sendStatus(500);
+    })
+})
+
+//DELETE A USER FROM USER_CLUBS TABLE: LEAVE A CLUB AS A NON ADMIN USER
+router.delete('/:id', (req, res) => {
+    let user_id = req.user.id
+    let clubs_id = req.params.id
+    let queryText = `DELETE FROM "user_clubs" WHERE "clubs_id" = $1 AND "user_id" = $2;`;
+    pool.query(queryText, [clubs_id, user_id])
+    .then((result) => {
+        console.log('in DELETE:', result);
+        res.sendStatus(200)
+        
+    }).catch((err) => {
+        console.log('in DELETE error:', err);
+        res.sendStatus(500);
+        
     })
 })
 
