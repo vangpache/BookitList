@@ -9,8 +9,17 @@ class Home extends Component {
     //ON LOAD: RUN THESE FUNCTIONS TO GET DATA
     componentDidMount() {
         this.getDetails();
+        // this.getBookitList();
        
     }
+
+    //GET ALL THE BOOK CLUBS TO DISPLAY ON HOME PAGE
+    // getBookitList = () => {
+    //     this.props.dispatch({
+    //         type: 'GET_ALL_CLUBS'
+    //     })
+    // }
+
 
     //GETS THE DETAILS FOR MOST RECENT THREE CLUBS
     getDetails = () => {
@@ -41,7 +50,7 @@ class Home extends Component {
 
 
                     {this.props.clubDetails.map(club => (
-                        <Grid item xs={1.5} >
+                        <Grid item xs={3} >
                             <Paper>
                                 <Card onClick={this.handleClick}>
                                     <CardContent >
@@ -58,7 +67,7 @@ class Home extends Component {
                     ))}
 
                     
-                    <Grid item xs={4.25} >
+                    <Grid item xs={3} >
                         
                         <Paper>
                             <Card>
@@ -78,16 +87,17 @@ class Home extends Component {
                         </Paper>
                     </Grid>
 
-                        <Grid item xs={4.25}>
+                        <Grid item xs={3}>
                             <Paper>
                             <Card>
                                 <CardContent>
                                     <h3>Bookit List:</h3>
                                     <ul>
-                                        <Link to="/club"><li>Book 1</li></Link>
-                                        <li>Book 2</li>
-                                        <li>Book 3</li>
-                                        <li>Book 4</li>
+                                    {this.props.clubDetails.map(club => {
+                                        
+                                        <Link to="/club" key={club.club_id}><li>{club.name}</li></Link>
+                                        
+                                    })}
                                     </ul>
                                 </CardContent>
                             </Card>

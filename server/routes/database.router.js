@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
     let queryText = `SELECT "book_title", "author", "image_url", "name", "username", "published", "clubs_id" FROM "user_clubs"
                     JOIN "user" ON "user"."id" = "user_clubs"."user_id"
                     JOIN "clubs" ON "clubs"."id" = "user_clubs"."clubs_id"
-                    WHERE "user_clubs"."user_id" = $1 ORDER BY "date" DESC LIMIT 3 ;`;
+                    WHERE "user_clubs"."user_id" = $1 ORDER BY "date" DESC ;`;
     pool.query(queryText, [user_id])
     .then((result) => {
         console.log('in GET details:', result);
@@ -39,7 +39,7 @@ router.post('/', (req, res) => {
     pool.query(queryText, [book.name, book.book_title, book.author, book.image_url, book.description, user_id, book.invite_accepted, book.admin_status])
     .then((result) => {
         console.log('in POST:', result);
-        res.sendStatus(200);
+        res.send(result.rows);
         
     }).catch((err) => {
         console.log('in POST error:', err);

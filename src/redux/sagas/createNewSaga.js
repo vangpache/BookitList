@@ -5,8 +5,17 @@ import axios from 'axios';
 
 function* postNewClub(action) {
     try {
-        yield axios.post(`/database`, action.payload)
+        let response = yield axios.post(`/database`, action.payload)
         // INSERT A GET TO RETRIEVE THE CLUB INFO AND ID
+        console.log('in postNewClub club id:', response.data);
+        console.log('in postNewClub history:', action.history);
+        //MOVE LOCATION
+        yield action.history.push(`/club`)
+        // DISPATCH THE ID TO THE NEW CLUB'S PAGE VIEW THROUGH SET NEW CLUB REDUCER
+        yield put ({
+            type: 'SET_NEW_CLUB',
+            payload: response.data
+        })
     } catch (error) {
         console.log('in postNewClub error:', error);
     }
@@ -30,6 +39,7 @@ function* searchGoodReads(action) {
 function* createNewSaga() {
     yield takeLatest ('SEARCH_GOODREADS', searchGoodReads);
     yield takeLatest('POST_NEWCLUB', postNewClub)
+   
 }
 
 export default createNewSaga;

@@ -96,9 +96,10 @@ class CreateNew extends Component {
     handleCreate = () => {
         this.props.dispatch({
             type: 'POST_NEWCLUB',
-            payload: this.state
+            payload: this.state, 
+            history : this.props.history
         })
-        this.props.history.push('/club')
+        // this.props.history.push('/club')
     }
 
     render() {
