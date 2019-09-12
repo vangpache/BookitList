@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { Button, Card, CardContent, Grid, Paper } from '@material-ui/core';
 
 
@@ -27,8 +27,16 @@ class Home extends Component {
     }
 
     handleDelete = () =>{
-        console.log('delete button clicked');
-        
+        console.log('delete button clicked');  
+    }
+
+    handleLeave = (id) => {
+        console.log('leave button clicked:', id);
+        this.props.dispatch({
+            type: 'LEAVE_BOOK',
+            payload: id,
+            history: this.props.history
+        })
     }
   
 
@@ -95,7 +103,7 @@ class Home extends Component {
                                         <>
                                         <Link to={`/club/${club.clubs_id}`} ><li >{club.name}</li></Link>
                                             {club.admin_status ? <Button key={club.clubs_id} onClick={this.handleDelete}>Delete</Button> : 
-                                            <Button key={club.clubs_id} onClick={this.handleLeave}>Leave Club</Button>}
+                                            <Button key={club.clubs_id} onClick={() => this.handleLeave(club.clubs_id)}>Leave Club</Button>}
                                             
                                         </>
                                     ))}
@@ -119,4 +127,4 @@ const mapStateToProps = reduxStore => {
     }
 }
 
-export default connect(mapStateToProps) (Home);
+export default withRouter (connect(mapStateToProps) (Home));
