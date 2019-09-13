@@ -29,6 +29,7 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 app.use('/books', goodReadsRouter);
 app.use('/database', databaseRouter);
+app.use('/database/discussion', databaseRouter);
 
 // Serve static files
 app.use(express.static('build'));

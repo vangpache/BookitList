@@ -3,7 +3,12 @@ import { connect } from 'react-redux';
 import { Button, Card, CardContent, TextField  } from '@material-ui/core';
 
 
+
 class DiscussionBoard extends Component {
+
+    componentDidMount() {
+        this.handleGetDiscussion();
+    }
 
     //DISCUSSION BOARD STATE
     state = {
@@ -25,6 +30,14 @@ class DiscussionBoard extends Component {
             payload: this.state
         })
     }
+
+    handleGetDiscussion = () => {
+        console.log('in handleGetDiscussion');
+        this.props.dispatch({
+            type: 'GET_DISCUSSION_BOARD',
+            payload: this.state.clubId.id
+        })
+    }
     
 
     render() {
@@ -42,6 +55,9 @@ class DiscussionBoard extends Component {
                         <Card>
                             <CardContent>
                                 <p>user posts render here</p>
+                                {this.props.discussionBoard.map(post => (
+                                    <p>username: {post.content}</p>
+                                ))}
                             </CardContent>
                         </Card>
 
@@ -53,4 +69,10 @@ class DiscussionBoard extends Component {
     }
 }
 
-export default connect() (DiscussionBoard);
+const mapStateToProps = reduxStore => {
+    return {
+        discussionBoard: reduxStore.discussionBoardReducer
+    }
+}
+
+export default connect(mapStateToProps) (DiscussionBoard);

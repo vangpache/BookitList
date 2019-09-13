@@ -1,7 +1,7 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
-const axios = require('axios');
+// const axios = require('axios');
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 //GET ALL BOOKCLUB DETAILS FOR ONE USER TO RENDER ON HOME PAGE
@@ -40,6 +40,24 @@ router.get('/:id', (req, res) => {
         
     }).catch((err) => {
         console.log('in GET CLUB ID error:', err);
+        res.sendStatus(500);
+    })
+})
+
+//GET DISCUSSION BOARD FOR EACH INDIVIDUAL CLUB PAGE
+router.get('/discussion/:id', (req, res) => {
+    console.log('in GET DISCUSSON BOARD');
+    
+    console.log('club_id:', req.params);
+    
+    let club_id = req.params.id
+    let queryText = `SELECT * FROM "discussion" WHERE "clubs_id" = $1 ORDER BY "date";`;
+    pool.query(queryText, [club_id])
+    .then((result) => {
+        console.log('in GET discussion:', result);
+        res.send(result.rows)
+    }).catch((error) => {
+        console.log('in GET discussion error:', error);
         res.sendStatus(500);
     })
 })

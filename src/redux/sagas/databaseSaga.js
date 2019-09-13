@@ -2,18 +2,6 @@ import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 
-//GETS ALL THE CLUBS FOR ONE USER TO DISPLAY ON HOME PAGE
-// function* getAllClubs(action) {
-//     try {
-//         let response = yield axios.get('/database')
-//     } catch (error) {
-        
-//     }
-// }
-
-
-
-
 function* getClubDetail(action) {
     try {
         let response = yield axios.get('/database')
@@ -46,6 +34,20 @@ function* postDiscussion(action) {
     }
 }
 
+//GET DISCUSSION BOARD FOR SINGLE CLUB ON DISPLAY
+function* getDiscussionBoard(action) {
+    try {
+        let response = yield axios.get(`/database/discussion/${action.payload}`)
+        console.log('in getDiscussionBoard saga:', response.data);
+        //PUT TO REDUCER
+        yield put({
+            type: 'SET_DISCUSSION_BOARD',
+            payload: response.data
+        })
+    } catch (error) {
+        console.log('in getDiscussionBoard saga error:', error); 
+    }
+}
 
 
 function* useBookId(action) {
@@ -71,6 +73,7 @@ function* databaseSaga() {
     yield takeLatest('USE_BOOK_ID', useBookId)
     yield takeLatest('LEAVE_BOOK', leaveBook)
     yield takeLatest('POST_DISCUSSION_CONTENT', postDiscussion)
+    yield takeLatest('GET_DISCUSSION_BOARD', getDiscussionBoard)
 }
 
 export default databaseSaga;
