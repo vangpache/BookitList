@@ -37,16 +37,27 @@ function* leaveBook(action) {
     }
 }
 
+
+function* postDiscussion(action) {
+    try {
+        yield axios.post(`/database/${action.payload.clubId.id}`, action.payload)
+    } catch (error) {
+        console.log('in postDiscussion saga error:', error);
+    }
+}
+
+
+
 function* useBookId(action) {
     try {
         let response = yield axios.get(`/database/${action.payload}`)
-        console.log('in useBookId:', response.data[0]);
+        console.log('in useBookId:', response);
         yield put({
             type: 'SET_SINGLEBOOK_DETAILS',
             payload: response.data[0]
         })
     } catch (error) {
-        console.log('in useBookId:', error);
+        console.log('in useBookId error:', error);
         
     }
 }
@@ -59,6 +70,7 @@ function* databaseSaga() {
     // yield takeLatest('GET_ALL_CLUBS', getAllClubs)
     yield takeLatest('USE_BOOK_ID', useBookId)
     yield takeLatest('LEAVE_BOOK', leaveBook)
+    yield takeLatest('POST_DISCUSSION_CONTENT', postDiscussion)
 }
 
 export default databaseSaga;

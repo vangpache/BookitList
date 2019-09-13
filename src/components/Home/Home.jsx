@@ -115,7 +115,7 @@ class Home extends Component {
                     </Grid>
                     </Grid>
                
-                    {JSON.stringify(this.props.clubDetails)}
+                    {/* {JSON.stringify(this.props.clubDetails)} */}
             </div>
         )
     }

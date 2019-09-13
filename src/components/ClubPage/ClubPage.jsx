@@ -13,7 +13,7 @@ class ClubPage extends Component {
     }
 
     getClubPageDetails = () => {
-        console.log('in get club page details');
+        console.log('in get club page details for id:', this.props.match.params.id);
         //take the club Id passed and dispatch it to GET book details
         this.props.dispatch({
             type: 'USE_BOOK_ID',
@@ -53,7 +53,7 @@ class ClubPage extends Component {
                     </Grid>
                     
                     <Grid item xs={7}>
-                        <DiscussionBoard />
+                        <DiscussionBoard clubId={this.props.match.params}/>
                     </Grid>
                 </Grid>
                 {this.props.details.admin_status ? 

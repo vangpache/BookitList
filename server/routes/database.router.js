@@ -55,7 +55,7 @@ router.post('/', (req, res) => {
                     VALUES ($1, $2, $3, $4, $5)
                     RETURNING id)
                     INSERT INTO "user_clubs" ("clubs_id", "user_id", "invite_accepted", "admin_status")
-                    VALUES((SELECT id FROM rows), $6, $7, $8 ) RETURNING id;`;
+                    VALUES((SELECT id FROM rows), $6, $7, $8 )`;
     pool.query(queryText, [book.name, book.book_title, book.author, book.image_url, book.description, user_id, book.invite_accepted, book.admin_status])
     .then((result) => {
         console.log('in POST:', result);
@@ -66,6 +66,30 @@ router.post('/', (req, res) => {
         res.sendStatus(500);
     })
 })
+
+//POST A DISCUSSON THREAD USING ID PARAMETER
+router.post('/:id', (req, res) => {
+    console.log('in Post discussons:', req.params.id);
+
+    let user_id = req.user.id
+    let club_id = req.params.id
+    let content = req.body.content
+    let queryText = `INSERT INTO "discussion" ("content", "user_id", "clubs_id")
+                        VALUES ($1, $2, $3);`
+    pool.query(queryText, [content, user_id, club_id])
+    .then((result) => {
+        console.log('in POST to discussion board:', result);
+        res.sendStatus(200);
+        
+    }).catch((err) => {
+        console.log('in POST  to discussion board error:', err);
+        res.sendStatus(500);
+    })
+})
+
+
+
+
 
 //DELETE A USER FROM USER_CLUBS TABLE: LEAVE A CLUB AS A NON ADMIN USER
 router.delete('/:id', (req, res) => {
