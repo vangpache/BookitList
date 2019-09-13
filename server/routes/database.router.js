@@ -23,7 +23,7 @@ router.get('/', (req, res) => {
         res.sendStatus(500);
     })
 })
-
+///////////////////////////////
 //GET ONE SPECIFIC CLUB DETAILS FOR ONE USER
 router.get('/:id', (req, res) => {
     console.log('in GET BY CLUB ID:', req.params);
@@ -73,11 +73,11 @@ router.post('/', (req, res) => {
                     VALUES ($1, $2, $3, $4, $5)
                     RETURNING id)
                     INSERT INTO "user_clubs" ("clubs_id", "user_id", "invite_accepted", "admin_status")
-                    VALUES((SELECT id FROM rows), $6, $7, $8 )`;
+                    VALUES((SELECT id FROM rows), $6, $7, $8 ) RETURNING *`;
     pool.query(queryText, [book.name, book.book_title, book.author, book.image_url, book.description, user_id, book.invite_accepted, book.admin_status])
     .then((result) => {
-        console.log('in POST:', result);
-        res.send(result.rows);
+        console.log('in POST:', result.rows[0].clubs_id);
+        res.send(result.rows[0]);
         
     }).catch((err) => {
         console.log('in POST error:', err);
@@ -123,6 +123,21 @@ router.delete('/:id', (req, res) => {
         console.log('in DELETE error:', err);
         res.sendStatus(500);
         
+    })
+})
+
+
+//DELETE A CLUB COMPLETELY FROM CLUBS AND USER_CLUBS TABLE: AUTH AS ADMIN NEEDED
+router.delete('/deletemyclub/:id', (req, res) => {
+    let clubs_id = req.params.id
+    let queryText = `WITH row AS(DELETE FROM "clubs" WHERE "id" = $1)
+                    DELETE FROM "user_clubs" WHERE "user_clubs"."clubs_id" = $1;`;
+    pool.query(queryText, [clubs_id])
+    .then((result) => {
+        console.log('in DELETE MY CLUB:', result);
+        res.sendStatus(200)
+    }).catch((error) => {
+        console.log('in DELETE MY CLUB:', error);
     })
 })
 

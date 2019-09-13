@@ -7,15 +7,10 @@ function* postNewClub(action) {
     try {
         let response = yield axios.post(`/database`, action.payload)
         // INSERT A GET TO RETRIEVE THE CLUB INFO AND ID
-        console.log('in postNewClub club id:', response.data);
-        console.log('in postNewClub history:', action.history);
+        console.log('in postNewClub club id:', response.data.clubs_id);
+        // console.log('in postNewClub history:', action.history);
         //MOVE LOCATION
-        yield action.history.push(`/club/${response.data[0].id}`)
-        // DISPATCH THE ID TO THE NEW CLUB'S PAGE VIEW THROUGH SET NEW CLUB REDUCER
-        // yield put ({
-        //     type: 'SET_NEW_CLUB',
-        //     payload: response.data
-        // })
+        yield action.history.push(`/club/${response.data.clubs_id}`)
     } catch (error) {
         console.log('in postNewClub error:', error);
     }

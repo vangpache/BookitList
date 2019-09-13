@@ -58,7 +58,7 @@ class ClubPage extends Component {
                 </Grid>
                 {this.props.details.admin_status ? 
                 <Button variant="outlined">Edit</Button> : 
-                <Button onClick={() => this.handleLeave(id)}>Leave Club</Button>}
+                <Button onClick={() => this.handleLeave(this.props.match.params)}>Leave Club</Button>}
                 
                 {JSON.stringify(this.props.details)}
             

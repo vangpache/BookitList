@@ -26,9 +26,13 @@ class Home extends Component {
         console.log('book clicked');
     }
 
-    handleDelete = () =>{
-        console.log('delete button clicked');  
-    }
+    // handleDelete = (id) =>{
+    //     console.log('delete button clicked');  
+    //     this.props.dispatch({
+    //         type: 'DELETE_CLUB',
+    //         payload: id
+    //     })
+    // }
 
     handleLeave = (id) => {
         console.log('leave button clicked:', id);
@@ -102,7 +106,7 @@ class Home extends Component {
                                     {this.props.clubDetails.map(club => (
                                         <>
                                         <Link to={`/club/${club.clubs_id}`} ><li >{club.name}</li></Link>
-                                            {club.admin_status ? <Button key={club.clubs_id} onClick={this.handleDelete}>Delete</Button> : 
+                                            {club.admin_status ? <Button key={club.clubs_id} >Delete</Button> : 
                                             <Button key={club.clubs_id} onClick={() => this.handleLeave(club.clubs_id)}>Leave Club</Button>}
                                             
                                         </>

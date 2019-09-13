@@ -53,6 +53,8 @@ function* getDiscussionBoard(action) {
 function* useBookId(action) {
     try {
         let response = yield axios.get(`/database/${action.payload}`)
+        console.log('what is the payload?', action.payload);
+        
         console.log('in useBookId:', response);
         yield put({
             type: 'SET_SINGLEBOOK_DETAILS',
@@ -60,6 +62,18 @@ function* useBookId(action) {
         })
     } catch (error) {
         console.log('in useBookId error:', error);
+        
+    }
+}
+
+function* deleteClub(action) {
+    try {
+        yield axios.delete(`/database/deletemyclub/${action.payload}`)
+        console.log('in deleteClub saga');
+
+        
+    } catch (error) {
+        console.log('in deleteClub error:', error);
         
     }
 }
@@ -74,6 +88,7 @@ function* databaseSaga() {
     yield takeLatest('LEAVE_BOOK', leaveBook)
     yield takeLatest('POST_DISCUSSION_CONTENT', postDiscussion)
     yield takeLatest('GET_DISCUSSION_BOARD', getDiscussionBoard)
+    yield takeLatest('DELETE_CLUB', deleteClub)
 }
 
 export default databaseSaga;

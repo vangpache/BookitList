@@ -175,7 +175,7 @@ class CreateNew extends Component {
 
                     <Grid item xs={6}>                       
                         <Paper>
-                                <TextField variant="filled" type="text" placeholder="invite users" />
+                                <TextField variant="filled" type="text" placeholder="invite users" value="hey" />
                                 <h4>users show up here</h4>
                                 <Button variant="outlined">Delete User</Button>
                         </Paper>
