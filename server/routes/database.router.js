@@ -62,6 +62,8 @@ router.get('/discussion/:id', (req, res) => {
     })
 })
 
+
+
 //POST NEW CLUB AND INSERT DATA INTO JUNCTION TABLE
 router.post('/', (req, res) => {
     console.log('in databaseRouter POST new club:', req.body);

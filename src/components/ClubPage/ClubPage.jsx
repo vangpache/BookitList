@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import BookDetails from '../BookDetails/BookDetails';
 import UsernameSearch from '../UsernameSearch/UsernameSearch';
 import DiscussionBoard from '../DiscussionBoard/DiscussionBoard';
-import { Button, Grid } from '@material-ui/core';
+import { Button, Card, CardContent, Grid } from '@material-ui/core';
 
 
 
@@ -22,14 +22,14 @@ class ClubPage extends Component {
         })
     }
 
-    handleLeave = (id) => {
-        console.log('leave button clicked:', id);
-        this.props.dispatch({
-            type: 'LEAVE_BOOK',
-            payload: id,
-            history: this.props.history
-        })   
-    }
+    // handleLeave = (id) => {
+    //     console.log('leave button clicked:', id);
+    //     this.props.dispatch({
+    //         type: 'LEAVE_BOOK',
+    //         payload: id,
+    //         history: this.props.history
+    //     })   
+    // }
 
     
 
@@ -51,20 +51,23 @@ class ClubPage extends Component {
                 <Grid container spacing={3}>
                     <Grid item xs={5} >
                         <BookDetails details={this.props.details} />
+                        {/* {this.props.details.admin_status ?
+                            <Button variant="outlined">Edit</Button> :
+                            <Button onClick={() => this.handleLeave(this.props.match.params)}>Leave Club</Button>} */}
                     </Grid>
                     
                     <Grid item xs={7}>
                         <DiscussionBoard clubId={this.props.match.params}/>
                     </Grid>
                 </Grid>
-                {this.props.details.admin_status ? 
-                <Button variant="outlined">Edit</Button> : 
-                <Button onClick={() => this.handleLeave(this.props.match.params)}>Leave Club</Button>}
                 
-                {JSON.stringify(this.props.details)}
+                
+                {/* {JSON.stringify(this.props.details)} */}
                 <Grid Container spacing={3}>
                     <Grid item xs={12}>
-                        <UsernameSearch />
+                     
+                                <UsernameSearch clubId={this.props.match.params} />
+                        
                     </Grid>
                 </Grid>
             

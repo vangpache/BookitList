@@ -54,12 +54,23 @@ function* inviteUser(action) {
     }
 }
 
+function* sendInvites(action) {
+    try {
+        yield axios.post(`/usernames/${action.clubId.id}`, action.payload)
+    } catch (error) {
+        console.log('in sendInvites post error:', error);
+        
+    }
+}
+
+
 //WATCHER SAGA
 function* createNewSaga() {
     yield takeLatest ('SEARCH_GOODREADS', searchGoodReads);
     yield takeLatest('POST_NEWCLUB', postNewClub)
     yield takeLatest('GET_USERNAMES', getUsernames)
     yield takeLatest('INVITE_USER', inviteUser)
+    yield takeLatest('SEND_INVITES', sendInvites)
    
 }
 

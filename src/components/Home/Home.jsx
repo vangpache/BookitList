@@ -9,6 +9,7 @@ class Home extends Component {
     //ON LOAD: RUN THESE FUNCTIONS TO GET DATA
     componentDidMount() {
         this.getDetails();
+        this.getNotifications();
        
     }
 
@@ -25,6 +26,13 @@ class Home extends Component {
     handleClick = () => {
         console.log('book clicked');
     }
+
+    getNotifications = () => {
+        this.props.dispatch({
+            type: 'GET_NOTIFICATIONS'
+        })
+    }
+
 
     // handleDelete = (id) =>{
     //     console.log('delete button clicked');  
@@ -84,12 +92,15 @@ class Home extends Component {
                                 <CardContent>
                                     <h4>Notifications</h4>
                                     <ul>
-                                        <li>invites go here
-                       
+                                        {this.props.notifications.map(invite => (
+                                            <li>{invite.name}
+
                                                 <Button variant="outlined" size="small">Accept Invite</Button>
                                                 <Button variant="outlined" size="small">Decline Invite</Button>
-                                       
-                                        </li>
+
+                                            </li>
+                                        ))}
+                                        
                                     </ul>
                                       
                                 </CardContent>
@@ -120,6 +131,7 @@ class Home extends Component {
                     </Grid>
                
                     {/* {JSON.stringify(this.props.clubDetails)} */}
+                    {JSON.stringify(this.props.notifications)}
             </div>
         )
     }
@@ -127,7 +139,8 @@ class Home extends Component {
 
 const mapStateToProps = reduxStore => {
     return {
-        clubDetails: reduxStore.databaseReducer
+        clubDetails: reduxStore.databaseReducer,
+        notifications: reduxStore.notificationsReducer
     }
 }
 

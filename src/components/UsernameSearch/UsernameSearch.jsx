@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, TextField } from '@material-ui/core';
+import { Button, Card, CardContent, TextField } from '@material-ui/core';
 import { connect } from 'react-redux';
 
 
@@ -7,7 +7,10 @@ class UsernameSearch extends Component {
 
     state = {
         query:'',
-        invited: []
+        invited: {
+            user_id: 0,
+            username: ''
+        }
     }
 
     getInfo = () => {
@@ -35,6 +38,7 @@ class UsernameSearch extends Component {
     handleAddUser = () => {
         console.log('add user button clicked');
         this.setState ({
+            ...this.state.invited,
             invited: {
                 user_id: this.props.users.id,
                 username: this.props.users.username 
@@ -44,10 +48,22 @@ class UsernameSearch extends Component {
             type: 'INVITE_USER', 
             payload: this.state.invited
         })
-        console.log('invites list:', this.state.invited);
-        console.log('user store:', this.props.users);
+        // console.log('invites list:', this.state.invited);
+        // console.log('user store:', this.props.users);
+        // console.log('in invitelist reducer', this.props.inviteList);
         
-        
+    }
+
+
+
+    //INVITE USERS TO JOIN CLUB
+    handleInvites = (id) => {
+        console.log('invite users button clicked');
+        this.props.dispatch({
+            type: 'SEND_INVITES',
+            payload: this.props.inviteList,
+            clubId: id
+        })
     }
     
 
@@ -55,33 +71,38 @@ class UsernameSearch extends Component {
 
 
         return (
-            <div>
-                <h1>This is the search username piece</h1>
-                <>
-                    <input variant="filled" type="text" placeholder="invite users" 
+            <>
+            <Card>
+                <CardContent>
+                        <h1>This is the search username piece</h1>
+                        
+                            <input variant="filled" type="text" placeholder="invite users"
                                 ref={input => this.search = input}
                                 onChange={this.handleInputChange} />
-                    <h4>users show up here</h4>
-                    {/* <p>{this.state.query}  */}
-                    <p>{this.props.users.username}
-                    <Button variant="outlined" onClick={this.handleAddUser}>Add user</Button>
-                    </p>
+                            <h4>users show up here</h4>
+                            {/* <p>{this.state.query}  */}
+                            <p>{this.props.users.username}
+                                <Button variant="outlined" onClick={this.handleAddUser}>Add user</Button>
+                            </p>
 
-                    <ul>
-                        {this.props.inviteList.map(username => (
-                        <li>
-                            {username.username}
-                            <Button>remove</Button>
-                        </li>
-                    ))}
-                    </ul>
+                            <ul>
+                                {this.props.inviteList.map(username => (
+                                    <li>
+                                        {username.username}
+                                        <Button>remove</Button>
+                                    </li>
+                                ))}
+                            </ul>
+                        
+                        <Button variant="outlined" onClick={() => this.handleInvites(this.props.clubId)}>Invite Users</Button><br/>
+                        {JSON.stringify(this.props.users)}
+                        {JSON.stringify(this.props.inviteList)}
+                </CardContent>
+            </Card>
+                
                     
-
-                    {JSON.stringify(this.props.users)}
-                    {JSON.stringify(this.props.inviteList)}
-                    
-                </>
-            </div>
+               
+            </>
         )
     }
 }

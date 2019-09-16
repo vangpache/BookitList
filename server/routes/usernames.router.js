@@ -21,6 +21,29 @@ router.get('/:username', (req, res) => {
 })
 
 
+//POST INVITES TO DATABASE
+router.post('/:clubId', (req, res) => {
+    console.log('in invites POST req.body:', req.body);
+    console.log('in invites POST req.body.user_id:', req.body.user_id);
+    
+    let clubId = req.params.clubId
+    let users = req.body
+    let queryText = `INSERT INTO "user_clubs" ("user_id", "clubs_id") VALUES ($1, $2);`;
+    //LOOP THROUGH INVITES AND FOR EACH INVITE:
+
+    for(each of users) {
+        console.log('in FOR LOOP, each:', each);
+        pool.query(queryText, [each.user_id, clubId])
+        .then((result) => {
+            console.log('in post invites', result);
+            res.sendStatus(200); 
+        }).catch((error) => {
+        console.log('in post invites error:', error);
+        res.sendStatus(500);
+        })
+    }
+})
+
 
 
 

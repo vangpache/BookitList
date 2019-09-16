@@ -78,6 +78,20 @@ function* deleteClub(action) {
     }
 }
 
+//GETS NOTIFICATION INVITES FOR HOME PAGE ON LOAD
+function* getNotifications (action) {
+    try {
+        let response = yield axios.get(`/notifications`)
+        console.log('in get notifications response:', response.data);
+        yield put ({
+            type: 'SET_NOTIFICATIONS',
+            payload: response
+        })
+    } catch (error) {
+        console.log('in get notifications saga error:', error);
+    }
+}
+
 
 //WATCHER
 function* databaseSaga() {
@@ -89,6 +103,7 @@ function* databaseSaga() {
     yield takeLatest('POST_DISCUSSION_CONTENT', postDiscussion)
     yield takeLatest('GET_DISCUSSION_BOARD', getDiscussionBoard)
     yield takeLatest('DELETE_CLUB', deleteClub)
+    yield takeLatest('GET_NOTIFICATIONS', getNotifications)
 }
 
 export default databaseSaga;
