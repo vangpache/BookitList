@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Notifications from '../Notifications/Notifications';
 import { Link, withRouter } from 'react-router-dom';
 import { Button, Card, CardContent, Grid, Paper } from '@material-ui/core';
 
@@ -90,19 +91,7 @@ class Home extends Component {
                         <Paper>
                             <Card>
                                 <CardContent>
-                                    <h4>Notifications</h4>
-                                    <ul>
-                                        {this.props.notifications.map(invite => (
-                                            <li>{invite.name}
-
-                                                <Button variant="outlined" size="small">Accept Invite</Button>
-                                                <Button variant="outlined" size="small">Decline Invite</Button>
-
-                                            </li>
-                                        ))}
-                                        
-                                    </ul>
-                                      
+                                    <Notifications /> 
                                 </CardContent>
                             </Card>
                         </Paper>
@@ -119,7 +108,6 @@ class Home extends Component {
                                         <Link to={`/club/${club.clubs_id}`} ><li >{club.name}</li></Link>
                                             {club.admin_status ? <Button key={club.clubs_id} >Delete</Button> : 
                                             <Button key={club.clubs_id} onClick={() => this.handleLeave(club.clubs_id)}>Leave Club</Button>}
-                                            
                                         </>
                                     ))}
                                     </ul>
@@ -140,7 +128,6 @@ class Home extends Component {
 const mapStateToProps = reduxStore => {
     return {
         clubDetails: reduxStore.databaseReducer,
-        notifications: reduxStore.notificationsReducer
     }
 }
 

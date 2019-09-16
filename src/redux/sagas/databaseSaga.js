@@ -92,6 +92,18 @@ function* getNotifications (action) {
     }
 }
 
+function* acceptInvite (action) {
+    try {
+        yield axios.put(`/notifications/${action.clubId}`, action.payload)
+        // console.log('in accept invite saga response:', response);
+        yield put ({
+            type: 'GET_NOTIFICATIONS'
+        })
+    } catch (error) {
+        console.log('in accept invite saga ERROR:', error);
+    }
+}
+
 
 //WATCHER
 function* databaseSaga() {
@@ -104,6 +116,7 @@ function* databaseSaga() {
     yield takeLatest('GET_DISCUSSION_BOARD', getDiscussionBoard)
     yield takeLatest('DELETE_CLUB', deleteClub)
     yield takeLatest('GET_NOTIFICATIONS', getNotifications)
+    yield takeLatest('ACCEPT_INVITE', acceptInvite)
 }
 
 export default databaseSaga;

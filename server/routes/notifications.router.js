@@ -20,7 +20,23 @@ router.get('/', (req, res) => {
             res.sendStatus(500);
 
         })
+})
 
+
+//UPDATE INVITES TO ACCEPT
+router.put('/:clubsId', (req, res) => {
+    let user_id = req.user.id
+    let clubsId = req.params.clubsId
+    let queryText = `UPDATE "user_clubs" SET "invite_accepted" = TRUE
+                    WHERE "user_id" = $1 AND "clubs_id"= $2;`;
+    pool.query(queryText, [user_id, clubsId])
+    .then((result) => {
+        console.log('in update invite to accept:', result);
+        res.sendStatus(200);
+    }).catch((error) => {
+        console.log('in update invite to accept ERROR:', error);
+        res.sendStatus(500);
+    })
 })
 
 
