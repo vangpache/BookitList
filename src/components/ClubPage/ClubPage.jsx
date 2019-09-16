@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import BookDetails from '../BookDetails/BookDetails';
+import UsernameSearch from '../UsernameSearch/UsernameSearch';
 import DiscussionBoard from '../DiscussionBoard/DiscussionBoard';
 import { Button, Grid } from '@material-ui/core';
 
@@ -61,6 +62,11 @@ class ClubPage extends Component {
                 <Button onClick={() => this.handleLeave(this.props.match.params)}>Leave Club</Button>}
                 
                 {JSON.stringify(this.props.details)}
+                <Grid Container spacing={3}>
+                    <Grid item xs={12}>
+                        <UsernameSearch />
+                    </Grid>
+                </Grid>
             
                 
             </div>

@@ -6,7 +6,8 @@ import booksReducer from './booksReducer';
 import databaseReducer from './databaseReducer';
 import singleBookReducer from './singleBookReducer';
 import discussionBoardReducer from './discussonBoardReducer';
-
+import searchUsersReducer from './searchUsersReducer';
+import inviteUsersReducer from './inviteUsersReducers';
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
 // This is imported in index.js as rootSaga
@@ -21,6 +22,8 @@ const rootReducer = combineReducers({
   databaseReducer,
   singleBookReducer,
   discussionBoardReducer,
+  searchUsersReducer,
+  inviteUsersReducer,
 });
 
 export default rootReducer;

@@ -30,10 +30,36 @@ function* searchGoodReads(action) {
     }
 }
 
+///GET USERNAMES FOR USER SEARCH INVITES
+function* getUsernames(action) {
+    try {
+        let response = yield axios.get(`/usernames/${action.payload}`)
+        yield put({
+            type: 'SET_INVITE_USERS',
+            payload: response.data[0]
+        })     
+    } catch (error) {
+        console.log('in getUsernames saga error:', error);       
+    }
+}
+
+function* inviteUser(action) {
+    try {
+        yield put ({
+            type: 'SAVE_USER_INVITES',
+            payload: action.payload
+        })
+    } catch (error) {
+        console.log('in inviteUsers Error', error);
+    }
+}
+
 //WATCHER SAGA
 function* createNewSaga() {
     yield takeLatest ('SEARCH_GOODREADS', searchGoodReads);
     yield takeLatest('POST_NEWCLUB', postNewClub)
+    yield takeLatest('GET_USERNAMES', getUsernames)
+    yield takeLatest('INVITE_USER', inviteUser)
    
 }
 

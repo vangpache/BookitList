@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { TextField, Button } from '@material-ui/core';
 import CreateNewSearchBar from '../CreateNewSearchBar/CreateNewSearchBar';
+import UsernameSearch from '../UsernameSearch/UsernameSearch';
 
 import { withStyles } from '@material-ui/core/styles';
 import { Paper, Grid } from '@material-ui/core';
@@ -96,7 +97,7 @@ class CreateNew extends Component {
     handleCreate = () => {
         this.props.dispatch({
             type: 'POST_NEWCLUB',
-            payload: this.state, 
+            payload: this.state,
             history : this.props.history
         })
         // this.props.history.push('/club')
@@ -168,16 +169,16 @@ class CreateNew extends Component {
                                         // value={this.state.newClub.notes}
                                         onChange={(event) => this.handleChange('notes', event)} />
                             <br /><br />
-                        
                             </div>
                         </Paper>
                     </Grid>
 
                     <Grid item xs={6}>                       
                         <Paper>
-                                <TextField variant="filled" type="text" placeholder="invite users" value="hey" />
+                            {/* <UsernameSearch /> */}
+                                {/* <TextField variant="filled" type="text" placeholder="invite users" value="hey" />
                                 <h4>users show up here</h4>
-                                <Button variant="outlined">Delete User</Button>
+                                <Button variant="outlined">Delete User</Button> */}
                         </Paper>
                     </Grid>
                 </Grid>
@@ -185,6 +186,7 @@ class CreateNew extends Component {
                     <Button variant="outlined" color="primary">Cancel</Button>
                     <Button variant="outlined" onClick={this.handleCreate} >Create New</Button>
                 </div>
+                
             </div>
         )
     }
@@ -192,7 +194,7 @@ class CreateNew extends Component {
 
 const mapStateToProps = reduxStore => {
     return {
-        booksList: reduxStore.booksReducer
+        booksList: reduxStore.booksReducer,
     }
 }
 
