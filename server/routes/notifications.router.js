@@ -24,17 +24,32 @@ router.get('/', (req, res) => {
 
 
 //UPDATE INVITES TO ACCEPT
-router.put('/:clubsId', (req, res) => {
+router.put('/:clubId', (req, res) => {
     let user_id = req.user.id
-    let clubsId = req.params.clubsId
+    let clubId = req.params.clubsId
     let queryText = `UPDATE "user_clubs" SET "invite_accepted" = TRUE
                     WHERE "user_id" = $1 AND "clubs_id"= $2;`;
-    pool.query(queryText, [user_id, clubsId])
+    pool.query(queryText, [user_id, clubId])
     .then((result) => {
         console.log('in update invite to accept:', result);
         res.sendStatus(200);
     }).catch((error) => {
         console.log('in update invite to accept ERROR:', error);
+        res.sendStatus(500);
+    })
+})
+
+//DELETES AN INVITE WHEN DECLINED
+router.delete('/:clubId', (req, res) => {
+    let user_id = req.user.id
+    let clubId = req.params.clubId
+    let queryText = `DELETE FROM "user_clubs" WHERE "user_id" = $1 AND "clubs_id" = $2;`
+    pool.query(queryText, [user_id, clubId])
+    .then((result) => {
+        console.log('in decline and delete invite response:', result);
+        res.sendStatus(200)
+    }).catch((error) => {
+        console.log('in decline an delete invite error:', error);
         res.sendStatus(500);
     })
 })

@@ -104,6 +104,18 @@ function* acceptInvite (action) {
     }
 }
 
+//DECLINE INVITATION AND DELETE THE INVITE FROM DATABASE
+function* deleteInvite (action) {
+    try {
+        yield axios.delete(`/notifications/${action.payload}`)  
+        yield put({
+            type: 'GET_NOTIFICATIONS'
+        })
+    } catch (error) {
+        console.log('in delete Invite saga error:', error);
+    }
+}
+
 
 //WATCHER
 function* databaseSaga() {
@@ -117,6 +129,7 @@ function* databaseSaga() {
     yield takeLatest('DELETE_CLUB', deleteClub)
     yield takeLatest('GET_NOTIFICATIONS', getNotifications)
     yield takeLatest('ACCEPT_INVITE', acceptInvite)
+    yield takeLatest('DELETE_INVITE', deleteInvite)
 }
 
 export default databaseSaga;

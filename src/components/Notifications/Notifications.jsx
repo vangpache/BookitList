@@ -19,6 +19,13 @@ class Notifications extends Component {
         })
     }
 
+    handleDecline = (id) => {
+        this.props.dispatch({
+            type: 'DELETE_INVITE',
+            payload: id
+        })
+    }
+
     render () {
 
         return (
