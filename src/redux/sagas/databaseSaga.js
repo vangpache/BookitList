@@ -69,9 +69,7 @@ function* useBookId(action) {
 function* deleteClub(action) {
     try {
         yield axios.delete(`/database/deletemyclub/${action.payload}`)
-        console.log('in deleteClub saga');
-
-        
+        console.log('in deleteClub saga'); 
     } catch (error) {
         console.log('in deleteClub error:', error);
         

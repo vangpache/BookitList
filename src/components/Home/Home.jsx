@@ -51,6 +51,13 @@ class Home extends Component {
             history: this.props.history
         })
     }
+
+    handleDelete = (id) => {
+        this.props.dispatch({
+            type: 'DELETE_CLUB',
+            payload: id
+        })
+    }
   
 
 
@@ -106,7 +113,7 @@ class Home extends Component {
                                     {this.props.clubDetails.map(club => (
                                         <>
                                         <Link to={`/club/${club.clubs_id}`} ><li >{club.name}</li></Link>
-                                            {club.admin_status ? <Button key={club.clubs_id} >Delete</Button> : 
+                                            {club.admin_status ? <Button key={club.clubs_id} onClick={() => this.handleDelete(club.clubs_id)} >Delete</Button> : 
                                             <Button key={club.clubs_id} onClick={() => this.handleLeave(club.clubs_id)}>Leave Club</Button>}
                                         </>
                                     ))}
