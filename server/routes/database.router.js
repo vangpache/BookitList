@@ -9,10 +9,10 @@ router.get('/', (req, res) => {
     console.log('in databaseRouter details GET:', req.user.id);
     
     let user_id = req.user.id
-    let queryText = `SELECT "book_title", "author", "image_url", "name", "username", "published", "clubs_id", "admin_status" FROM "user_clubs"
+    let queryText = `SELECT "book_title", "author", "image_url", "name", "username", "published", "clubs_id", "admin_status", "invite_accepted" FROM "user_clubs"
                     JOIN "user" ON "user"."id" = "user_clubs"."user_id"
                     JOIN "clubs" ON "clubs"."id" = "user_clubs"."clubs_id"
-                    WHERE "user_clubs"."user_id" = $1 ORDER BY "date" DESC ;`;
+                    WHERE "user_clubs"."user_id" = $1 AND "user_clubs"."invite_accepted" = TRUE ORDER BY "date" DESC ;`;
     pool.query(queryText, [user_id])
     .then((result) => {
         console.log('in GET details:', result);
@@ -51,7 +51,9 @@ router.get('/discussion/:id', (req, res) => {
     console.log('club_id:', req.params);
     
     let club_id = req.params.id
-    let queryText = `SELECT * FROM "discussion" WHERE "clubs_id" = $1 ORDER BY "date";`;
+    let queryText = `SELECT "discussion"."id", "content", "clubs_id", "user_id", "date", "username" FROM "discussion"
+                    JOIN "user" ON "user"."id" = "discussion"."user_id"
+                    WHERE "clubs_id" = $1 ORDER BY "date";`;
     pool.query(queryText, [club_id])
     .then((result) => {
         console.log('in GET discussion:', result);

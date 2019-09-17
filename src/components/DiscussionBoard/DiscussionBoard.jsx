@@ -10,6 +10,7 @@ class DiscussionBoard extends Component {
         this.handleGetDiscussion();
     }
 
+ 
     //DISCUSSION BOARD STATE
     state = {
         content: '',
@@ -29,6 +30,7 @@ class DiscussionBoard extends Component {
             type: 'POST_DISCUSSION_CONTENT',
             payload: this.state
         })
+        this.handleGetDiscussion();
     }
 
     handleGetDiscussion = () => {
@@ -56,7 +58,7 @@ class DiscussionBoard extends Component {
                             <CardContent>
                                 <p>user posts render here</p>
                                 {this.props.discussionBoard.map(post => (
-                                    <p>username: {post.content}</p>
+                                    <p><span>{post.username}:</span> {post.content} <span>{post.date}</span></p> 
                                 ))}
                             </CardContent>
                         </Card>

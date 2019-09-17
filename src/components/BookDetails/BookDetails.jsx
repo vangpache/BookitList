@@ -7,6 +7,7 @@ class BookDetails extends Component {
 
 
 
+
     handleLeave = (id) => {
         console.log('leave button clicked:', id);
         this.props.dispatch({
@@ -25,10 +26,9 @@ class BookDetails extends Component {
                 
                         <Card>
                             <CardContent>
-                                <h4>Details here</h4>
+                                <h4>Book: {this.props.details.book_title} </h4>
                                 <img src={this.props.details.image_url} alt="book cover"/>
-                                <h6>Book: {this.props.details.book_title} </h6>
-                                <h6>Author: {this.props.details.author} </h6>
+                                <h5>Author: {this.props.details.author} </h5>
 
                         {this.props.details.admin_status ?
                             <Button variant="outlined">Edit</Button> :

@@ -1,7 +1,7 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
-
+//GETS ALL CLUBS DETAILS FOR HOME PAGE RENDER
 function* getClubDetail(action) {
     try {
         let response = yield axios.get('/database')
@@ -29,6 +29,10 @@ function* leaveBook(action) {
 function* postDiscussion(action) {
     try {
         yield axios.post(`/database/${action.payload.clubId.id}`, action.payload)
+        yield put ({
+            type: 'GET_DISCUSSION_BOARD',
+            payload: action.payload.clubId.id
+        })
     } catch (error) {
         console.log('in postDiscussion saga error:', error);
     }
@@ -66,10 +70,14 @@ function* useBookId(action) {
     }
 }
 
+//DELETES A CLUB FROM THE HOME AGE
 function* deleteClub(action) {
     try {
         yield axios.delete(`/database/deletemyclub/${action.payload}`)
         console.log('in deleteClub saga'); 
+        yield put({
+            type: 'GET_CLUB_DETAILS'
+        })
     } catch (error) {
         console.log('in deleteClub error:', error);
         
@@ -91,11 +99,15 @@ function* getNotifications (action) {
 }
 
 function* acceptInvite (action) {
-    try {
-        yield axios.put(`/notifications/${action.clubId}`, action.payload)
+
+        try {
+        yield axios.put(`/notifications/${action.payload}`)
         // console.log('in accept invite saga response:', response);
         yield put ({
             type: 'GET_NOTIFICATIONS'
+        })
+        yield put ({
+            type: 'GET_CLUB_DETAILS'
         })
     } catch (error) {
         console.log('in accept invite saga ERROR:', error);
@@ -108,6 +120,9 @@ function* deleteInvite (action) {
         yield axios.delete(`/notifications/${action.payload}`)  
         yield put({
             type: 'GET_NOTIFICATIONS'
+        })
+        yield put({
+            type: 'GET_CLUB_DETAILS'
         })
     } catch (error) {
         console.log('in delete Invite saga error:', error);

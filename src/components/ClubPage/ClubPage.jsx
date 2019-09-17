@@ -49,13 +49,21 @@ class ClubPage extends Component {
                 <h1>{this.props.details.name}</h1>
                 
                 <Grid container spacing={3}>
-                    <Grid item xs={5} >
-                        <BookDetails details={this.props.details} />
-                        {/* {this.props.details.admin_status ?
+                    <Grid item xs={5}>
+                        <Grid item xs={12} >
+
+                            <BookDetails details={this.props.details} />
+                            {/* {this.props.details.admin_status ?
                             <Button variant="outlined">Edit</Button> :
                             <Button onClick={() => this.handleLeave(this.props.match.params)}>Leave Club</Button>} */}
+                        </Grid>
+
+                        <Grid item xs={12}>
+                            <UsernameSearch clubId={this.props.match.params} />
+                        </Grid>
+
                     </Grid>
-                    
+        
                     <Grid item xs={7}>
                         <DiscussionBoard clubId={this.props.match.params}/>
                     </Grid>
@@ -63,13 +71,9 @@ class ClubPage extends Component {
                 
                 
                 {/* {JSON.stringify(this.props.details)} */}
-                <Grid Container spacing={3}>
-                    <Grid item xs={12}>
-                     
-                                <UsernameSearch clubId={this.props.match.params} />
-                        
-                    </Grid>
-                </Grid>
+                {/* <Grid Container spacing={3}>
+                    
+                </Grid> */}
             
                 
             </div>

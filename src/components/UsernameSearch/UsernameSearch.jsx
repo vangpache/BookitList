@@ -74,16 +74,14 @@ class UsernameSearch extends Component {
             <>
             <Card>
                 <CardContent>
-                        <h1>This is the search username piece</h1>
+                        <h1>Add new members:</h1>
                         
-                            <input variant="filled" type="text" placeholder="invite users"
+                            <input variant="filled" type="text" placeholder="search for users..."
                                 ref={input => this.search = input}
                                 onChange={this.handleInputChange} />
-                            <h4>users show up here</h4>
-                            {/* <p>{this.state.query}  */}
-                            <p>{this.props.users.username}
+                            <span>{this.props.users.username}
                                 <Button variant="outlined" onClick={this.handleAddUser}>Add user</Button>
-                            </p>
+                            </span>
 
                             <ul>
                                 {this.props.inviteList.map(username => (

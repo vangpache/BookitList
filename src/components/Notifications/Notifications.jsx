@@ -4,18 +4,11 @@ import { Button } from '@material-ui/core';
 
 class Notifications extends Component {
 
-    state = {
-        invite_accepted: false
-    }
 
     handleAccept = (id) => {
-        this.setState({
-            invite_accepted: true
-        })
         this.props.dispatch({
             type: 'ACCEPT_INVITE',
-            payload: this.state,
-            clubId: id
+            payload: id,
         })
     }
 
@@ -28,6 +21,9 @@ class Notifications extends Component {
 
     render () {
 
+        console.log('in notifications, club id is:', this.props.notifications.id);
+        
+
         return (
             <>
             <h4>Notifications</h4>
@@ -36,13 +32,13 @@ class Notifications extends Component {
                     <li>{invite.name}
 
                         <Button variant="outlined" size="small" 
-                                onClick={() => this.handleAccept(invite.clubs_id)} >Accept Invite
+                                onClick={() => this.handleAccept(invite.clubs_id)}>Accept Invite
                         </Button>
 
                         <Button variant="outlined" size="small" 
                                 onClick={() => this.handleDecline(invite.clubs_id)}>Decline Invite
                         </Button>
-
+                        {/* {JSON.stringify(invite.clubs_id)} */}
                     </li>
                 ))}
 

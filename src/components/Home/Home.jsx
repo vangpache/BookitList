@@ -11,16 +11,19 @@ class Home extends Component {
     componentDidMount() {
         this.getDetails();
         this.getNotifications();
-       
     }
 
-  
-
-
-    //GETS THE DETAILS FOR MOST RECENT THREE CLUBS
+    //GETS THE DETAILS FOR ALL CLUBS TO DISPLAY ON HOME PAGE ON LOAD
     getDetails = () => {
         this.props.dispatch({
             type: 'GET_CLUB_DETAILS'
+        })
+    }
+
+    //GETS INVITES TO DISPLAY ON HOME PAGE ON RENDER
+    getNotifications = () => {
+        this.props.dispatch({
+            type: 'GET_NOTIFICATIONS'
         })
     }
 
@@ -28,21 +31,7 @@ class Home extends Component {
         console.log('book clicked');
     }
 
-    getNotifications = () => {
-        this.props.dispatch({
-            type: 'GET_NOTIFICATIONS'
-        })
-    }
-
-
-    // handleDelete = (id) =>{
-    //     console.log('delete button clicked');  
-    //     this.props.dispatch({
-    //         type: 'DELETE_CLUB',
-    //         payload: id
-    //     })
-    // }
-
+    //LEAVE A CLUB AS A NON-ADMIN; DELETES CLUB FROM USER_CLUBS TABLE
     handleLeave = (id) => {
         console.log('leave button clicked:', id);
         this.props.dispatch({
@@ -52,6 +41,7 @@ class Home extends Component {
         })
     }
 
+    //DELETE A CLUB FROM HOME PAGE AS AN ADMIN
     handleDelete = (id) => {
         this.props.dispatch({
             type: 'DELETE_CLUB',
@@ -60,10 +50,13 @@ class Home extends Component {
     }
   
 
-
     render() {
 
-           
+        // let renderclubs = this.props.clubDetails.map((club) => {
+        //     return (
+                
+        //     )
+        // })
 
         return (
 
@@ -76,20 +69,25 @@ class Home extends Component {
 
 
                     {this.props.clubDetails.map(club => (
+                        
                         <Grid item xs={3} >
                             <Paper>
+                                
                                 <Card onClick={this.handleClick}>
                                     <CardContent >
-                                        {/* <CardActions > */}
+ 
                                         <p>{club.name}</p>
+                                        <Link to={`/club/${club.clubs_id}`}>
                                             <img src={club.image_url} alt={club.book_title}/>
+                                        </Link>
                                         <p>Book: {club.book_title}</p>
-                                        <p>By: {club.author}</p>
-                                        {/* </CardActions> */}
+                                        <p>By: {club.author}</p> 
+ 
                                     </CardContent>
                                 </Card>
                             </Paper>
                         </Grid>
+                            
                     ))}
 
                     
@@ -111,22 +109,26 @@ class Home extends Component {
                                     <h3>Bookit List:</h3>
                                     <ul>
                                     {this.props.clubDetails.map(club => (
+                                         
                                         <>
+                                            
                                         <Link to={`/club/${club.clubs_id}`} ><li >{club.name}</li></Link>
                                             {club.admin_status ? <Button key={club.clubs_id} onClick={() => this.handleDelete(club.clubs_id)} >Delete</Button> : 
                                             <Button key={club.clubs_id} onClick={() => this.handleLeave(club.clubs_id)}>Leave Club</Button>}
-                                        </>
+                                            
+                                        </> 
+                                        
                                     ))}
                                     </ul>
                                 </CardContent>
                             </Card>
                         </Paper>
                         
-                    </Grid>
+                        </Grid>
                     </Grid>
                
                     {/* {JSON.stringify(this.props.clubDetails)} */}
-                    {JSON.stringify(this.props.notifications)}
+                    {JSON.stringify(this.props.clubDetails)}
             </div>
         )
     }
