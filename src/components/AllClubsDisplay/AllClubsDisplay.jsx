@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, Card, CardContent, Grid, Paper } from '@material-ui/core';
+import { Button, Card, CardContent, IconButton, Grid, Paper } from '@material-ui/core';
+import  DeleteIcon from '@material-ui/icons/Delete';
 import { Link, withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/styles';
 
@@ -50,7 +51,9 @@ class AllClubsDisplay extends Component {
                                     </Link>
                                     <p>Book: {club.book_title}</p>
                                     <p>By: {club.author}</p>
-                                    {club.admin_status ? <Button key={club.clubs_id} onClick={() => this.handleDelete(club.clubs_id)} >Delete</Button> :
+                            {club.admin_status ? <IconButton aria-label="Delete">
+                                                    <DeleteIcon key={club.clubs_id} onClick={() => this.handleDelete(club.clubs_id)} />
+                                                </IconButton> :
                                         <Button key={club.clubs_id} onClick={() => this.handleLeave(club.clubs_id)}>Leave Club</Button>}
 
                                 </CardContent>

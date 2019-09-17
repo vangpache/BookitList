@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Button, Card, CardContent, TextField } from '@material-ui/core';
+import { Button, Card, CardContent } from '@material-ui/core';
+import SendIcon from '@material-ui/icons/Send';
 import { connect } from 'react-redux';
 
 
@@ -86,17 +87,18 @@ class UsernameSearch extends Component {
 
                             <ul>
                                 {this.state.invited.map(username => (
-                                    <li>
+                                    <li key={username.id}>
                                         {username.username}
                                         <Button>remove</Button>
                                     </li>
                                 ))}
                             </ul>
                         
-                        <Button variant="outlined" onClick={() => this.handleInvites(this.props.clubId)}>Invite Users</Button><br/>
-                        {JSON.stringify(this.props.users)}
+                        <Button variant="outlined" color="primary" onClick={() => this.handleInvites(this.props.clubId)}>Send Invites 
+                        <SendIcon/></Button><br/>
+                        {/* {JSON.stringify(this.props.users)}
                         {JSON.stringify(this.state.invited)}
-                        {JSON.stringify(this.props.inviteList)}
+                        {JSON.stringify(this.props.inviteList)} */}
                 </CardContent>
             </Card>
                 
