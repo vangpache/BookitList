@@ -43,6 +43,7 @@ function* getUsernames(action) {
     }
 }
 
+//TAKES THE ADDED USER TO INVITE AND SPREADS IN THE INVITE-USERS-REDUCER STATE
 function* inviteUser(action) {
     try {
         yield put ({
@@ -69,7 +70,7 @@ function* createNewSaga() {
     yield takeLatest ('SEARCH_GOODREADS', searchGoodReads);
     yield takeLatest('POST_NEWCLUB', postNewClub)
     yield takeLatest('GET_USERNAMES', getUsernames)
-    yield takeLatest('INVITE_USER', inviteUser)
+    // yield takeLatest('INVITE_USER', inviteUser)
     yield takeLatest('SEND_INVITES', sendInvites)
    
 }

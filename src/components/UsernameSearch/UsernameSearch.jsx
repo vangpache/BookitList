@@ -6,17 +6,16 @@ import { connect } from 'react-redux';
 class UsernameSearch extends Component {
 
     state = {
-        query:'',
-        invited: {
-            user_id: 0,
-            username: ''
-        }
+        search: {
+            query:''
+        },
+        invited: [],
     }
 
     getInfo = () => {
         this.props.dispatch({
             type: 'GET_USERNAMES',
-            payload: this.state.query
+            payload: this.state.search.query
         })
     }
 
@@ -24,9 +23,11 @@ class UsernameSearch extends Component {
 
     handleInputChange = () => {
         this.setState({
-            query: this.search.value
+            search:{
+                query: this.search.value
+            }
         }, () => {
-            if (this.state.query && this.state.query.length > 1) {
+            if (this.state.search.query && this.state.search.query.length > 1) {
                     this.getInfo()  
             }
         })
@@ -34,26 +35,24 @@ class UsernameSearch extends Component {
     }
 
     //ON CLICK --> TAKES THE USER IN THE REDUCER AND ADDS TO A STATE THAT WILL DISPATCH UPON CREATE NEW BUTTON TO A NEW REDUCER THAT COLLECTS ALL USERS INVITED
-    //SPREAD STATEMENT NOT WORKING ATM, NEED TO LOOK AT AGAIN
     handleAddUser = () => {
         console.log('add user button clicked');
         this.setState ({
-            ...this.state.invited,
-            invited: {
+            invited: [...this.state.invited, {
                 user_id: this.props.users.id,
                 username: this.props.users.username 
-            }
+            }]
         })
-        this.props.dispatch({
-            type: 'INVITE_USER', 
-            payload: this.state.invited
-        })
-        // console.log('invites list:', this.state.invited);
-        // console.log('user store:', this.props.users);
-        // console.log('in invitelist reducer', this.props.inviteList);
-        
+        // this.inviteUsers();
     }
 
+    //ADDS USER IN STATE TO THE INVITE-USERS-REDUCER ONLY ; DOES NOT DISPATCH TO DB
+    // inviteUsers = () => {
+    //     this.props.dispatch({
+    //         type: 'INVITE_USER',
+    //         payload: this.state.invited
+    //     })
+    // }
 
 
     //INVITE USERS TO JOIN CLUB
@@ -61,7 +60,7 @@ class UsernameSearch extends Component {
         console.log('invite users button clicked');
         this.props.dispatch({
             type: 'SEND_INVITES',
-            payload: this.props.inviteList,
+            payload: this.state.invited,
             clubId: id
         })
     }
@@ -79,12 +78,14 @@ class UsernameSearch extends Component {
                             <input variant="filled" type="text" placeholder="search for users..."
                                 ref={input => this.search = input}
                                 onChange={this.handleInputChange} />
+
+                        {!this.props.users.username ?  
+                        <span>bye</span> :
                             <span>{this.props.users.username}
-                                <Button variant="outlined" onClick={this.handleAddUser}>Add user</Button>
-                            </span>
+                                <Button variant="outlined" onClick={this.handleAddUser}>Add user</Button></span>}
 
                             <ul>
-                                {this.props.inviteList.map(username => (
+                                {this.state.invited.map(username => (
                                     <li>
                                         {username.username}
                                         <Button>remove</Button>
@@ -94,6 +95,7 @@ class UsernameSearch extends Component {
                         
                         <Button variant="outlined" onClick={() => this.handleInvites(this.props.clubId)}>Invite Users</Button><br/>
                         {JSON.stringify(this.props.users)}
+                        {JSON.stringify(this.state.invited)}
                         {JSON.stringify(this.props.inviteList)}
                 </CardContent>
             </Card>
