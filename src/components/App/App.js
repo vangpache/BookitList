@@ -98,7 +98,7 @@ class App extends Component {
 
             <ProtectedRoute
               exact
-              path="/edit"
+              path="/edit/:id"
               component={EditDetails}
             />
             {/* If none of the other routes matched, we will show a 404. */}

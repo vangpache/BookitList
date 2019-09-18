@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
     console.log('in databaseRouter details GET:', req.user.id);
     
     let user_id = req.user.id
-    let queryText = `SELECT "book_title", "author", "image_url", "name", "username", "published", "clubs_id", "admin_status", "invite_accepted" FROM "user_clubs"
+    let queryText = `SELECT "book_title", "author", "image_url", "name", "username", "clubs_id", "admin_status", "invite_accepted" FROM "user_clubs"
                     JOIN "user" ON "user"."id" = "user_clubs"."user_id"
                     JOIN "clubs" ON "clubs"."id" = "user_clubs"."clubs_id"
                     WHERE "user_clubs"."user_id" = $1 AND "user_clubs"."invite_accepted" = TRUE ORDER BY "date" DESC ;`;
@@ -30,7 +30,7 @@ router.get('/:id', (req, res) => {
 
     let user_id = req.user.id
     let club_id = req.params.id
-    let queryText = `SELECT "name", "book_title", "author", "image_url", "published", "description", "admin_status" FROM "clubs"
+    let queryText = `SELECT "name", "book_title", "author", "image_url", "description", "admin_status" FROM "clubs"
                     JOIN "user_clubs" ON "user_clubs"."clubs_id" = "clubs"."id"
                     WHERE "clubs_id" = $1 AND "user_id" = $2;`;
     pool.query(queryText, [club_id, user_id])
@@ -142,6 +142,21 @@ router.delete('/deletemyclub/:id', (req, res) => {
         res.sendStatus(200)
     }).catch((error) => {
         console.log('in DELETE MY CLUB:', error);
+    })
+})
+
+router.put('/', (req, res) => {
+
+    let updates = req.body
+    let queryText = `UPDATE "clubs" SET "name" = $1, "book_title" = $2, "author" = $3, "image_url" = $4, "description" = $5
+                    WHERE "id" = $6;`;
+    pool.query(queryText, [updates.name, updates.book_title, updates.author, updates.image_url, updates.description, updates.clubId])
+    .then((result) => {
+        console.log('in update details:', result);
+        res.sendStatus(200);
+        
+    }).catch((error) => {
+        console.log('in update details error:', error); 
     })
 })
 

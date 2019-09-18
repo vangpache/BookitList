@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { TextField, Button } from '@material-ui/core';
 import CreateNewSearchBar from '../CreateNewSearchBar/CreateNewSearchBar';
-import UsernameSearch from '../UsernameSearch/UsernameSearch';
+// import UsernameSearch from '../UsernameSearch/UsernameSearch';
 
 import { withStyles } from '@material-ui/core/styles';
 import { Paper, Grid } from '@material-ui/core';
@@ -58,12 +58,8 @@ class CreateNew extends Component {
             book_title: '',
             author: '',
             image_url: '',
-            pub_day: 0,
-            pub_month: 0,
-            pub_year: 0,
             name: '',
             description: '',
-            notes: '',
             invite_accepted: true,
             admin_status: true
     }
@@ -75,12 +71,8 @@ class CreateNew extends Component {
                 book_title: tile.best_book.title._text,
                 author: tile.best_book.author.name._text,
                 image_url: tile.best_book.image_url._text,
-                pub_day: tile.original_publication_day._text,
-                pub_month: tile.original_publication_month._text,
-                pub_year: tile.original_publication_year._text
             
-        })
-        console.log('show me THE MONEYYY:', this.state);        
+        })       
     }
 
     //SET THE NEW CLUB DETAILS STATE
@@ -163,12 +155,12 @@ class CreateNew extends Component {
                                         // value={this.state.newClub.description}
                                         onChange={(event) => this.handleChange('description', event)} />
                             <br /><br />
-                            Notes:<br />
+                            {/* Notes:<br />
                             <TextField  variant="filled" type="text" 
                                         placeholder="let clubbers know when and where to meet"
                                         // value={this.state.newClub.notes}
                                         onChange={(event) => this.handleChange('notes', event)} />
-                            <br /><br />
+                            <br /><br /> */}
                             </div>
                         </Paper>
                     </Grid>

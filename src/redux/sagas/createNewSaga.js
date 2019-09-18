@@ -43,17 +43,17 @@ function* getUsernames(action) {
     }
 }
 
-//TAKES THE ADDED USER TO INVITE AND SPREADS IN THE INVITE-USERS-REDUCER STATE
-function* inviteUser(action) {
-    try {
-        yield put ({
-            type: 'SAVE_USER_INVITES',
-            payload: action.payload
-        })
-    } catch (error) {
-        console.log('in inviteUsers Error', error);
-    }
-}
+//TAKES THE ADDED USER TO INVITE AND SPREADS IN THE INVITE-USERS-REDUCER STATE-- CURRENTLY NOT IN USE ANYMORE/NOT NEEDED ATM
+// function* inviteUser(action) {
+//     try {
+//         yield put ({
+//             type: 'SAVE_USER_INVITES',
+//             payload: action.payload
+//         })
+//     } catch (error) {
+//         console.log('in inviteUsers Error', error);
+//     }
+// }
 
 function* sendInvites(action) {
     try {
@@ -64,11 +64,23 @@ function* sendInvites(action) {
     }
 }
 
+function* updateClubDetails(action) {
+    // console.log('in update club details action.payload:', action.payload.clubId);
+    
+    try {
+        yield axios.put(`/database`, action.payload)
+        yield action.history.push(`/club/${action.payload.clubId}`)
+    } catch (error) {
+        console.log('in update club details error:', error);
+    }
+}
+
 
 //WATCHER SAGA
 function* createNewSaga() {
     yield takeLatest ('SEARCH_GOODREADS', searchGoodReads);
     yield takeLatest('POST_NEWCLUB', postNewClub)
+    yield takeLatest('UPDATE_CLUB_DETAILS', updateClubDetails)
     yield takeLatest('GET_USERNAMES', getUsernames)
     // yield takeLatest('INVITE_USER', inviteUser)
     yield takeLatest('SEND_INVITES', sendInvites)

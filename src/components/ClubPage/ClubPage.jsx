@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import BookDetails from '../BookDetails/BookDetails';
 import UsernameSearch from '../UsernameSearch/UsernameSearch';
 import DiscussionBoard from '../DiscussionBoard/DiscussionBoard';
-import { Button, Card, CardContent, Grid } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 
 
 
@@ -53,9 +53,7 @@ class ClubPage extends Component {
                         <Grid item xs={12} >
 
                             <BookDetails details={this.props.details} />
-                            {/* {this.props.details.admin_status ?
-                            <Button variant="outlined">Edit</Button> :
-                            <Button onClick={() => this.handleLeave(this.props.match.params)}>Leave Club</Button>} */}
+                            
                         </Grid>
 
                         <Grid item xs={12}>

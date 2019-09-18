@@ -4,7 +4,7 @@ import Notifications from '../Notifications/Notifications';
 import AllClubsDisplay from '../AllClubsDisplay/AllClubsDisplay';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/styles';
-import { Button, Card, CardContent, Divider, Grid, Paper } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 
 const styles = {
     
@@ -61,7 +61,7 @@ class Home extends Component {
                         
                     </Grid>
                
-                    {JSON.stringify(this.props.clubDetails)}
+                    {/* {JSON.stringify(this.props.clubDetails)} */}
             </div>
         )
     }

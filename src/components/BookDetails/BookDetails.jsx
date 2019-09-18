@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Card, CardContent } from '@material-ui/core';
+import { withRouter } from 'react-router-dom';
 
 
 
@@ -17,6 +18,12 @@ class BookDetails extends Component {
         })
     }
 
+    handleEdit = (id) => {
+        console.log('handleEdit club id is: ', id);
+        this.props.history.push(`/edit/${id.id}`)
+
+    }
+
     render() {
 
 
@@ -27,11 +34,13 @@ class BookDetails extends Component {
                         <Card>
                             <CardContent>
                                 <h4>Book: {this.props.details.book_title} </h4>
-                                <img src={this.props.details.image_url} alt="book cover"/>
                                 <h5>Author: {this.props.details.author} </h5>
+                                <img src={this.props.details.image_url} alt="book cover"/>
+                                <p>Notes: {this.props.details.description}</p>
+                                
 
                         {this.props.details.admin_status ?
-                            <Button variant="outlined">Edit</Button> :
+                            <Button variant="outlined" onClick={() => this.handleEdit(this.props.match.params)}>Edit</Button> :
                             <Button onClick={() => this.handleLeave(this.props.match.params)}>Leave Club</Button>}
                             </CardContent>
                         </Card>
@@ -41,4 +50,4 @@ class BookDetails extends Component {
     }
 }
 
-export default BookDetails;
+export default withRouter(BookDetails);
