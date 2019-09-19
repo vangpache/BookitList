@@ -127,9 +127,9 @@ class CreateNew extends Component {
                 <h1>Create a New Circle:</h1>
                 <Grid container spacing={3}>
                     <Grid item xs={6} >
-                        <Paper className={classes.paper} >
+                        {/* <Paper className={classes.paper} > */}
                             <CreateNewSearchBar />
-                        </Paper>
+                        {/* </Paper> */}
                     </Grid>
                             
                     <Grid  item xs={6}>
@@ -192,14 +192,14 @@ class CreateNew extends Component {
                         </Paper>
                     </Grid>
 
-                    <Grid item xs={6}>                       
-                        <Paper>
+                    {/* <Grid item xs={6}>                       
+                        <Paper> */}
                             {/* <UsernameSearch /> */}
                                 {/* <TextField variant="filled" type="text" placeholder="invite users" value="hey" />
                                 <h4>users show up here</h4>
                                 <Button variant="outlined">Delete User</Button> */}
-                        </Paper>
-                    </Grid>
+                        {/* </Paper>
+                    </Grid> */}
                 </Grid>
                 
                 

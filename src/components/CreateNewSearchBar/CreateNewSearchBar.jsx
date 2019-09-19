@@ -54,13 +54,13 @@ class CreateNewSearchBar extends Component {
 
         return (
             <div className={classes.divContainer} >
-                <Paper className={classes.paper}>
+                {/* <Paper className={classes.paper}> */}
                     <Book />
                     <InputBase className={classes.input} placeholder="search books..." onChange={this.handleSearchQuery}/>
                     <IconButton className={classes.iconButton} onClick={this.handleClick}>
                         <SearchIcon  />
                     </IconButton>
-                </Paper> 
+                {/* </Paper>  */}
             </div>
               
          

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, IconButton } from '@material-ui/core';
+import { IconButton, Table, TableBody, TableCell, TableHead, TableRow  } from '@material-ui/core';
 import { MailOutline, Cancel, CheckCircle } from '@material-ui/icons';
 import { withStyles } from '@material-ui/styles';
 
@@ -44,24 +44,43 @@ class Notifications extends Component {
         return (
             <>
                 <h4>Notifications <MailOutline /></h4>
-            <ul>
-                {this.props.notifications.map(invite => (
-                    <li> {invite.name}
-
-                        <IconButton className={this.props.classes.iconbuttonAccept} variant="outlined" size="small" 
-                                onClick={() => this.handleAccept(invite.clubs_id)}>
-                            <CheckCircle /> Accept Invite
+                    <Table>
+                        {/* <TableHead>
+                            <TableRow>
+                                <TableCell>
+                                    You've got mail!
+                                </TableCell>
+                                <TableCell>
+                                    accept this invite
+                                </TableCell>
+                                <TableCell>
+                                    Decline this invite
+                                </TableCell>
+                            </TableRow>
+                        </TableHead> */}
+                        <TableBody>
+                        {this.props.notifications.map(invite => (
+                            <TableRow>
+                                <TableCell>
+                                    {invite.name}
+                                </TableCell>
+                                <TableCell>
+                                    <IconButton className={this.props.classes.iconbuttonAccept} variant="outlined" size="small"
+                                        onClick={() => this.handleAccept(invite.clubs_id)}>
+                                        <CheckCircle /> Accept Invite
                         </IconButton>
-
-                        <IconButton className={this.props.classes.iconbuttonDecline} variant="outlined" size="small" 
-                                onClick={() => this.handleDecline(invite.clubs_id)}>
-                                    <Cancel/>Decline Invite
+                                </TableCell>
+                                <TableCell>
+                                    <IconButton className={this.props.classes.iconbuttonDecline} variant="outlined" size="small"
+                                        onClick={() => this.handleDecline(invite.clubs_id)}>
+                                        <Cancel />Decline Invite
                         </IconButton>
-                        {/* {JSON.stringify(invite.clubs_id)} */}
-                    </li>
+                                </TableCell>
+                            </TableRow>
                 ))}
+                    </TableBody>
+                </Table>
 
-            </ul>
             </>
         )
     }

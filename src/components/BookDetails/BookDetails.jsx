@@ -1,13 +1,45 @@
 import React, { Component } from 'react';
-import { Button, Card, CardContent } from '@material-ui/core';
+import { connect } from 'react-redux';
+import { Button, CardContent, Grid } from '@material-ui/core';
+import { PersonOutline } from '@material-ui/icons';
 import { withRouter } from 'react-router-dom';
+import { withStyles } from '@material-ui/styles';
 
 
+const styles = {
+    gridBookDetails: {
+        display: 'inline-block',
+        float: 'left'
+    },
+    gridMembers: {
+        display: 'inline-block',
+        float: 'right',
+        margin: '30px'
+    },
+    button: {
+        margin: '15px'
+    },
+    p: {
+        color: 'orange'
+    },
+    ul: {
+        listStyleType: 'none'
+    }
+}
 
 class BookDetails extends Component {
 
+    componentDidMount() {
+        this.getMembersToDisplay();
+    }
 
-
+    
+    getMembersToDisplay = () => {
+        this.props.dispatch({
+            type: 'GET_MEMBERS_DISPLAY',
+            payload: this.props.match.params
+        })
+    }
 
     handleLeave = (id) => {
         console.log('leave button clicked:', id);
@@ -30,9 +62,9 @@ class BookDetails extends Component {
         return (
 
             <div>
-                
-                        <Card>
-                            <CardContent>
+                <Grid item xs={7} className={this.props.classes.gridBookDetails} >
+                 
+                            <CardContent> 
                                 <h4>Book: {this.props.details.book_title} </h4>
                                 <h5>Author: {this.props.details.author} </h5>
                                 <img src={this.props.details.image_url} alt="book cover"/>
@@ -41,13 +73,36 @@ class BookDetails extends Component {
 
                         {this.props.details.admin_status ?
                             <Button variant="outlined" onClick={() => this.handleEdit(this.props.match.params)}>Edit</Button> :
-                            <Button onClick={() => this.handleLeave(this.props.match.params)}>Leave Club</Button>}
+                            <Button onClick={() => this.handleLeave(this.props.match.params)}
+                            
+                                    className={this.props.classes.button}>Leave Club</Button>}
                             </CardContent>
-                        </Card>
+                      
+                </Grid>
+
+                <Grid item xs={5} className={this.props.classes.gridMembers}>
+                            <CardContent>
+                                <p className={this.props.classes.p} >current members</p>
+                                <ul className={this.props.classes.ul} >
+                            {this.props.members.map(username => (
+                                    <li> <PersonOutline /> {username.username}</li>
+                                ))}
+                                </ul>
+                                
+              
+                            </CardContent>
+                </Grid>
+                        
                
             </div>
         )
     }
 }
 
-export default withRouter(BookDetails);
+const mapStateToProps = reduxStore => {
+    return {
+        members: reduxStore.membersReducer
+    }
+}
+
+export default withStyles(styles) (withRouter(connect(mapStateToProps)(BookDetails)));

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import BookDetails from '../BookDetails/BookDetails';
 import UsernameSearch from '../UsernameSearch/UsernameSearch';
 import DiscussionBoard from '../DiscussionBoard/DiscussionBoard';
-import { Grid } from '@material-ui/core';
+import { Card, Grid } from '@material-ui/core';
 
 
 
@@ -11,6 +11,7 @@ class ClubPage extends Component {
     // COMPONENT DID MOUNT TO GET CURRENT BOOK CLUB BASED ON ID
     componentDidMount() {
         this.getClubPageDetails();
+        // this.getMembersToDisplay();
     }
 
     getClubPageDetails = () => {
@@ -21,6 +22,7 @@ class ClubPage extends Component {
             payload: this.props.match.params.id
         })
     }
+
 
 
     render() {
@@ -37,31 +39,29 @@ class ClubPage extends Component {
                 <h1>{this.props.details.name}</h1>
                 
                 <Grid container spacing={3}>
+    
                     <Grid item xs={5}>
-                        <Grid item xs={12} >
-
-                            <BookDetails details={this.props.details} />
-                            
+                        <Grid item={12}>
+                            <Card>
+                            <BookDetails details={this.props.details}  />
+                            {/* {JSON.stringify(this.props.members)} */}
+                            </Card>
                         </Grid>
-
-                        <Grid item xs={12}>
-                            <UsernameSearch clubId={this.props.match.params} />
+                        
+                        <Grid container spacing={3}>
+                            <Grid item xs={12}>
+                                <UsernameSearch clubId={this.props.match.params} />
+                            </Grid>
                         </Grid>
-
+                        
                     </Grid>
         
                     <Grid item xs={7}>
                         <DiscussionBoard clubId={this.props.match.params}/>
                     </Grid>
+
                 </Grid>
-                
-                
-                {/* {JSON.stringify(this.props.details)} */}
-                {/* <Grid Container spacing={3}>
-                    
-                </Grid> */}
-            
-                
+                     
             </div>
         )
     }
@@ -69,7 +69,8 @@ class ClubPage extends Component {
 
 const mapStateToProps = reduxStore => {
     return {
-        details: reduxStore.singleBookReducer
+        details: reduxStore.singleBookReducer,
+        // members: reduxStore.membersReducer.data
     }
 }
 

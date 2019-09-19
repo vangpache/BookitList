@@ -3,7 +3,22 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-//GET USERNAMES OF ALL MEMBERS IN ONE CLUB TO DISPLAY
+//GET USERNAMES OF ALL MEMBERS IN ONE CIRCLE TO DISPLAY
+router.get('/members/:clubId', (req, res) => {
+    console.log('in get members:', req.params.clubId);
+    let clubId = req.params.clubId
+    let queryText = `SELECT "username" FROM "user_clubs" 
+                    JOIN "user" ON "user"."id" = "user_clubs"."user_id"
+                    WHERE "clubs_id" = $1;`
+    pool.query(queryText, [clubId])
+    .then((result) => {
+        console.log('in get members result.rows', result.rows);
+        res.send(result.rows)    
+    }).catch((error) => {
+        console.log('in get members error:', error);
+        res.sendStatus(500)
+    })
+});
 
 
 
@@ -19,10 +34,8 @@ router.get('/:username', (req, res) => {
     .then((result) => {
         console.log('in get usernames:', result);
         res.send(result.rows);
-
     }).catch((error) => {
         console.log('in get username error:', error);
-
     })
 })
 

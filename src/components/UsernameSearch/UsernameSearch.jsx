@@ -10,7 +10,7 @@ class UsernameSearch extends Component {
         search: {
             query:''
         },
-        invited: [],
+        invited: []
     }
 
     getInfo = () => {
@@ -42,7 +42,13 @@ class UsernameSearch extends Component {
             invited: [...this.state.invited, {
                 user_id: this.props.users.id,
                 username: this.props.users.username 
-            }]
+            }],
+            search: {
+                query: ''
+            }
+        })
+        this.props.dispatch({
+            type: 'ON_SUBMIT_CLEAR'
         })
     }
 
@@ -58,7 +64,8 @@ class UsernameSearch extends Component {
         this.setState({
             search: {
                 query: ''
-            }
+            },
+            invited: []
         })
     }
     
@@ -76,8 +83,8 @@ class UsernameSearch extends Component {
                                 ref={input => this.search = input} value={this.state.search.query}
                                 onChange={this.handleInputChange} />
 
-                        {!this.props.users.username ?  
-                        <span>bye</span> :
+                        {!this.state.search.query ?  
+                            <span>search for friends</span> :
                             <span>{this.props.users.username}
                                 <Button variant="outlined" onClick={this.handleAddUser}>Add user</Button></span>}
 

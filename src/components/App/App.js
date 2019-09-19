@@ -24,19 +24,15 @@ import EditDetails from '../EditDetails/EditDetails';
 
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import { createMuiTheme } from '@material-ui/core/styles';
-import green from '@material-ui/core/colors/green';
-
-
 import './App.css';
 
 const theme = createMuiTheme({
-  palette: {
-    primary: green
-  }
+ 
+    primary: {
+      dark: '#ff9100',
+    }
+  
 })
-
-
-
 
 
 

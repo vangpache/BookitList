@@ -9,7 +9,7 @@ import { Grid } from '@material-ui/core';
 const styles = {
     notificationsGrid: {
         // background: '#cddc39',
-        height: 200,
+        // height: 200,
     }
 }
 

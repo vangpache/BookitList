@@ -129,6 +129,18 @@ function* deleteInvite (action) {
     }
 }
 
+function* getMembersDisplay(action) {
+    try {
+        let response = yield axios.get(`/usernames/members/${action.payload.id}`)
+        console.log('in get Members to display:', response); 
+        yield put ({
+            type: 'SET_MEMBERS_TO_DISPLAY',
+            payload: response
+        })
+    } catch (error) {
+        console.log('in get Members to display error:', error);
+    }
+}
 
 //WATCHER
 function* databaseSaga() {
@@ -143,6 +155,7 @@ function* databaseSaga() {
     yield takeLatest('GET_NOTIFICATIONS', getNotifications)
     yield takeLatest('ACCEPT_INVITE', acceptInvite)
     yield takeLatest('DELETE_INVITE', deleteInvite)
+    yield takeLatest('GET_MEMBERS_DISPLAY', getMembersDisplay)
 }
 
 export default databaseSaga;
