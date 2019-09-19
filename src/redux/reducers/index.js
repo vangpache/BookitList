@@ -7,7 +7,6 @@ import databaseReducer from './databaseReducer';
 import singleBookReducer from './singleBookReducer';
 import discussionBoardReducer from './discussonBoardReducer';
 import searchUsersReducer from './searchUsersReducer';
-import inviteUsersReducer from './inviteUsersReducers'; //CURRENTLY NOT IN USE; TO BE REMOVED SOON
 import notificationsReducer from './notificationsReducer';
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -24,7 +23,6 @@ const rootReducer = combineReducers({
   singleBookReducer,
   discussionBoardReducer,
   searchUsersReducer,
-  inviteUsersReducer,
   notificationsReducer,
 });
 

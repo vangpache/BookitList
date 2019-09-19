@@ -46,6 +46,18 @@ const styles = theme => ({
         background:
             'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
     },
+    textField: {
+        width: 500,
+        margin: '20px'
+    },
+    cancelButton: {
+        margin: '20px',
+        alignItem: 'left'
+    },
+    createButton: {
+        margin: '20px',
+        // alignItem: 'right'
+    }
   
 });
 
@@ -62,6 +74,10 @@ class CreateNew extends Component {
             description: '',
             invite_accepted: true,
             admin_status: true
+    }
+
+    handleCancel = () => {
+        this.props.history.push('/')
     }
 
     handleClick = (tile) => {
@@ -92,7 +108,15 @@ class CreateNew extends Component {
             payload: this.state,
             history : this.props.history
         })
-        // this.props.history.push('/club')
+        this.setState({
+            book_title: '',
+            author: '',
+            image_url: '',
+            name: '',
+            description: '',
+            invite_accepted: true,
+            admin_status: true
+        })
     }
 
     render() {
@@ -100,7 +124,7 @@ class CreateNew extends Component {
       
         return (
             <div>
-                <h1>Create a New Book Club:</h1>
+                <h1>Create a New Circle:</h1>
                 <Grid container spacing={3}>
                     <Grid item xs={6} >
                         <Paper className={classes.paper} >
@@ -145,22 +169,25 @@ class CreateNew extends Component {
                         <Paper>
                             <div>
                                           
-                            <TextField  variant="filled" type="text" 
-                                        placeholder="Name of cirlce / book title"
+                            <TextField  id="outlined-textarea" label="name of circle"
+                                        className={this.props.classes.textField}
+                                        margin="normal" variant="outlined" type="text" 
+                                        placeholder="Name of cirlce / book title" value={this.state.name}
                                         // value={this.state.newClub.name}
                                         onChange={(event) => this.handleChange('name', event)} />
                             <br /><br />
-                            <TextField  variant="filled" type="text" 
-                                        placeholder="Description"
+                            <TextField  id="outlined-textarea" label="description"
+                                        multiline className={this.props.classes.textField}
+                                        margin="normal" variant="outlined" type="text" 
+                                        placeholder="Description" value={this.state.description}
                                         // value={this.state.newClub.description}
                                         onChange={(event) => this.handleChange('description', event)} />
                             <br /><br />
-                            {/* Notes:<br />
-                            <TextField  variant="filled" type="text" 
-                                        placeholder="let clubbers know when and where to meet"
-                                        // value={this.state.newClub.notes}
-                                        onChange={(event) => this.handleChange('notes', event)} />
-                            <br /><br /> */}
+                                <div className={this.props.classes.buttonsDiv} >
+                                    <Button className={this.props.classes.cancelButton} variant="outlined" color="primary" onClick={this.handleCancel}>Cancel</Button>
+                                    <Button className={this.props.classes.createButton} variant="outlined" onClick={this.handleCreate} >Create New</Button>
+                                </div>
+                            
                             </div>
                         </Paper>
                     </Grid>
@@ -174,10 +201,7 @@ class CreateNew extends Component {
                         </Paper>
                     </Grid>
                 </Grid>
-                <div>
-                    <Button variant="outlined" color="primary">Cancel</Button>
-                    <Button variant="outlined" onClick={this.handleCreate} >Create New</Button>
-                </div>
+                
                 
             </div>
         )

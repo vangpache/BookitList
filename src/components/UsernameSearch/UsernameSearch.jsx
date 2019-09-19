@@ -44,16 +44,7 @@ class UsernameSearch extends Component {
                 username: this.props.users.username 
             }]
         })
-        // this.inviteUsers();
     }
-
-    //ADDS USER IN STATE TO THE INVITE-USERS-REDUCER ONLY ; DOES NOT DISPATCH TO DB
-    // inviteUsers = () => {
-    //     this.props.dispatch({
-    //         type: 'INVITE_USER',
-    //         payload: this.state.invited
-    //     })
-    // }
 
 
     //INVITE USERS TO JOIN CLUB
@@ -63,6 +54,11 @@ class UsernameSearch extends Component {
             type: 'SEND_INVITES',
             payload: this.state.invited,
             clubId: id
+        })
+        this.setState({
+            search: {
+                query: ''
+            }
         })
     }
     
@@ -77,7 +73,7 @@ class UsernameSearch extends Component {
                         <h1>Add new members:</h1>
                         
                             <input variant="filled" type="text" placeholder="search for users..."
-                                ref={input => this.search = input}
+                                ref={input => this.search = input} value={this.state.search.query}
                                 onChange={this.handleInputChange} />
 
                         {!this.props.users.username ?  

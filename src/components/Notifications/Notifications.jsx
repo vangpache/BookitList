@@ -1,6 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button } from '@material-ui/core';
+import { Button, IconButton } from '@material-ui/core';
+import { MailOutline, Cancel, CheckCircle } from '@material-ui/icons';
+import { withStyles } from '@material-ui/styles';
+
+const styles = {
+    iconbuttonAccept: {
+        margin: '15px',
+        fontSize: '1em',
+        color: 'green',
+        background: 'white'
+    },
+    iconbuttonDecline: {
+        margin: '15px',
+        fontSize: '1em',
+        color: 'red'
+    },
+
+}
 
 class Notifications extends Component {
 
@@ -26,18 +43,20 @@ class Notifications extends Component {
 
         return (
             <>
-            <h4>Notifications</h4>
+                <h4>Notifications <MailOutline /></h4>
             <ul>
                 {this.props.notifications.map(invite => (
-                    <li>{invite.name}
+                    <li> {invite.name}
 
-                        <Button variant="outlined" size="small" 
-                                onClick={() => this.handleAccept(invite.clubs_id)}>Accept Invite
-                        </Button>
+                        <IconButton className={this.props.classes.iconbuttonAccept} variant="outlined" size="small" 
+                                onClick={() => this.handleAccept(invite.clubs_id)}>
+                            <CheckCircle /> Accept Invite
+                        </IconButton>
 
-                        <Button variant="outlined" size="small" 
-                                onClick={() => this.handleDecline(invite.clubs_id)}>Decline Invite
-                        </Button>
+                        <IconButton className={this.props.classes.iconbuttonDecline} variant="outlined" size="small" 
+                                onClick={() => this.handleDecline(invite.clubs_id)}>
+                                    <Cancel/>Decline Invite
+                        </IconButton>
                         {/* {JSON.stringify(invite.clubs_id)} */}
                     </li>
                 ))}
@@ -54,4 +73,4 @@ const mapStateToProps = reduxStore => {
     }
 }
 
-export default connect(mapStateToProps) (Notifications);
+export default withStyles (styles) (connect(mapStateToProps) (Notifications));

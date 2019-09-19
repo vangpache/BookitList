@@ -22,18 +22,6 @@ class ClubPage extends Component {
         })
     }
 
-    // handleLeave = (id) => {
-    //     console.log('leave button clicked:', id);
-    //     this.props.dispatch({
-    //         type: 'LEAVE_BOOK',
-    //         payload: id,
-    //         history: this.props.history
-    //     })   
-    // }
-
-    
-
-
 
     render() {
 

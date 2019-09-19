@@ -7,7 +7,10 @@ import { withStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
 
 const styles = {
-    
+    notificationsGrid: {
+        // background: '#cddc39',
+        height: 200,
+    }
 }
 
 
@@ -40,28 +43,20 @@ class Home extends Component {
 
             <div>
                 <Grid container spacing ={3}>
-                    <Grid item xs={6} >
-
-                        {/* <Paper> */}
-                            {/* <Card>
-                                <CardContent> */}
+                    <Grid item xs={6} className={this.props.classes.notificationsGrid} >
                                     <Notifications />
-                                {/* </CardContent>
-                            </Card> */}
-                        {/* </Paper> */}
                     </Grid>
-                    {/* <Divider orientation="vertical" variant="middle" /> */}
+              
                     <Grid item xs={6}>
                         <p>username and avatar here: align to right</p>
                     </Grid>
                
                     <Grid item xs={12}>
+                        <h1>My Current List:</h1>
                         <AllClubsDisplay />
                     </Grid>
                         
-                    </Grid>
-               
-                    {/* {JSON.stringify(this.props.clubDetails)} */}
+                </Grid>
             </div>
         )
     }

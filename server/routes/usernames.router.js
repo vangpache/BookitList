@@ -3,6 +3,12 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
+//GET USERNAMES OF ALL MEMBERS IN ONE CLUB TO DISPLAY
+
+
+
+
+
 //GET THE USERNAMES LIST AND IDS TO INVITE USERS
 router.get('/:username', (req, res) => {
     console.log('show req.params:', req.params.username);

@@ -7,10 +7,11 @@ import { withStyles } from '@material-ui/styles';
 
 const styles = {
     card: {
-        maxWidth: 375,
+        width: 350,
+        height: 375,
         display: 'inline-block',
         flexDirection: 'rows',
-        // alignItems: ''
+        margin: '5px'
     },
 
 }
@@ -42,7 +43,8 @@ class AllClubsDisplay extends Component {
             <>
                 {this.props.clubDetails.map(club => (
 
-                            <Card className={this.props.classes.card} onClick={this.handleClick}>
+                            <Card className={this.props.classes.card}
+                                    key={club.clubs_id} onClick={this.handleClick}>
                                 <CardContent >
 
                                     <p>{club.name}</p>
@@ -51,8 +53,8 @@ class AllClubsDisplay extends Component {
                                     </Link>
                                     <p>Book: {club.book_title}</p>
                                     <p>By: {club.author}</p>
-                            {club.admin_status ? <IconButton aria-label="Delete">
-                                                    <DeleteIcon key={club.clubs_id} onClick={() => this.handleDelete(club.clubs_id)} />
+                            {club.admin_status ? <IconButton aria-label="Delete" key={club.clubs_id} onClick={() => this.handleDelete(club.clubs_id)}>
+                                                    <DeleteIcon   />
                                                 </IconButton> :
                                         <Button key={club.clubs_id} onClick={() => this.handleLeave(club.clubs_id)}>Leave Club</Button>}
 

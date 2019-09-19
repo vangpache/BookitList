@@ -1,8 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withStyles } from '@material-ui/styles';
 import { Button, Card, CardContent, TextField  } from '@material-ui/core';
+import './DiscussionBoard.css';
 
-
+const styles = {
+    textField: {
+        border: '#ff9100'
+    },
+    card: {
+        margin: '10px 0px 10px 0px'
+    }
+    // postButton: {
+    //     margin: '15px'
+    // }
+}
 
 class DiscussionBoard extends Component {
 
@@ -31,6 +43,9 @@ class DiscussionBoard extends Component {
             payload: this.state
         })
         this.handleGetDiscussion();
+        this.setState({
+            content: ''
+        })
     }
 
     handleGetDiscussion = () => {
@@ -51,10 +66,14 @@ class DiscussionBoard extends Component {
                 <Card>
                     <CardContent>
                         <h2>Discussion Board</h2>
-                        <TextField variant="filled" placeholder="Write something for the board..."
+                        <TextField id="outlined-textarea" label="Post a new message"
+                                    multiline className={this.props.classes.textField}
+                                    margin="normal" variant="outlined" fullWidth={true}
+                                    placeholder="Post a new message..."
+                                    value={this.state.content}
                                     onChange={this.handleChange} />
-                        <Button variant="outlined" onClick={this.handleClick} >Post</Button>
-                        <Card>
+                        <Button className={this.props.classes.postButton} variant="outlined" onClick={this.handleClick} >Post</Button>
+                        <Card className={this.props.classes.card} >
                             <CardContent>
                                 <p>user posts render here</p>
                                 {this.props.discussionBoard.map(post => (
@@ -77,4 +96,4 @@ const mapStateToProps = reduxStore => {
     }
 }
 
-export default connect(mapStateToProps) (DiscussionBoard);
+export default withStyles(styles) (connect(mapStateToProps) (DiscussionBoard));
