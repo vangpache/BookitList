@@ -5,7 +5,7 @@ const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 //GET ALL BOOKCLUB DETAILS FOR ONE USER TO RENDER ON HOME PAGE
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
     console.log('in databaseRouter details GET:', req.user.id);
     
     let user_id = req.user.id
@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
 })
 ///////////////////////////////
 //GET ONE SPECIFIC CLUB DETAILS FOR ONE USER
-router.get('/:id', (req, res) => {
+router.get('/:id', rejectUnauthenticated, (req, res) => {
     console.log('in GET BY CLUB ID:', req.params);
 
     let user_id = req.user.id
@@ -45,7 +45,7 @@ router.get('/:id', (req, res) => {
 })
 
 //GET DISCUSSION BOARD FOR EACH INDIVIDUAL CLUB PAGE
-router.get('/discussion/:id', (req, res) => {
+router.get('/discussion/:id', rejectUnauthenticated, (req, res) => {
     console.log('in GET DISCUSSON BOARD');
     
     console.log('club_id:', req.params);
@@ -67,7 +67,7 @@ router.get('/discussion/:id', (req, res) => {
 
 
 //POST NEW CLUB AND INSERT DATA INTO JUNCTION TABLE
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
     console.log('in databaseRouter POST new club:', req.body);
     
     let user_id = req.user.id
@@ -90,7 +90,7 @@ router.post('/', (req, res) => {
 })
 
 //POST A DISCUSSON THREAD USING ID PARAMETER
-router.post('/:id', (req, res) => {
+router.post('/:id', rejectUnauthenticated, (req, res) => {
     console.log('in Post discussons:', req.params.id);
 
     let user_id = req.user.id
@@ -114,7 +114,7 @@ router.post('/:id', (req, res) => {
 
 
 //DELETE A USER FROM USER_CLUBS TABLE: LEAVE A CLUB AS A NON ADMIN USER
-router.delete('/:id', (req, res) => {
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
     let user_id = req.user.id
     let clubs_id = req.params.id
     let queryText = `DELETE FROM "user_clubs" WHERE "clubs_id" = $1 AND "user_id" = $2;`;
@@ -132,7 +132,7 @@ router.delete('/:id', (req, res) => {
 
 
 //DELETE A CLUB COMPLETELY FROM CLUBS AND USER_CLUBS TABLE: AUTH AS ADMIN NEEDED
-router.delete('/deletemyclub/:id', (req, res) => {
+router.delete('/deletemyclub/:id', rejectUnauthenticated, (req, res) => {
     let clubs_id = req.params.id
     let queryText = `WITH row AS(DELETE FROM "clubs" WHERE "id" = $1)
                     DELETE FROM "user_clubs" WHERE "user_clubs"."clubs_id" = $1;`;
@@ -145,7 +145,7 @@ router.delete('/deletemyclub/:id', (req, res) => {
     })
 })
 
-router.put('/', (req, res) => {
+router.put('/', rejectUnauthenticated, (req, res) => {
 
     let updates = req.body
     let queryText = `UPDATE "clubs" SET "name" = $1, "book_title" = $2, "author" = $3, "image_url" = $4, "description" = $5
@@ -158,7 +158,7 @@ router.put('/', (req, res) => {
     }).catch((error) => {
         console.log('in update details error:', error); 
     })
-})
+});
 
 
 

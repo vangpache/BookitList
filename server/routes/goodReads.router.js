@@ -7,7 +7,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 require('dotenv').config();
 
 //GET RESULTS FROM GOODREADS API WITH SEARCH QUERY
-router.get('/:search', (req, res) => {
+router.get('/:search', rejectUnauthenticated, (req, res) => {
     console.log('in bookRouter js GET:', req.params.search);
 
     axios.get(`https://www.goodreads.com/search.xml?key=${process.env.API_KEY}&q=${req.params.search}`)

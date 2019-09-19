@@ -4,12 +4,12 @@ const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 //GET USERNAMES OF ALL MEMBERS IN ONE CIRCLE TO DISPLAY
-router.get('/members/:clubId', (req, res) => {
+router.get('/members/:clubId', rejectUnauthenticated, (req, res) => {
     console.log('in get members:', req.params.clubId);
     let clubId = req.params.clubId
     let queryText = `SELECT "username" FROM "user_clubs" 
                     JOIN "user" ON "user"."id" = "user_clubs"."user_id"
-                    WHERE "clubs_id" = $1;`
+                    WHERE "clubs_id" = $1 AND "invite_accepted" = TRUE;`
     pool.query(queryText, [clubId])
     .then((result) => {
         console.log('in get members result.rows', result.rows);
@@ -21,11 +21,8 @@ router.get('/members/:clubId', (req, res) => {
 });
 
 
-
-
-
 //GET THE USERNAMES LIST AND IDS TO INVITE USERS
-router.get('/:username', (req, res) => {
+router.get('/:username', rejectUnauthenticated, (req, res) => {
     console.log('show req.params:', req.params.username);
     
     let username = req.params
@@ -41,7 +38,7 @@ router.get('/:username', (req, res) => {
 
 
 //POST INVITES TO DATABASE
-router.post('/:clubId', (req, res) => {
+router.post('/:clubId', rejectUnauthenticated, (req, res) => {
     console.log('in invites POST req.body:', req.body);
     console.log('in invites POST req.body.user_id:', req.body.user_id);
     

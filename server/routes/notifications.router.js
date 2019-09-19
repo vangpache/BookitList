@@ -5,7 +5,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 
 
 //GET NOTIFICATIONS ON LOAD
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
     console.log('in get notifications for user id:', req.user.id);
     let queryText = `SELECT "name", "clubs_id", "invite_accepted" from "clubs"
                         JOIN "user_clubs" ON "user_clubs"."clubs_id" = "clubs"."id"
@@ -24,7 +24,7 @@ router.get('/', (req, res) => {
 
 
 //UPDATE INVITES TO ACCEPT
-router.put('/:clubId', (req, res) => {
+router.put('/:clubId', rejectUnauthenticated, (req, res) => {
     let user_id = req.user.id
     let clubId = req.params.clubId
     let queryText = `UPDATE "user_clubs" SET "invite_accepted" = TRUE
@@ -40,7 +40,7 @@ router.put('/:clubId', (req, res) => {
 })
 
 //DELETES AN INVITE WHEN DECLINED
-router.delete('/:clubId', (req, res) => {
+router.delete('/:clubId', rejectUnauthenticated, (req, res) => {
     let user_id = req.user.id
     let clubId = req.params.clubId
     let queryText = `DELETE FROM "user_clubs" WHERE "user_id" = $1 AND "clubs_id" = $2;`
