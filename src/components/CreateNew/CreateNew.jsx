@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { TextField, Button } from '@material-ui/core';
+import { Grid, Paper, TextField, Button } from '@material-ui/core';
 import CreateNewSearchBar from '../CreateNewSearchBar/CreateNewSearchBar';
-// import UsernameSearch from '../UsernameSearch/UsernameSearch';
-
 import { withStyles } from '@material-ui/core/styles';
-import { Paper, Grid } from '@material-ui/core';
-import { classes } from 'istanbul-lib-coverage';
 
 
 //GRID LIST IMPORTS
@@ -40,24 +36,31 @@ const styles = theme => ({
         transform: 'translateZ(0)',
     },
     title: {
-        color: theme.palette.primary.light,
+        // color: theme.palette.primary.light,
+        color: 'white'
     },
     titleBar: {
         background:
             'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
     },
     textField: {
-        width: 500,
+        width: 375,
         margin: '20px'
     },
     cancelButton: {
         margin: '20px',
-        alignItem: 'left'
+        float: 'left'
     },
     createButton: {
         margin: '20px',
-        // alignItem: 'right'
+        float: 'right',
+    },
+    showSelectionGrid: {
+        // margin: '5px',
+        // backgroundColor: 'red',
+        textAlign: 'center'
     }
+    
   
 });
 
@@ -117,6 +120,9 @@ class CreateNew extends Component {
             invite_accepted: true,
             admin_status: true
         })
+        this.props.dispatch({
+            type: 'CLEAR_BOOKS_REDUCER'
+        })
     }
 
     render() {
@@ -127,82 +133,68 @@ class CreateNew extends Component {
                 <h1>Create a New Circle:</h1>
                 <Grid container spacing={3}>
                     <Grid item xs={6} >
-                        {/* <Paper className={classes.paper} > */}
-                            <CreateNewSearchBar />
-                        {/* </Paper> */}
+                      <Grid container spaciing ={3}>
+                          <Grid item xs={12}>
+                                <CreateNewSearchBar />
+                          </Grid>
+                          <Grid item xs={7}>
+                                    <Paper>
+                                        {/* <CreateNewInputs state={this.props.state} /> */}
+                                            <TextField id="outlined-textarea" label="name of circle"
+                                                className={this.props.classes.textField}
+                                                margin="normal" variant="outlined" type="text"
+                                                placeholder="Name of cirlce / book title" value={this.state.name}
+                                                // value={this.state.newClub.name}
+                                                onChange={(event) => this.handleChange('name', event)} />
+                                            <br /><br />
+                                            <TextField id="outlined-textarea" label="description"
+                                                multiline className={this.props.classes.textField}
+                                                margin="normal" variant="outlined" type="text"
+                                                placeholder="Description" value={this.state.description}
+                                                // value={this.state.newClub.description}
+                                                onChange={(event) => this.handleChange('description', event)} />
+                                            <br /><br />
+                                            <div className={this.props.classes.buttonsDiv} >
+                                                <Button className={this.props.classes.cancelButton} variant="outlined" color="primary" onClick={this.handleCancel}>Cancel</Button>
+                                                <Button className={this.props.classes.createButton} variant="outlined" onClick={this.handleCreate} >Create New</Button>
+                                            </div>
+                                    </Paper>
+                          </Grid>
+                          <Grid item xs={5} className={this.props.classes.showSelectionGrid} >
+                              {this.state.book_title ? 
+                              <>
+                              <p>You chose this book:</p>
+                                <span>{this.state.book_title}</span><br/>
+                                <span>author: {this.state.author}</span><br/>
+                                    <img src={this.state.image_url} alt="book title cover" /></> : <span></span>}
+                          </Grid>
+                        
+                        </Grid>
                     </Grid>
                             
                     <Grid  item xs={6}>
                         <div>
                             
                                     <Paper >
-                                <GridList className={classes.gridList} cols={5} rows={1}>
+                                <GridList className={this.props.classes.gridList} cols={5} rows={1}>
                                     {this.props.booksList.map(tile => (
                                         <GridListTile key={tile} onClick={() => this.handleClick(tile)} >
                                             <img src={tile.best_book.image_url._text} alt={tile.best_book.title._text} />
                                             <GridListTileBar
                                                 title={tile.best_book.title._text}
                                                 classes={{
-                                                    root: classes.titleBar,
-                                                    title: classes.title,
+                                                    root: this.props.classes.titleBar,
+                                                    title: this.props.classes.title,
                                                 }}
                                             
                                             />
                                         </GridListTile>
                                     ))}
-                                </GridList>
-                            
-                        </Paper>
-                                
+                                </GridList>    
+                        </Paper>   
                         </div>
                     </Grid>
-                    
-                    
-
-
-
                 </Grid>
-                
-               
-                <Grid container spacing={3}>
-                    <Grid item xs={6}>
-                        <Paper>
-                            <div>
-                                          
-                            <TextField  id="outlined-textarea" label="name of circle"
-                                        className={this.props.classes.textField}
-                                        margin="normal" variant="outlined" type="text" 
-                                        placeholder="Name of cirlce / book title" value={this.state.name}
-                                        // value={this.state.newClub.name}
-                                        onChange={(event) => this.handleChange('name', event)} />
-                            <br /><br />
-                            <TextField  id="outlined-textarea" label="description"
-                                        multiline className={this.props.classes.textField}
-                                        margin="normal" variant="outlined" type="text" 
-                                        placeholder="Description" value={this.state.description}
-                                        // value={this.state.newClub.description}
-                                        onChange={(event) => this.handleChange('description', event)} />
-                            <br /><br />
-                                <div className={this.props.classes.buttonsDiv} >
-                                    <Button className={this.props.classes.cancelButton} variant="outlined" color="primary" onClick={this.handleCancel}>Cancel</Button>
-                                    <Button className={this.props.classes.createButton} variant="outlined" onClick={this.handleCreate} >Create New</Button>
-                                </div>
-                            
-                            </div>
-                        </Paper>
-                    </Grid>
-
-                    {/* <Grid item xs={6}>                       
-                        <Paper> */}
-                            {/* <UsernameSearch /> */}
-                                {/* <TextField variant="filled" type="text" placeholder="invite users" value="hey" />
-                                <h4>users show up here</h4>
-                                <Button variant="outlined">Delete User</Button> */}
-                        {/* </Paper>
-                    </Grid> */}
-                </Grid>
-                
-                
             </div>
         )
     }

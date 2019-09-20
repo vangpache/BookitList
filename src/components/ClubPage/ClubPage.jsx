@@ -40,7 +40,7 @@ class ClubPage extends Component {
                 
                 <Grid container spacing={3}>
     
-                    <Grid item xs={5}>
+                    <Grid item xs={6}>
                         <Grid item={12}>
                             <Card>
                             <BookDetails details={this.props.details}  />
@@ -50,13 +50,14 @@ class ClubPage extends Component {
                         
                         <Grid container spacing={3}>
                             <Grid item xs={12}>
-                                <UsernameSearch clubId={this.props.match.params} />
+                                {this.props.details.admin_status ? < UsernameSearch clubId={this.props.match.params} /> : <> </> }
+                                
                             </Grid>
                         </Grid>
                         
                     </Grid>
         
-                    <Grid item xs={7}>
+                    <Grid item xs={6}>
                         <DiscussionBoard clubId={this.props.match.params}/>
                     </Grid>
 

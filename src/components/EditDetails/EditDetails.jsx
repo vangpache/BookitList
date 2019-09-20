@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { TextField, Button } from '@material-ui/core';
 import CreateNewSearchBar from '../CreateNewSearchBar/CreateNewSearchBar';
+import { withRouter } from 'react-router-dom';
 // import UsernameSearch from '../UsernameSearch/UsernameSearch';
 
 import { withStyles } from '@material-ui/core/styles';
@@ -16,7 +17,18 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 
 
 const styles = {
-
+    textField: {
+        width: 500,
+        margin: '20px'
+    },
+    cancelButton: {
+        margin: '20px',
+        float: 'left'
+    },
+    editButton: {
+        margin: '20px',
+        float: 'right',
+    } 
 }
 
 class EditDetails extends Component {
@@ -73,6 +85,10 @@ class EditDetails extends Component {
         // this.props.history.push('/club')
     }
 
+    handleCancel = () => {
+        this.props.history.push(`/club/${this.props.match.params.id}`)
+    }
+
     render() {
 
 
@@ -83,9 +99,33 @@ class EditDetails extends Component {
                 <h1>Edit Club Details:</h1>
                 <Grid container spacing={3}>
                     <Grid item xs={6} >
+                        <Grid container spacing={3}>
+                            <Grid item xs={12}>
                         <Paper className={classes.paper} >
                             <CreateNewSearchBar />
                         </Paper>
+                            </Grid>
+                            <Grid item xs={12}>
+
+                                <TextField variant="outlined" type="text" margin="normal"
+                                    id="outlined-textarea" className={this.props.classes.textField}
+                                    placeholder="Name of cirlce / book title"
+                                    defaultValue={this.props.details.name}
+                                    onChange={(event) => this.handleChange('name', event)} />
+                                <br /><br />
+                                <TextField variant="outlined" type="text" margin="normal"
+                                    id="outlined-textarea" className={this.props.classes.textField}
+                                    placeholder="Description"
+                                    defaultValue={this.props.details.description}
+                                    onChange={(event) => this.handleChange('description', event)} />
+                                <br /><br />
+                                <div>
+                                    <Button className={this.props.classes.cancelButton} variant="outlined" onClick={() => this.handleCancel(this.props.match.params.id)} >Cancel</Button>
+                                    <Button className={this.props.classes.editButton} variant="outlined" onClick={this.handleCreate} >Make Edits</Button>
+                                </div>
+
+                            </Grid>
+                        </Grid>
                     </Grid>
 
                     <Grid item xs={6}>
@@ -112,38 +152,7 @@ class EditDetails extends Component {
 
                         </div>
                     </Grid>
-
-
-
-
-
                 </Grid>
-
-
-                <Grid container spacing={3}>
-                    <Grid item xs={9}>
-                        <Paper>
-                            <div>
-
-                                <TextField variant="filled" type="text"
-                                    placeholder="Name of cirlce / book title"
-                                    defaultValue={this.props.details.name}
-                                    onChange={(event) => this.handleChange('name', event)} />
-                                <br /><br />
-                                <TextField variant="filled" type="text"
-                                    placeholder="Description"
-                                    defaultValue={this.props.details.description}
-                                    onChange={(event) => this.handleChange('description', event)} />
-                                <br /><br />
-                                {/* {JSON.stringify(this.props.details)} */}
-                            </div>
-                        </Paper>
-                    </Grid>
-                </Grid>
-                <div>
-                    <Button variant="outlined" color="primary">Cancel</Button>
-                    <Button variant="outlined" onClick={this.handleCreate} >Make Edits</Button>
-                </div>
 
             </div>
         )
@@ -158,4 +167,4 @@ const mapStateToProps = reduxStore => {
     }
 }
 
-export default connect(mapStateToProps)(withStyles(styles)(EditDetails));
+export default withRouter (connect(mapStateToProps)(withStyles(styles)(EditDetails)));

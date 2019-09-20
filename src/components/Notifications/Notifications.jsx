@@ -9,13 +9,19 @@ const styles = {
         margin: '15px',
         fontSize: '1em',
         color: 'green',
-        background: 'white'
+        background: 'white',
+        backgroundColor: '#ffd600'
     },
     iconbuttonDecline: {
         margin: '15px',
         fontSize: '1em',
-        color: 'red'
+        color: 'red',
+        backgroundColor: '#ffd600'
     },
+    notification: {
+        backgroundColor: '#ffd600',
+        padding: '0px'
+    }
 
 }
 
@@ -44,33 +50,21 @@ class Notifications extends Component {
         return (
             <>
                 <h4>Notifications <MailOutline /></h4>
-                    <Table>
-                        {/* <TableHead>
-                            <TableRow>
-                                <TableCell>
-                                    You've got mail!
-                                </TableCell>
-                                <TableCell>
-                                    accept this invite
-                                </TableCell>
-                                <TableCell>
-                                    Decline this invite
-                                </TableCell>
-                            </TableRow>
-                        </TableHead> */}
+                <Table size="small">
                         <TableBody>
                         {this.props.notifications.map(invite => (
                             <TableRow>
-                                <TableCell>
+                                <TableCell className={this.props.classes.notification}  >
+                                    <span>You're invited to: </span>
                                     {invite.name}
                                 </TableCell>
-                                <TableCell>
+                                <TableCell className={this.props.classes.notification} >
                                     <IconButton className={this.props.classes.iconbuttonAccept} variant="outlined" size="small"
                                         onClick={() => this.handleAccept(invite.clubs_id)}>
                                         <CheckCircle /> Accept Invite
                         </IconButton>
                                 </TableCell>
-                                <TableCell>
+                                <TableCell className={this.props.classes.notification} >
                                     <IconButton className={this.props.classes.iconbuttonDecline} variant="outlined" size="small"
                                         onClick={() => this.handleDecline(invite.clubs_id)}>
                                         <Cancel />Decline Invite

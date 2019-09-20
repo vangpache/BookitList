@@ -68,6 +68,18 @@ class UsernameSearch extends Component {
             invited: []
         })
     }
+
+    handleRemove = (name) => {        
+        let invites = this.state.invited
+        for( let i = 0; i < invites.length; i++) {
+            if (invites[i].username == name) {
+                invites.splice(i, 1)
+          } else {
+              console.log('NOO THERE');
+          }
+        }
+        console.log('end of loop', this.state.invited)
+    }
     
 
     render () {
@@ -77,7 +89,7 @@ class UsernameSearch extends Component {
             <>
             <Card>
                 <CardContent>
-                        <h1>Add new members:</h1>
+                        <h1>Invite:</h1>
                         
                             <input variant="filled" type="text" placeholder="search for users..."
                                 ref={input => this.search = input} value={this.state.search.query}
@@ -92,7 +104,7 @@ class UsernameSearch extends Component {
                                 {this.state.invited.map(username => (
                                     <li key={username.id}>
                                         {username.username}
-                                        <Button>remove</Button>
+                                        <Button onClick={() => this.handleRemove(username.username)}>remove</Button>
                                     </li>
                                 ))}
                             </ul>

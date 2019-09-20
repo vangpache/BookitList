@@ -75,7 +75,7 @@ class DiscussionBoard extends Component {
                         <Button className={this.props.classes.postButton} variant="outlined" onClick={this.handleClick} >Post</Button>
                         <Card className={this.props.classes.card} >
                             <CardContent>
-                                <p>user posts render here</p>
+                                {/* <p>user posts render here</p> */}
                                 {this.props.discussionBoard.map(post => (
                                     <p><span>{post.username}:</span> {post.content} <span>{post.date}</span></p> 
                                 ))}
