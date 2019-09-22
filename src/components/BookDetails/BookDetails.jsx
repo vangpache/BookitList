@@ -13,7 +13,6 @@ const styles = {
     },
     gridMembers: {
         display: 'inline-block',
-        float: 'right',
         margin: '30px'
     },
     button: {

@@ -6,6 +6,13 @@ import { connect } from 'react-redux';
 
 class UsernameSearch extends Component {
 
+    // componentDidUpdate(prevProps) {
+    //     // let invites = this.state.invited
+    //     if(prevProps.invited !== this.props.invited) {
+    //         this.handleAddUser();
+    //     }
+    // }
+
     state = {
         search: {
             query:''
@@ -35,7 +42,7 @@ class UsernameSearch extends Component {
         console.log('in username search query:', this.state);
     }
 
-    //ON CLICK --> TAKES THE USER IN THE REDUCER AND ADDS TO A STATE THAT WILL DISPATCH UPON CREATE NEW BUTTON TO A NEW REDUCER THAT COLLECTS ALL USERS INVITED
+ 
     handleAddUser = () => {
         console.log('add user button clicked');
         this.setState ({
@@ -72,7 +79,7 @@ class UsernameSearch extends Component {
     handleRemove = (name) => {        
         let invites = this.state.invited
         for( let i = 0; i < invites.length; i++) {
-            if (invites[i].username == name) {
+            if (invites[i].username === name) {
                 invites.splice(i, 1)
           } else {
               console.log('NOO THERE');
@@ -111,9 +118,6 @@ class UsernameSearch extends Component {
                         
                         <Button variant="outlined" color="primary" onClick={() => this.handleInvites(this.props.clubId)}>Send Invites 
                         <SendIcon/></Button><br/>
-                        {/* {JSON.stringify(this.props.users)}
-                        {JSON.stringify(this.state.invited)}
-                        {JSON.stringify(this.props.inviteList)} */}
                 </CardContent>
             </Card>
                 

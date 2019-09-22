@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/styles';
+import Moment from 'react-moment';
 import { Button, Card, CardContent, TextField  } from '@material-ui/core';
 import './DiscussionBoard.css';
 
@@ -77,7 +78,7 @@ class DiscussionBoard extends Component {
                             <CardContent>
                                 {/* <p>user posts render here</p> */}
                                 {this.props.discussionBoard.map(post => (
-                                    <p><span>{post.username}:</span> {post.content} <span>{post.date}</span></p> 
+                                    <p><span>{post.username}:</span> {post.content} <span> <Moment format="LLLL">{post.date}</Moment> </span></p> 
                                 ))}
                             </CardContent>
                         </Card>

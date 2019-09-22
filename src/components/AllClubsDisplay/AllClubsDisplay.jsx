@@ -7,11 +7,12 @@ import { withStyles } from '@material-ui/styles';
 
 const styles = {
     card: {
-        width: 350,
+        width: 300,
         height: 375,
         display: 'inline-block',
         flexDirection: 'rows',
-        margin: '5px'
+        margin: '5px',
+        fontSize: '14px'
     },
 
 }
