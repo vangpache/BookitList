@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Card, CardContent } from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
 import { connect } from 'react-redux';
+import swal from '@sweetalert/with-react';
 
 
 class UsernameSearch extends Component {
@@ -74,8 +75,14 @@ class UsernameSearch extends Component {
             },
             invited: []
         })
+        swal({
+            title: "Sent!",
+            icon: "success",
+            button: "yay!"
+        })
     }
 
+    //DOES NOT RENDER ON UPDATE AT THIS MOMENT
     handleRemove = (name) => {        
         let invites = this.state.invited
         for( let i = 0; i < invites.length; i++) {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import swal from '@sweetalert/with-react';
 import { Button, CardContent, Grid } from '@material-ui/core';
 import { PersonOutline } from '@material-ui/icons';
 import { withRouter } from 'react-router-dom';
@@ -42,11 +43,25 @@ class BookDetails extends Component {
 
     handleLeave = (id) => {
         console.log('leave button clicked:', id);
-        this.props.dispatch({
-            type: 'LEAVE_BOOK',
-            payload: id,
-            history: this.props.history
+        swal({
+            title: "Are you sure you want to leave?",
+            text: "Once you leave, you will not be able to see this circle anymore.",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
         })
+            .then((willDelete) => {
+                if (willDelete) {
+                    swal("Poof! You've left the circle!", {
+                        icon: "success",
+                    })
+                    this.props.dispatch({
+                        type: 'LEAVE_BOOK',
+                        payload: id,
+                        history: this.props.history
+                    })
+                }
+            })
     }
 
     handleEdit = (id) => {
