@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import swal from '@sweetalert/with-react';
 import { Button, Card, CardContent, IconButton } from '@material-ui/core';
 import  DeleteIcon from '@material-ui/icons/Delete';
 import { Link, withRouter } from 'react-router-dom';
@@ -23,18 +24,46 @@ class AllClubsDisplay extends Component {
     //LEAVE A CLUB AS A NON-ADMIN; DELETES CLUB FROM USER_CLUBS TABLE
     handleLeave = (id) => {
         console.log('leave button clicked:', id);
-        this.props.dispatch({
-            type: 'LEAVE_BOOK',
-            payload: id,
-            history: this.props.history
+        swal({
+            title: "Are you sure you want to leave?",
+            text: "Once you leave, you will not be able to see this circle anymore.",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if(willDelete) {
+                swal("Poof! You've left the circle!", {
+                    icon: "success",
+                })
+                this.props.dispatch({
+                    type: 'LEAVE_BOOK',
+                    payload: id,
+                    history: this.props.history
+                })
+            } 
         })
     }
 
     //DELETE A CLUB FROM HOME PAGE AS AN ADMIN
     handleDelete = (id) => {
-        this.props.dispatch({
-            type: 'DELETE_CLUB',
-            payload: id
+        swal({
+            title: "Are you sure you want to delete this circle?",
+            text: "Once you delete a circle, it will be gone forever!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if(willDelete) {
+                swal("Poof! Deleted!", {
+                    icon: "succes",
+                })
+                this.props.dispatch({
+                    type: 'DELETE_CLUB',
+                    payload: id
+                })
+            }
         })
     }
 
