@@ -57,7 +57,7 @@ class AllClubsDisplay extends Component {
         .then((willDelete) => {
             if(willDelete) {
                 swal("Poof! Deleted!", {
-                    icon: "succes",
+                    icon: "success",
                 })
                 this.props.dispatch({
                     type: 'DELETE_CLUB',

@@ -125,12 +125,26 @@ class CreateNew extends Component {
         })
     }
 
+    //ON CLICK OF H1 POPULATES EACH FIELD FOR PRESENTATION PURPOSES*******
+    handleAutofill = () => {
+        this.setState({
+            book_title: 'Becoming',
+            author: 'Michelle Obama',
+            image_url: 'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1528206996l/38746485._SX98_.jpg',
+            name: 'Besties Reading Together',
+            description: 'Meet e/o Saturdays @ Groundswell Cafe',
+            invite_accepted: true,
+            admin_status: true
+
+        })
+    }
+
     render() {
 
       
         return (
             <div>
-                <h1>Create a New Circle:</h1>
+                <h1 onClick={this.handleAutofill}>Create a New Circle:</h1>
                 <Grid container spacing={3}>
                     <Grid item xs={6} >
                       <Grid container spaciing ={3}>

@@ -29,6 +29,13 @@ class LoginPage extends Component {
     });
   }
 
+  handlePrefill = () => {
+    this.setState ({
+      username: 'pache',
+      password: 'december',
+    })
+  }
+
   render() {
     return (
       <div>
@@ -41,7 +48,7 @@ class LoginPage extends Component {
           </h2>
         )}
         <form onSubmit={this.login}>
-          <h1>Login</h1>
+          <h1 onClick={this.handlePrefill} >Login</h1>
           <div>
             <label htmlFor="username">
               Username:

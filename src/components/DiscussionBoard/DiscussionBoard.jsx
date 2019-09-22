@@ -56,6 +56,12 @@ class DiscussionBoard extends Component {
             payload: this.state.clubId.id
         })
     }
+
+    handlePrefill = () => {
+        this.setState({
+            content: `Read pages 1-99 for our first meeting. Can't wait to see everyone!`
+        })
+    }
     
 
     render() {
@@ -66,7 +72,7 @@ class DiscussionBoard extends Component {
             <div>
                 <Card>
                     <CardContent>
-                        <h2>Discussion Board</h2>
+                        <h2 onClick={this.handlePrefill} >Discussion Board</h2>
                         <TextField id="outlined-textarea" label="Post a new message"
                                     multiline className={this.props.classes.textField}
                                     margin="normal" variant="outlined" fullWidth={true}

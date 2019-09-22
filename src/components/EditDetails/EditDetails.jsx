@@ -89,6 +89,7 @@ class EditDetails extends Component {
         this.props.history.push(`/club/${this.props.match.params.id}`)
     }
 
+
     render() {
 
 
@@ -96,7 +97,7 @@ class EditDetails extends Component {
 
 
             <div>
-                <h1>Edit Club Details:</h1>
+                <h1 >Edit Club Details:</h1>
                 <Grid container spacing={3}>
                     <Grid item xs={6} >
                         <Grid container spacing={3}>

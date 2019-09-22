@@ -94,6 +94,7 @@ class UsernameSearch extends Component {
         }
         console.log('end of loop', this.state.invited)
     }
+
     
 
     render () {
@@ -124,7 +125,7 @@ class UsernameSearch extends Component {
                             </ul>
                         
                         <Button variant="outlined" color="primary" onClick={() => this.handleInvites(this.props.clubId)}>Send Invites 
-                        <SendIcon/></Button><br/>
+                        <SendIcon /></Button><br/>
                 </CardContent>
             </Card>
                 

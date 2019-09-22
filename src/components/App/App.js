@@ -15,7 +15,6 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
-// import MyClubs from '../MyClubs/MyClubs';
 import InfoPage from '../InfoPage/InfoPage';
 import ClubPage from '../ClubPage/ClubPage';
 import CreateNew from '../CreateNew/CreateNew';
@@ -80,12 +79,6 @@ class App extends Component {
               path="/createnew"
               component={CreateNew}
             />
-            {/* <ProtectedRoute
-            exact
-            path="/myclubs"
-            component={MyClubs}
-            /> */}
-
             <ProtectedRoute
               exact
               path="/club/:id"
