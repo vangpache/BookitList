@@ -48,7 +48,7 @@ class Home extends Component {
                     </Grid>
               
                     <Grid item xs={6}>
-                        <p>username and avatar here: align to right</p>
+                        {/* <p>username and avatar here: align to right</p> */}
                     </Grid>
                
                     <Grid item xs={12}>

@@ -9,7 +9,9 @@ const AboutPage = () => (
   <div>
     <div>
       <p>
-        This about page is for anyone to read!
+        Bookit List is a digital space for bookworms and learners everywhere. Flawlessly, plan reading circles centered around the book of 
+        your choice and invite your friends to join in on the discussions in one easy application. Keep a running list of your past circles
+        for your own records. Now go out and keep the learning alive!
       </p>
     </div>
   </div>
