@@ -3,6 +3,14 @@ import { Button, Card, CardContent } from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
 import { connect } from 'react-redux';
 import swal from '@sweetalert/with-react';
+import { withStyles } from '@material-ui/styles';
+
+
+const styles = theme => ({
+    addButton: {
+        margin: '20px;'
+    }
+})
 
 
 class UsernameSearch extends Component {
@@ -113,7 +121,8 @@ class UsernameSearch extends Component {
                         {!this.state.search.query ?  
                             <span>search for friends</span> :
                             <span>{this.props.users.username}
-                                <Button variant="outlined" onClick={this.handleAddUser}>Add user</Button></span>}
+                                <Button variant="outlined" onClick={this.handleAddUser}
+                                        className={this.props.classes.addButton} >Add user</Button></span>}
 
                             <ul>
                                 {this.state.invited.map(username => (
@@ -143,4 +152,4 @@ const mapStateToProps = reduxStore => {
     }
 }
 
-export default connect(mapStateToProps) (UsernameSearch);
+export default withStyles(styles) (connect(mapStateToProps) (UsernameSearch));
