@@ -21,7 +21,7 @@ CREATE TABLE "clubs" (
     "description" VARCHAR (800)
 );
 
--- CREATE discussion TABLE
+-- CREATE JUNCTION discussion TABLE
 CREATE TABLE "discussion" (
     "id" SERIAL PRIMARY KEY,
     "content" VARCHAR (1000),

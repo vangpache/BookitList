@@ -74,6 +74,7 @@ class Notifications extends Component {
                 ))}
                     </TableBody>
                 </Table>
+                {/* {JSON.stringify(this.props.notifications)} */}
 
             </>
         )

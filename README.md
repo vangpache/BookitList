@@ -1,3 +1,12 @@
+<!-- # Bookit List
+Bookit List is an application designed for bookworms and learners alike. It is a desktop application that connects users to one another based on their current reads or want-to-reads.  Users are able to create reading circles specifically for a book and invite friends to join the circle in a few clicks; leaving more time for crumpets, tea, and talk. Bookit List also makes it a breeze to share, grow, and exchange ideas about your most favorite topics with others.
+
+# Getting Started
+Download then open the file. Run 'npm install'. Then open a terminal and run 'npm run server' and in a second terminal run 'npm run client'.
+
+# Authors
+Pache Vang -->
+
 # Prime Project
 This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
 
