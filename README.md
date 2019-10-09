@@ -5,7 +5,8 @@ Bookit List is an application designed for bookworms and learners alike. It is a
 Download then open the file. Run 'npm install'. Then open a terminal and run 'npm run server' and in a second terminal run 'npm run client'.
 
 # Authors
-Pache Vang -->
+Pache Vang
+Prime Digital Academy -->
 
 # Prime Project
 This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).

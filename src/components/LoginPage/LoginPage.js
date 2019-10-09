@@ -1,5 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Button, TextField } from '@material-ui/core';
+import { withStyles } from '@material-ui/styles';
+
+
+
+const styles = theme => ({
+  textFields: {
+    margin: '10px',
+  }
+})
 
 class LoginPage extends Component {
   state = {
@@ -47,12 +57,17 @@ class LoginPage extends Component {
             {this.props.errors.loginMessage}
           </h2>
         )}
+        <>
+        {/* <center> */}
         <form onSubmit={this.login}>
           <h1 onClick={this.handlePrefill} >Login</h1>
           <div>
             <label htmlFor="username">
-              Username:
-              <input
+              {/* Username: */}
+              <TextField
+                className={this.props.classes.textFields}
+                variant="outlined"
+                label="username"
                 type="text"
                 name="username"
                 value={this.state.username}
@@ -62,8 +77,11 @@ class LoginPage extends Component {
           </div>
           <div>
             <label htmlFor="password">
-              Password:
-              <input
+              {/* Password: */}
+              <TextField
+                className={this.props.classes.textFields}
+                variant="outlined"
+                label="password"
                 type="password"
                 name="password"
                 value={this.state.password}
@@ -79,15 +97,18 @@ class LoginPage extends Component {
               value="Log In"
             />
           </div>
+          
         </form>
+        {/* </center> */}
+        </>
         <center>
-          <button
+          <Button
             type="button"
             className="link-button"
             onClick={() => {this.props.dispatch({type: 'SET_TO_REGISTER_MODE'})}}
           >
             Register
-          </button>
+          </Button>
         </center>
       </div>
     );
@@ -101,4 +122,4 @@ const mapStateToProps = state => ({
   errors: state.errors,
 });
 
-export default connect(mapStateToProps)(LoginPage);
+export default withStyles(styles) (connect(mapStateToProps)(LoginPage));
