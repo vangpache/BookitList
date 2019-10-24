@@ -51,7 +51,13 @@ CREATE TABLE "user" (
 );
 ```
 ### Login Page
+![](public/images/login.png)
+
+### Landing Page: Home Display of Current Reading Circles
 ![](public/images/Home-read.png)
+
+### User Features
+![](public/images/features-crud.png)
 
 
 
