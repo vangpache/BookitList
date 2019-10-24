@@ -23,7 +23,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         res.sendStatus(500);
     })
 })
-///////////////////////////////
+
 //GET ONE SPECIFIC CLUB DETAILS FOR ONE USER
 router.get('/:id', rejectUnauthenticated, (req, res) => {
     console.log('in GET BY CLUB ID:', req.params);

@@ -9,7 +9,8 @@ Bookit List is an application designed for bookworms and learners alike. It is a
 - Redux/Saga
 - PostgreSQL
 - Material UI
-- [Good Reads API] (https://www.goodreads.com/api)
+- [Good Reads API](https://www.goodreads.com/api)
+- a full list of dependencies can be found in `package.json`
 
 # Getting Started
 These instructions will get you a copy of the project up and running on your local machine.
@@ -36,7 +37,7 @@ Before you get started, be sure to have the following software installed on your
 7. Navigate to `localhost:3000`
 
 ## Good Reads API
-1. Navigate to [Good Reads API] (https://www.goodreads.com/api) to create an API_KEY.
+1. Navigate to [Good Reads API](https://www.goodreads.com/api) to create an API_KEY.
 2. Open the `.env` file and add the line: `API_KEY=` followed by your API KEY, with no spaces.
 
 ## Create database and table
@@ -59,15 +60,25 @@ CREATE TABLE "user" (
 ### User Features
 ![](public/images/features-crud.png)
 
+# Completed Features
+- Search for books and capture data
+- Create new circles and invite users to join
+- Recieve in-app notifications of new invitations
+- Accept and Decline invites to circles
+- Post messages on a discussion board within each circle
+- Edit existing circles
 
-
+# Next Steps
+- implement a user profile and image upload/avatar capablity
+- implement email or text message ability 
+- implement the ability to archive completed or deleted circles
+- implement the ability to search books and link to more information
+- implement a calendar
 
 # Authors
 Pache Vang
 Prime Digital Academy
 
-# Prime Project
-This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
 
 We **STRONGLY** recommend following these instructions carefully. It's a lot, and will take some time to set up, but your life will be much easier this way in the long run.
 
@@ -82,9 +93,8 @@ We **STRONGLY** recommend following these instructions carefully. It's a lot, an
 Before you get started, make sure you have the following software installed on your computer:
 
 - [Node.js](https://nodejs.org/en/)
-- [PostrgeSQL](https://www.postgresql.org/)
+- [PostgreSQL](https://www.postgresql.org/)
 - [Nodemon](https://nodemon.io/)
-
 
 
 If you would like to name your database something else, you will need to change `prime_app` to the name of your new database name in `server/modules/pool.js`
@@ -129,34 +139,12 @@ Keep in mind that once you using the login route, Postman will manage your sessi
 After running the login route above, you can try any other route you've created that requires a logged in user!
 
 
-## Production Build
-
-Before pushing to Heroku, run `npm run build` in terminal. This will create a build folder that contains the code Heroku will be pointed at. You can test this build by typing `npm start`. Keep in mind that `npm start` will let you preview the production build but will **not** auto update.
-
-* Start postgres if not running already by using `brew services start postgresql`
-* Run `npm start`
-* Navigate to `localhost:5000`
-
 ## Lay of the Land
 
 * `src/` contains the React application
 * `public/` contains static assets for the client-side
 * `build/` after you build the project, contains the transpiled code from `src/` and `public/` that will be viewed on the production site
 * `server/` contains the Express App
-
-This code is also heavily commented. We recommend reading through the comments, getting a lay of the land, and becoming comfortable with how the code works before you start making too many changes. If you're wondering where to start, consider reading through component file comments in the following order:
-
-* src/components
-  * App/App
-  * Footer/Footer
-  * Nav/Nav
-  * AboutPage/AboutPage
-  * InfoPage/InfoPage
-  * UserPage/UserPage
-  * LoginPage/LoginPage
-  * RegisterPage/RegisterPage
-  * LogOutButton/LogOutButton
-  * ProtectedRoute/ProtectedRoute
 
 ## Deployment
 
@@ -168,6 +156,3 @@ This code is also heavily commented. We recommend reading through the comments, 
 1. Add an environment variable for `SERVER_SESSION_SECRET` with a nice random string for security
 1. In the deploy section, select manual deploy
 
-## Update Documentation
-
-Customize this ReadMe and the code comments in this project to read less like a starter repo and more like a project. Here is an example: https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
