@@ -75,10 +75,6 @@ CREATE TABLE "user" (
 - implement the ability to search books and link to more information
 - implement a calendar
 
-# Authors
-Pache Vang
-Prime Digital Academy
-
 
 We **STRONGLY** recommend following these instructions carefully. It's a lot, and will take some time to set up, but your life will be much easier this way in the long run.
 
@@ -139,4 +135,12 @@ Then make sure `Launch Program` is selected from the dropdown, then click the gr
 1. Create the necessary tables
 1. Add an environment variable for `SERVER_SESSION_SECRET` with a nice random string for security
 1. In the deploy section, select manual deploy
+
+# Author
+Pache Vang
+
+
+## Acknowledgments
+
+* Prime Digital Academy for Authentication and Middleware code
 
