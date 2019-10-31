@@ -9,7 +9,7 @@
 
 .nav {
   overflow: hidden;
-  background-color: #ff9100;
+  background-image: linear-gradient(to top, #5588a3, #94ceca);
   border-radius: 15px;
   height: 100px;
 }
@@ -17,7 +17,8 @@
 .nav-link {
   float: left;
   color: #f2f2f2;
-  background-color: #ff9100;
+  /* background-color: #145374; */
+  background-image: linear-gradient(to top, #5588a3, #94ceca);
   text-align: center;
   padding: 40px 10px;
   text-decoration: none;
@@ -31,7 +32,9 @@
 }
 
 .nav-link:hover {
-  background-color: #ffab40;
+  background-color: #e8e8e8;
+  
+  
 }
 
 .nav-right {
