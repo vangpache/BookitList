@@ -41,10 +41,10 @@ class Home extends Component {
 
         return (
 
-            <div>
+            <div className="homePage">
                 <Grid container spacing ={3}>
                     <Grid item xs={6} className={this.props.classes.notificationsGrid} >
-                                    <Notifications />
+                        <Notifications />
                     </Grid>
               
                     <Grid item xs={6}>

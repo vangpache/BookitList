@@ -1,6 +1,5 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0px;
 }
 
 .alert {
@@ -12,7 +11,8 @@ form {
     background-image: linear-gradient(to top, #d597ce, #f2d6eb);
     width: 20%;
     height: 450px;
-    margin: 100px auto;
+    margin: 50px auto;
+    margin-bottom: 20px;
     padding: 25px;
     border-radius: 20px;
     color: #5d1451;
@@ -53,4 +53,9 @@ input {
 .appContainer {
     /* text-align: center; */
     margin: 30px;
+}
+
+.homePage {
+    padding: 25px;
+    background-color: red;
 }
