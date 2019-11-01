@@ -57,21 +57,23 @@ input {
 
 .homePage {
     padding: 25px;
-    /* background-color: red; */
+    margin: 5px;
+    background-color: #facf5a;
+    border-radius: 10px;
 }
 
 .userProfileBar {
-    /* background-color: blue; */
-    width: 25%;
-    justify-content: center;
+    /* background-color: #facf5a; */
+    width: 250px;
+    text-align: center;
     padding: 15px;
-    /* display: inline-flex; */
+    background-image: linear-gradient(to top, #94ceca, #5588a3);
+    border-radius: 10px;
+    margin: 5px;
 }
 
 .userProfileHome {
-    /* float: right; */
     padding: 15px;
-    /* margin-left: auto; */
     background-color: green;
 }
 

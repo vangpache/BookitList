@@ -10,15 +10,15 @@ import UserProfile from '../UserProfile/UserProfile';
 const UserPage = (props) => (
   <div className="homePageContainer">
     <div className="userProfileBar">
-      <h1 id="welcome">
+      <h2 id="welcome">
         Welcome, {props.user.username}!
-    </h1>
+    </h2>
     <UserProfile />
     </div>
     
     {/* <p>Your ID is: {props.user.id}</p> */}
     <Home />
-    <LogOutButton className="log-in" />
+    {/* <LogOutButton className="log-in" /> */}
   </div>
 );
 

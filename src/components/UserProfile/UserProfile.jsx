@@ -18,8 +18,10 @@ class UserProfile extends Component {
                 {/* <h2 className="userProfileHome">user profile exists here</h2> */}
                 <img src={profileImage} alt="user profile image" width="150px" className="profileImage" />
                 <Button>Edit Profile</Button>
-                <h4>User: Pache</h4>
+                
+                <h4>User: {this.props.user.username}</h4>
                 <h4>Favorite Author: Roald Dahl</h4>
+                {JSON.stringify(this.props.user)}
             </>
         )
     }
@@ -27,7 +29,7 @@ class UserProfile extends Component {
 
 const mapStateToProps = reduxStore => {
     return {
-        reduxStore
+        user: reduxStore.user
     }
 }
 

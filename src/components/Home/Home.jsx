@@ -52,7 +52,7 @@ class Home extends Component {
                     </Grid>
                
                     <Grid item xs={12}>
-                        <h1>My Current List:</h1>
+                        <h1>My Current Circles:</h1>
                         <AllClubsDisplay />
                     </Grid>
                         
