@@ -13,7 +13,8 @@ const styles = {
         display: 'inline-block',
         flexDirection: 'rows',
         margin: '5px',
-        fontSize: '14px'
+        fontSize: '14px',
+        backgroundColor: '#e8e8e8'
     },
 
 }
