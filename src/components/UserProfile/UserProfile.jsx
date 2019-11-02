@@ -21,10 +21,6 @@ class UserProfile extends Component {
     }
 
     handleEdit = () => {
-        this.props.dispatch({
-            type: 'UPDATE_PROFILE',
-            payload: this.state
-        })
         if (this.state.edit === false) {
             this.setState({
                 currently_reading: this.props.user.currently_reading,
@@ -33,20 +29,21 @@ class UserProfile extends Component {
                 favorite_quote: this.props.user.favorite_quote,
                 edit: true
             })
-        } else {
-            this.setState({
-                edit: false
-            })
-        }
-        
+        } 
+    }
+
+    handleDone = () => {
+        this.props.dispatch({
+            type: 'UPDATE_PROFILE',
+            payload: this.state
+        })
+        this.setState({
+            edit: false
+        })
     }
 
     handleCancelButton = () => {
         this.setState({
-            currently_reading: this.props.user.currently_reading,
-            favorite_author: this.props.user.favorite_author,
-            favorite_book: this.props.user.favorite_book,
-            favorite_quote: this.props.user.favorite_quote,
             edit: false
         })
     }
@@ -108,7 +105,7 @@ class UserProfile extends Component {
                             label="Favorite book" defaultValue={this.props.user.favorite_book} />
                 <TextField onChange={(event) => this.handleInputs('favorite_quote', event)} placeholder="Favorite quote..." 
                             label="Favorite quote" defaultValue={this.props.user.favorite_quote}/><br/>
-                <Button onClick={this.handleEdit}>Done</Button><Button onClick={this.handleCancelButton}>Cancel</Button><br/>
+                <Button onClick={this.handleDone}>Done</Button><Button onClick={this.handleCancelButton}>Cancel</Button><br/>
                 </>
                 }
        
