@@ -27,7 +27,7 @@ const styles = theme => ({
 
 class CreateNewSearchBar extends Component {
 
-    state ={
+    state = {
         search: ''
     }
 
