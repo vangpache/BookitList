@@ -43,12 +43,8 @@ class Home extends Component {
 
             <div className="homePage">
                 <Grid container spacing ={3}>
-                    <Grid item xs={6} className={this.props.classes.notificationsGrid} >
+                    <Grid item xs={12} className={this.props.classes.notificationsGrid} >
                         <Notifications />
-                    </Grid>
-              
-                    <Grid item xs={6}>
-                        {/* <p>username and avatar here: align to right</p> */}
                     </Grid>
                
                     <Grid item xs={12}>

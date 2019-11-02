@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { IconButton, Table, TableBody, TableCell, TableHead, TableRow  } from '@material-ui/core';
+import { IconButton, InputBase, Paper, Table, TableBody, TableCell, TableRow  } from '@material-ui/core';
 import { MailOutline, Cancel, CheckCircle } from '@material-ui/icons';
+import SearchIcon from '@material-ui/icons/Search';
+import Book from '@material-ui/icons/Book';
 import { withStyles } from '@material-ui/styles';
 
 const styles = {
@@ -10,18 +12,18 @@ const styles = {
         fontSize: '1em',
         color: 'green',
         background: 'white',
-        backgroundColor: '#ffd600'
+        // backgroundColor: '#ffd600'
     },
     iconbuttonDecline: {
         margin: '15px',
         fontSize: '1em',
         color: 'red',
-        backgroundColor: '#ffd600'
+        // backgroundColor: '#ffd600'
     },
-    notification: {
-        backgroundColor: '#ffd600',
-        padding: '0px'
-    }
+    // notification: {
+    //     backgroundColor: '#ffd600',
+    //     padding: '0px'
+    // },
 
 }
 
@@ -48,7 +50,8 @@ class Notifications extends Component {
         
 
         return (
-            <>
+            <div className="notifications">
+                <div>
                 <h4>Notifications <MailOutline /></h4>
                 <Table size="small">
                         <TableBody>
@@ -74,9 +77,18 @@ class Notifications extends Component {
                 ))}
                     </TableBody>
                 </Table>
+                </div>
                 {/* {JSON.stringify(this.props.notifications)} */}
-
-            </>
+                <div className="searchBooksInput">
+                <Paper>
+                    <Book />
+                    <InputBase placeholder="search books..."/>
+                        <IconButton onClick={this.handleClick}>
+                            <SearchIcon />
+                        </IconButton>
+                </Paper>
+                </div>
+            </div>
         )
     }
 }

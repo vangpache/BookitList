@@ -70,6 +70,7 @@ input {
     background-image: linear-gradient(to top, #94ceca, #5588a3);
     border-radius: 10px;
     margin: 5px;
+    color: #dfcdc3;
 }
 
 .userProfileHome {
@@ -79,11 +80,25 @@ input {
 
 .profileImage {
     border-radius: 50%;
-    padding: 5px;
+    /* padding: 5px; */
     margin: 5px;
+    border: 5px solid white;
 }
 
 .homePageContainer {
     display: inline-flex;
     height: 100%;
+}
+
+.notifications {
+    background: white;
+    width: 100%;
+    display: inline-flex
+}
+
+.searchBooksInput {
+    /* background-color: black; */
+    margin-left: auto;
+    margin-top: 10px;
+    padding: 10px;
 }
