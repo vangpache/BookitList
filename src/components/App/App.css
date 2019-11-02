@@ -16,6 +16,7 @@ form {
     padding: 25px;
     border-radius: 20px;
     color: #5d1451;
+    border: black solid 1px;
 }
 
 input {
@@ -57,5 +58,56 @@ input {
 
 .homePage {
     padding: 25px;
-    background-color: red;
+    margin: 5px;
+    background-color: #facf5a;
+    border-radius: 10px;
+}
+
+.userProfileBar {
+    /* background-color: #facf5a; */
+    width: 250px;
+    text-align: center;
+    padding: 15px;
+    background-image: linear-gradient(to top, #94ceca, #5588a3);
+    border-radius: 10px;
+    margin: 5px;
+    color: #dfcdc3;
+}
+
+.userProfileHome {
+    padding: 15px;
+    background-color: green;
+}
+
+.profileImage {
+    border-radius: 50%;
+    /* padding: 5px; */
+    margin: 5px;
+    border: 5px solid white;
+}
+
+.homePageContainer {
+    display: inline-flex;
+    height: 100%;
+}
+
+.notifications {
+    /* background: white; */
+    width: 100%;
+    display: inline-flex
+}
+
+.searchBooksInput {
+    /* background-color: black; */
+    margin-left: auto;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+.loginPageDiv {
+    background-image: url('../App/background.jpg');
+    background-size: 100%;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 5px;
 }
