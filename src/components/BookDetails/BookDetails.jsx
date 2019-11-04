@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import swal from '@sweetalert/with-react';
 import { Button, CardContent, Grid } from '@material-ui/core';
-import { PersonOutline } from '@material-ui/icons';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/styles';
 
@@ -17,14 +16,8 @@ const styles = {
         margin: '30px'
     },
     button: {
-        margin: '15px'
+        margin: '10px'
     },
-    p: {
-        color: 'orange'
-    },
-    ul: {
-        listStyleType: 'none'
-    }
 }
 
 class BookDetails extends Component {
@@ -76,37 +69,20 @@ class BookDetails extends Component {
         return (
 
             <div>
-                <Grid item xs={7} className={this.props.classes.gridBookDetails} >
+                {/* <Grid item xs={6} className={this.props.classes.gridBookDetails} > */}
                  
                             <CardContent> 
-                                <h4>Book: {this.props.details.book_title} </h4>
-                                <h5>Author: {this.props.details.author} </h5>
+                                <h4>{this.props.details.book_title} </h4>
+                                <h5>by: {this.props.details.author} </h5>
                                 <img src={this.props.details.image_url} alt="book cover"/>
-                                <p>Notes: {this.props.details.description}</p>
-                                
+                                <p>{this.props.details.description}</p>
 
                         {this.props.details.admin_status ?
                             <Button variant="outlined" onClick={() => this.handleEdit(this.props.match.params)}>Edit</Button> :
-                            <Button onClick={() => this.handleLeave(this.props.match.params.id)}
-                            className={this.props.classes.button}>Leave Club</Button>}
-                            </CardContent>
-                      
-                </Grid>
+                            <Button variant="outlined" onClick={() => this.handleLeave(this.props.match.params.id)}
+                                className={this.props.classes.button}>Leave Club</Button>}
 
-                <Grid item xs={5} className={this.props.classes.gridMembers}>
-                            <CardContent>
-                                <p className={this.props.classes.p} >current members</p>
-                                <ul className={this.props.classes.ul} >
-                            {this.props.members.map(username => (
-                                    <li> <PersonOutline /> {username.username}</li>
-                                ))}
-                                </ul>
-                                
-              
-                            </CardContent>
-                </Grid>
-                        
-               
+                            </CardContent>    
             </div>
         )
     }

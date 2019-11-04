@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/styles';
 import Moment from 'react-moment';
+import { PersonOutline } from '@material-ui/icons';
 import { Button, Card, CardContent, TextField  } from '@material-ui/core';
 import './DiscussionBoard.css';
 
@@ -11,10 +12,7 @@ const styles = {
     },
     card: {
         margin: '10px 0px 10px 0px'
-    }
-    // postButton: {
-    //     margin: '15px'
-    // }
+    },
 }
 
 class DiscussionBoard extends Component {
@@ -56,12 +54,6 @@ class DiscussionBoard extends Component {
             payload: this.state.clubId.id
         })
     }
-
-    handlePrefill = () => {
-        this.setState({
-            content: `Read pages 1-99 for our first meeting. Can't wait to see everyone!`
-        })
-    }
     
 
     render() {
@@ -72,7 +64,20 @@ class DiscussionBoard extends Component {
             <div>
                 <Card>
                     <CardContent>
-                        <h2 onClick={this.handlePrefill} >Discussion Board</h2>
+                        <div className="discussionHeadingMembersDiv">
+                        <div>
+                        <h2>Discussion Board</h2>
+                        </div>
+                        <div className="showMembers" >
+                            <p>members</p>
+                            <ul className="ul" >
+                                {this.props.members.map(username => (
+                                    
+                                    <li><img src={username.profile_image} alt="user profile image" className="membersProfile" /> {username.username}</li>
+                                ))}
+                            </ul>
+                        </div>
+                        </div>
                         <TextField id="outlined-textarea" label="Post a new message"
                                     multiline className={this.props.classes.textField}
                                     margin="normal" variant="outlined" fullWidth={true}
@@ -91,6 +96,7 @@ class DiscussionBoard extends Component {
 
                     </CardContent>
                 </Card>
+                {/* {JSON.stringify(this.props.members)} */}
                 
             </div>
         )
@@ -99,7 +105,8 @@ class DiscussionBoard extends Component {
 
 const mapStateToProps = reduxStore => {
     return {
-        discussionBoard: reduxStore.discussionBoardReducer
+        discussionBoard: reduxStore.discussionBoardReducer,
+        members: reduxStore.membersReducer
     }
 }
 

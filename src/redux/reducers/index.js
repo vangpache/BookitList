@@ -9,6 +9,7 @@ import discussionBoardReducer from './discussonBoardReducer';
 import searchUsersReducer from './searchUsersReducer';
 import notificationsReducer from './notificationsReducer';
 import membersReducer from './membersReducer';
+import meetupsReducer from './meetupsReducer';
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
 // This is imported in index.js as rootSaga
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
   searchUsersReducer,
   notificationsReducer,
   membersReducer,
+  meetupsReducer,
 });
 
 export default rootReducer;

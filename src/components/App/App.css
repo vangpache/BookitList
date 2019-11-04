@@ -8,15 +8,18 @@ body {
 }
 
 form {
-    background-image: linear-gradient(to top, #d597ce, #f2d6eb);
+    /* background-image: linear-gradient(to top, #f7be16, #f2d6eb); */
+    /* background-image: linear-gradient(to top, #5588a3, #e8e8e8); */
+    background-color: #305f72;
     width: 20%;
     height: 450px;
     margin: 50px auto;
     margin-bottom: 20px;
     padding: 25px;
     border-radius: 20px;
-    color: #5d1451;
-    border: black solid 1px;
+    /* color: #5d1451; */
+    color: white;
+    border: white solid 1px;
 }
 
 input {
@@ -26,17 +29,20 @@ input {
 
 .log-in, .log-out, .register {
   /* background-color: #ff9100; */
-  background-color: #5d1451;
+  /* background-color: #5d1451; */
+  background-color: #305f72;
   border-radius: 4px;
-  color: #f8f8f8;
+  /* color: #f8f8f8; */
   min-height: 50px;
   min-width: 100px;
   outline:0;
   cursor: pointer;
+  color: white;
 }
 
 .log-in:hover, .log-out:hover, .register:hover {
-  background-color: #745c97;
+  /* background-color: #745c97; */
+  background-color: #5f6769;
 }
 
 /* This line makes the "Register" and "Login" buttons look like links */
@@ -64,14 +70,15 @@ input {
 }
 
 .userProfileBar {
-    /* background-color: #facf5a; */
+    /* background-color: #f7be16; */
     width: 250px;
     text-align: center;
     padding: 15px;
     background-image: linear-gradient(to top, #94ceca, #5588a3);
     border-radius: 10px;
     margin: 5px;
-    color: #dfcdc3;
+    /* color: #dfcdc3; */
+    
 }
 
 .userProfileHome {
@@ -110,4 +117,40 @@ input {
     padding: 20px;
     border-radius: 10px;
     margin: 5px;
+}
+
+.discussionHeadingMembersDiv {
+    display: inline-flex;
+    width: 100%;
+}
+
+.ul {
+    list-style: none;
+    }
+
+.showMembers {
+    color: orange;
+    margin-left: auto;
+    padding-right: 100px;
+}
+
+.membersProfile {
+    width: 25px;
+    border-radius: 50%;
+}
+
+.buttonLink {
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline:0;
+    color: blue;
+}
+
+.buttonLink .lessInfo {
+    display: none;
+}
+
+.active .lessInfo {
+    display: block;
 }
