@@ -4,7 +4,6 @@ import swal from '@sweetalert/with-react';
 import { Button, CardContent, Grid } from '@material-ui/core';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/styles';
-import Meetups from '../Meetups/Meetups';
 
 
 const styles = {
@@ -19,10 +18,6 @@ const styles = {
     button: {
         margin: '10px'
     },
-    meetingsGrid: {
-        display: 'inline-block',
-        // backgroundColor: 'red',
-    }
 }
 
 class BookDetails extends Component {
@@ -74,7 +69,7 @@ class BookDetails extends Component {
         return (
 
             <div>
-                <Grid item xs={6} className={this.props.classes.gridBookDetails} >
+                {/* <Grid item xs={6} className={this.props.classes.gridBookDetails} > */}
                  
                             <CardContent> 
                                 <h4>{this.props.details.book_title} </h4>
@@ -87,15 +82,7 @@ class BookDetails extends Component {
                             <Button variant="outlined" onClick={() => this.handleLeave(this.props.match.params.id)}
                                 className={this.props.classes.button}>Leave Club</Button>}
 
-                            </CardContent>
-                </Grid>
-                <Grid item xs={6} className={this.props.classes.meetingsGrid} >
-                    <CardContent>
-                        <Meetups />
-                    </CardContent>
-                </Grid>
-                        
-               
+                            </CardContent>    
             </div>
         )
     }

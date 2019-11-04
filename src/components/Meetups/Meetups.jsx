@@ -1,17 +1,28 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, TextField } from '@material-ui/core';
+import { Button, CardContent, TextField } from '@material-ui/core';
 
 
 class Meetups extends Component {
+    componentDidMount() {
+        this.getMeetups();
+    }
+    
     state = {
         date: '',
         start_time: '',
         end_time: '',
         location: '',
         notes: '',
-        clubId: this.props.match.params.id,
+        clubId: '',
         meetup: false
+    }
+
+    getMeetups = () => {
+        this.props.dispatch({
+            type: 'GET_MEETUPS',
+            payload: +(this.props.clubId.id)
+        })
     }
 
     //TOGGLES THE ADD A NEW MEETUP DATE/TIME/LOCATION INPUTS
@@ -30,7 +41,8 @@ class Meetups extends Component {
     //SET STATE WITH INPUT VALUES FOR MEETUP
     handleMeetupInputs =(propertyName, event) => {
         this.setState({
-            [propertyName]: event.target.value
+            [propertyName]: event.target.value,
+            clubId: this.props.club.id
         })
     }
 
@@ -48,7 +60,7 @@ class Meetups extends Component {
 
         return (
 
-            <div>
+            <CardContent>
                 <h3>Upcoming Meets:</h3>
                 <ul>
                     <li>Monday Nov. 4th, 2019 @ GroundsWell Cafe</li>
@@ -65,16 +77,17 @@ class Meetups extends Component {
                     <Button variant="outlined" onClick={this.handleAddMeetup} >Add</Button><Button variant="outlined" onClick={this.handleMeetup}>Cancel</Button>
                     
                     </> }
-                {JSON.stringify(this.state)}
+                {JSON.stringify(this.props.meetups)}
                 
-            </div>
+            </CardContent>
         )
     }
 }
 
 const mapStateToProps = reduxStore => {
     return {
-        reduxStore
+        club: reduxStore.singleBookReducer,
+        meetups: reduxStore.meetupsReducer,
     }
 }
 

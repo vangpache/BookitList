@@ -63,10 +63,27 @@ function* updateClubDetails(action) {
     }
 }
 
+function* getMeetups(action) {
+    try {
+        let response = yield axios.get(`/database/meetup/get/${action.payload}`)
+        console.log('in get meetups response:', response.data);
+        //YIELD PUT SET MEETUPS TO REDUCER HERE
+        yield put({
+            type: 'SET_MEETUPS',
+            payload: response.data
+        })
+    } catch (error) {
+        console.log('error in getMeetups:', error);
+    }
+}
+
 function* postMeetup(action) {
     try {
-        yield axios.put(`/database/meetup/${action.payload.clubId}`, action.payload)
+        yield axios.post('/database/meetup/post', action.payload)
         //YIELD PUT GET MEETUPS HERE
+        yield put ({
+            try: 'GET_MEETUPS'
+        })
     } catch (error) {
         console.log('error in post meetup saga', error);
     }
@@ -80,7 +97,8 @@ function* createNewSaga() {
     yield takeLatest('UPDATE_CLUB_DETAILS', updateClubDetails);
     yield takeLatest('GET_USERNAMES', getUsernames);
     yield takeLatest('SEND_INVITES', sendInvites);
-    yield takeLatest('POST_MEETUP', postMeetup)
+    yield takeLatest('POST_MEETUP', postMeetup);
+    yield takeLatest('GET_MEETUPS', getMeetups)
    
 }
 

@@ -1,17 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import BookDetails from '../BookDetails/BookDetails';
+import Meetups from '../Meetups/Meetups';
 import UsernameSearch from '../UsernameSearch/UsernameSearch';
 import DiscussionBoard from '../DiscussionBoard/DiscussionBoard';
 import { Card, Grid } from '@material-ui/core';
+import { withStyles } from '@material-ui/styles';
 
-
+const styles = {
+    detailsMeetups: {
+        display: 'inline-block',
+        verticalAlign: 'top',
+    }
+}
 
 class ClubPage extends Component {
     // COMPONENT DID MOUNT TO GET CURRENT BOOK CLUB BASED ON ID
     componentDidMount() {
         this.getClubPageDetails();
-        // this.getMembersToDisplay();
     }
 
     getClubPageDetails = () => {
@@ -41,10 +47,18 @@ class ClubPage extends Component {
                 <Grid container spacing={3}>
     
                     <Grid item xs={6}>
-                        <Grid item={12}>
-                            <Card>
+                        <Grid item={12}  >
+                            <Grid item xs={6} className={this.props.classes.detailsMeetups}>
+                            {/* <Card> */}
                             <BookDetails details={this.props.details}  />
-                            </Card>
+                            {/* </Card> */}
+                            </Grid>
+
+                            <Grid item xs={6} className={this.props.classes.detailsMeetups}>
+                            {/* <Card> */}
+                                <Meetups clubId={this.props.match.params}/>
+                            {/* </Card> */}
+                            </Grid>
                         </Grid>
                         
                         <Grid container spacing={3}>
@@ -73,4 +87,4 @@ const mapStateToProps = reduxStore => {
     }
 }
 
-export default connect(mapStateToProps) (ClubPage);
+export default withStyles(styles) (connect(mapStateToProps) (ClubPage));

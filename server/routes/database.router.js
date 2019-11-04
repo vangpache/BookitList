@@ -30,7 +30,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 
     let user_id = req.user.id
     let club_id = req.params.id
-    let queryText = `SELECT "name", "book_title", "author", "image_url", "description", "admin_status" FROM "clubs"
+    let queryText = `SELECT "clubs"."id", "name", "book_title", "author", "image_url", "description", "admin_status" FROM "clubs"
                     JOIN "user_clubs" ON "user_clubs"."clubs_id" = "clubs"."id"
                     WHERE "clubs_id" = $1 AND "user_id" = $2;`;
     pool.query(queryText, [club_id, user_id])
@@ -62,6 +62,23 @@ router.get('/discussion/:id', rejectUnauthenticated, (req, res) => {
         console.log('in GET discussion error:', error);
         res.sendStatus(500);
     })
+})
+
+//GET MEETUPS FOR CLUB ID
+router.get('/meetup/get/:id', rejectUnauthenticated, (req, res) => {
+    console.log('in get meetups:', req.params.id);
+    let club_id = req.params.id
+    let queryText = `SELECT * from "meetups" WHERE "clubs_id" = $1;`;
+
+    pool.query(queryText,[club_id])
+    .then ((result) => {
+        console.log('get meetups:', result.rows);
+        res.send(result.rows)
+        
+    }).catch((err) => {
+        res.sendStatus(500);
+    })
+    
 })
 
 
@@ -109,7 +126,27 @@ router.post('/:id', rejectUnauthenticated, (req, res) => {
     })
 })
 
+//POST A NEW MEETUP FOR CLUB
+router.post('/meetup/post', rejectUnauthenticated, (req, res) => {
+    console.log('in post meetup:', req.body);
 
+    let club_id = req.body.clubId;
+    let date = req.body.date;
+    let start_time = req.body.start_time;
+    let end_time = req.body.end_time;
+    let location = req.body.location;
+    let notes =  req.body.notes;
+    let user_id = req.user.id;
+    let queryText = `INSERT INTO "meetups" ("date", "start_time", "end_time", "location", "notes", "clubs_id", "user_id")
+                        VALUES ($1, $2, $3, $4, $5, $6, $7);`
+    
+    pool.query(queryText, [date, start_time, end_time, location, notes, club_id, user_id])
+    .then((result) => {
+        res.sendStatus(201);
+    }).catch((err) => {
+        res.sendStatus(500)
+    })
+})
 
 
 
