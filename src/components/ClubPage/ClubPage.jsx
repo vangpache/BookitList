@@ -44,7 +44,6 @@ class ClubPage extends Component {
                         <Grid item={12}>
                             <Card>
                             <BookDetails details={this.props.details}  />
-                            {/* {JSON.stringify(this.props.members)} */}
                             </Card>
                         </Grid>
                         
