@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import swal from '@sweetalert/with-react';
 import { Button, CardContent, Grid } from '@material-ui/core';
-import { PersonOutline } from '@material-ui/icons';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/styles';
+import Meetups from '../Meetups/Meetups';
 
 
 const styles = {
@@ -21,7 +21,7 @@ const styles = {
     },
     meetingsGrid: {
         display: 'inline-block',
-        backgroundColor: 'red',
+        // backgroundColor: 'red',
     }
 }
 
@@ -90,7 +90,10 @@ class BookDetails extends Component {
                             </CardContent>
                 </Grid>
                 <Grid item xs={6} className={this.props.classes.meetingsGrid} >
+                    <CardContent>
                         <h1>meeting dates here</h1>
+                        <Meetups />
+                    </CardContent>
                 </Grid>
                         
                

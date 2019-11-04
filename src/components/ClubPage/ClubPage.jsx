@@ -70,7 +70,6 @@ class ClubPage extends Component {
 const mapStateToProps = reduxStore => {
     return {
         details: reduxStore.singleBookReducer,
-        // members: reduxStore.membersReducer.data
     }
 }
 
