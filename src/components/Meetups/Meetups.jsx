@@ -41,7 +41,7 @@ class Meetups extends Component {
                     <TextField variant="outlined" type="time" /><br />
                     <TextField multiline rows="3" variant="outlined" type="text" placeholder="location" />
                     <TextField multiline rows="3" variant="outlined" type="text" placeholder="notes..." /><br/>
-                    <Button>Add</Button><Button onClick={this.handleMeetup}>Cancel</Button>
+                    <Button variant="outlined">Add</Button><Button variant="outlined" onClick={this.handleMeetup}>Cancel</Button>
                     
                     </> }
                 

@@ -6,7 +6,12 @@
 CREATE TABLE "user" (
     "id" SERIAL PRIMARY KEY,
     "username" VARCHAR (80) UNIQUE NOT NULL,
-    "password" VARCHAR (1000) NOT NULL
+    "password" VARCHAR (1000) NOT NULL,
+    "profile_image" VARCHAR(1000),
+    "currently_reading" VARCHAR(1000),
+    "favorite_author" VARCHAR(1000),
+    "favorite_book" VARCHAR(1000),
+    "favorite_quote" VARCHAR(2000)
 );
 
 
@@ -37,6 +42,18 @@ CREATE TABLE "user_clubs" (
     "clubs_id" INT REFERENCES clubs(id),
     "invite_accepted" boolean DEFAULT false,
     "admin_status" boolean DEFAULT false
+);
+
+-- CREATE meetups TABLE
+CREATE TABLE "meetups" (
+    "id" SERIAL PRIMARY KEY,
+    "date" date,
+    "start_time" time,
+    "end_time" time,
+    "location" VARCHAR (300),
+    "notes" VARCHAR(1000),
+    "clubs_id" INT REFERENCES clubs(id),
+    "user_id" INT REFERENCES user(id)
 );
 
 

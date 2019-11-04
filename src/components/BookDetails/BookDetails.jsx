@@ -84,14 +84,13 @@ class BookDetails extends Component {
 
                         {this.props.details.admin_status ?
                             <Button variant="outlined" onClick={() => this.handleEdit(this.props.match.params)}>Edit</Button> :
-                            <Button onClick={() => this.handleLeave(this.props.match.params.id)}
+                            <Button variant="outlined" onClick={() => this.handleLeave(this.props.match.params.id)}
                                 className={this.props.classes.button}>Leave Club</Button>}
 
                             </CardContent>
                 </Grid>
                 <Grid item xs={6} className={this.props.classes.meetingsGrid} >
                     <CardContent>
-                        <h1>meeting dates here</h1>
                         <Meetups />
                     </CardContent>
                 </Grid>
