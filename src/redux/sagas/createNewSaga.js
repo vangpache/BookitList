@@ -43,18 +43,6 @@ function* getUsernames(action) {
     }
 }
 
-//TAKES THE ADDED USER TO INVITE AND SPREADS IN THE INVITE-USERS-REDUCER STATE-- CURRENTLY NOT IN USE ANYMORE/NOT NEEDED ATM
-// function* inviteUser(action) {
-//     try {
-//         yield put ({
-//             type: 'SAVE_USER_INVITES',
-//             payload: action.payload
-//         })
-//     } catch (error) {
-//         console.log('in inviteUsers Error', error);
-//     }
-// }
-
 function* sendInvites(action) {
     try {
         yield axios.post(`/usernames/${action.clubId.id}`, action.payload)
@@ -75,15 +63,24 @@ function* updateClubDetails(action) {
     }
 }
 
+function* postMeetup(action) {
+    try {
+        yield axios.put(`/database/meetup/${action.payload.clubId}`, action.payload)
+        //YIELD PUT GET MEETUPS HERE
+    } catch (error) {
+        console.log('error in post meetup saga', error);
+    }
+}
+
 
 //WATCHER SAGA
 function* createNewSaga() {
     yield takeLatest ('SEARCH_GOODREADS', searchGoodReads);
-    yield takeLatest('POST_NEWCLUB', postNewClub)
-    yield takeLatest('UPDATE_CLUB_DETAILS', updateClubDetails)
-    yield takeLatest('GET_USERNAMES', getUsernames)
-    // yield takeLatest('INVITE_USER', inviteUser)
-    yield takeLatest('SEND_INVITES', sendInvites)
+    yield takeLatest('POST_NEWCLUB', postNewClub);
+    yield takeLatest('UPDATE_CLUB_DETAILS', updateClubDetails);
+    yield takeLatest('GET_USERNAMES', getUsernames);
+    yield takeLatest('SEND_INVITES', sendInvites);
+    yield takeLatest('POST_MEETUP', postMeetup)
    
 }
 

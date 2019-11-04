@@ -144,18 +144,16 @@ function* getMembersDisplay(action) {
 
 //WATCHER
 function* databaseSaga() {
-    //GETS TOP 3 CLUB DETAILS FOR THE HOME PAGE RENDER
     yield takeLatest('GET_CLUB_DETAILS', getClubDetail);
-    // yield takeLatest('GET_ALL_CLUBS', getAllClubs)
-    yield takeLatest('USE_BOOK_ID', useBookId)
-    yield takeLatest('LEAVE_BOOK', leaveBook)
-    yield takeLatest('POST_DISCUSSION_CONTENT', postDiscussion)
-    yield takeLatest('GET_DISCUSSION_BOARD', getDiscussionBoard)
-    yield takeLatest('DELETE_CLUB', deleteClub)
-    yield takeLatest('GET_NOTIFICATIONS', getNotifications)
-    yield takeLatest('ACCEPT_INVITE', acceptInvite)
-    yield takeLatest('DELETE_INVITE', deleteInvite)
-    yield takeLatest('GET_MEMBERS_DISPLAY', getMembersDisplay)
+    yield takeLatest('USE_BOOK_ID', useBookId);
+    yield takeLatest('LEAVE_BOOK', leaveBook);
+    yield takeLatest('POST_DISCUSSION_CONTENT', postDiscussion);
+    yield takeLatest('GET_DISCUSSION_BOARD', getDiscussionBoard);
+    yield takeLatest('DELETE_CLUB', deleteClub);
+    yield takeLatest('GET_NOTIFICATIONS', getNotifications);
+    yield takeLatest('ACCEPT_INVITE', acceptInvite);
+    yield takeLatest('DELETE_INVITE', deleteInvite);
+    yield takeLatest('GET_MEMBERS_DISPLAY', getMembersDisplay);
 }
 
 export default databaseSaga;
