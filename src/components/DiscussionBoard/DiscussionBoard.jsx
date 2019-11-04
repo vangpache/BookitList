@@ -72,7 +72,8 @@ class DiscussionBoard extends Component {
                             <p>members</p>
                             <ul className="ul" >
                                 {this.props.members.map(username => (
-                                    <li> <PersonOutline /> {username.username}</li>
+                                    
+                                    <li><img src={username.profile_image} alt="user profile image" className="membersProfile" /> {username.username}</li>
                                 ))}
                             </ul>
                         </div>
@@ -95,7 +96,7 @@ class DiscussionBoard extends Component {
 
                     </CardContent>
                 </Card>
-                
+                {/* {JSON.stringify(this.props.members)} */}
                 
             </div>
         )

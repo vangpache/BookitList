@@ -133,3 +133,8 @@ input {
     margin-left: auto;
     padding-right: 100px;
 }
+
+.membersProfile {
+    width: 25px;
+    border-radius: 50%;
+}

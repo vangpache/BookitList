@@ -19,6 +19,10 @@ const styles = {
     button: {
         margin: '10px'
     },
+    meetingsGrid: {
+        display: 'inline-block',
+        backgroundColor: 'red',
+    }
 }
 
 class BookDetails extends Component {
@@ -70,7 +74,7 @@ class BookDetails extends Component {
         return (
 
             <div>
-                <Grid item xs={12} className={this.props.classes.gridBookDetails} >
+                <Grid item xs={6} className={this.props.classes.gridBookDetails} >
                  
                             <CardContent> 
                                 <h4>{this.props.details.book_title} </h4>
@@ -84,6 +88,9 @@ class BookDetails extends Component {
                                 className={this.props.classes.button}>Leave Club</Button>}
 
                             </CardContent>
+                </Grid>
+                <Grid item xs={6} className={this.props.classes.meetingsGrid} >
+                        <h1>meeting dates here</h1>
                 </Grid>
                         
                

@@ -7,7 +7,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 router.get('/members/:clubId', rejectUnauthenticated, (req, res) => {
     console.log('in get members:', req.params.clubId);
     let clubId = req.params.clubId
-    let queryText = `SELECT "username" FROM "user_clubs" 
+    let queryText = `SELECT "username", "profile_image" FROM "user_clubs" 
                     JOIN "user" ON "user"."id" = "user_clubs"."user_id"
                     WHERE "clubs_id" = $1 AND "invite_accepted" = TRUE;`
     pool.query(queryText, [clubId])
