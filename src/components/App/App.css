@@ -138,3 +138,19 @@ input {
     width: 25px;
     border-radius: 50%;
 }
+
+.buttonLink {
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline:0;
+    color: blue;
+}
+
+.buttonLink .lessInfo {
+    display: none;
+}
+
+.active .lessInfo {
+    display: block;
+}

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, CardContent, TextField } from '@material-ui/core';
+import Moment from 'react-moment';
+import moment from 'moment';
 
 
 class Meetups extends Component {
@@ -15,7 +17,8 @@ class Meetups extends Component {
         location: '',
         notes: '',
         clubId: '',
-        meetup: false
+        meetup: false,
+        moreInfo: false,
     }
 
     getMeetups = () => {
@@ -25,8 +28,21 @@ class Meetups extends Component {
         })
     }
 
+    handleMoreInfo = (event) => {
+        // if(!this.state.moreInfo) {
+        //     this.setState({
+        //         moreInfo: true
+        //     })
+        // } else {
+        //     this.setState({
+        //         moreInfo: false
+        //     })
+        // }
+        event.currentTarget.classList.toggle('active');
+    }
+
     //TOGGLES THE ADD A NEW MEETUP DATE/TIME/LOCATION INPUTS
-    handleMeetup = () => {
+    handleMeetup = (id) => {
         if (!this.state.meetup) {
             this.setState({
                 meetup: true
@@ -58,14 +74,32 @@ class Meetups extends Component {
     render() {
 
 
+
         return (
 
             <CardContent>
-                <h3>Upcoming Meets:</h3>
-                <ul>
-                    <li>Monday Nov. 4th, 2019 @ GroundsWell Cafe</li>
-                    <li>Friday Nov. 8th, 2019 @ 980 Fuller Avenue, Saint Paul, MN 55104</li>
-                </ul>
+                <h3>Next meetup:</h3>
+
+                {this.props.meetups.map((meetup, i) => {
+                    return (
+                        <>
+                        <ul>
+                            <li>
+                                <Moment format="dddd, MMMM Do YYYY">{meetup.date}</Moment> @ {moment(meetup.start_time, "hh:mm").format('LT')}  to {moment(meetup.end_time, "hh:mm").format('LT')}
+                                     <div key={i} className="buttonLink" onClick={this.handleMoreInfo}>more info...
+                                     <div className="lessInfo">
+                                        <p>location: {meetup.location}</p>
+                                        <p>notes: {meetup.notes}</p>
+                                     </div>
+                                     </div>
+                                
+                            </li>
+                        </ul>
+                         
+                        </>
+                    )
+                })}
+    
                 {!this.state.meetup ?
                     < Button variant="outlined" onClick={this.handleMeetup} >Add new meetup</Button> :
             <>
@@ -76,8 +110,8 @@ class Meetups extends Component {
                     <TextField multiline rows="3" variant="outlined" type="text" placeholder="notes..." onChange={(event) => this.handleMeetupInputs('notes', event)} /><br/>
                     <Button variant="outlined" onClick={this.handleAddMeetup} >Add</Button><Button variant="outlined" onClick={this.handleMeetup}>Cancel</Button>
                     
-                    </> }
-                {JSON.stringify(this.props.meetups)}
+                    </> }<br/>
+                {/* {JSON.stringify(this.props.meetups)} */}
                 
             </CardContent>
         )
