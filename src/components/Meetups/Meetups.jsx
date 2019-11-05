@@ -21,6 +21,7 @@ const styles = {
     },
     meetupForm: {
         paddingTop: '10px',
+        maxWidth: '250px',
     },
     buttons: {
         margin: '5px',
@@ -81,7 +82,15 @@ class Meetups extends Component {
             type: 'POST_MEETUP',
             payload: this.state
         })
-        //ADD CLEAR INPUT FIELDS 
+        //ADD CLEAR INPUT FIELDS  AND SET MEETUP TO FALSE
+        this.setState({
+            date: '',
+            start_time: '',
+            end_time: '',
+            location: '',
+            notes: '',
+            meetup: false,
+        })
     }
 
 
@@ -119,16 +128,17 @@ class Meetups extends Component {
                 {!this.state.meetup ?
                     < Button className={this.props.classes.buttons} variant="outlined" onClick={this.handleMeetup} >Add new meetup</Button> :
             <div className={this.props.classes.meetupForm}>
-                    <TextField variant="outlined" type="date" onChange={(event) => this.handleMeetupInputs('date', event)} /><br />
-                    <TextField variant="outlined" type="time" onChange={(event) => this.handleMeetupInputs('start_time', event)} />
-                    <TextField variant="outlined" type="time" onChange={(event) => this.handleMeetupInputs('end_time', event)} /><br />
-                    <TextField multiline rows="3" variant="outlined" type="text" placeholder="location" onChange={(event) => this.handleMeetupInputs('location', event)} />
-                    <TextField multiline rows="3" variant="outlined" type="text" placeholder="notes..." onChange={(event) => this.handleMeetupInputs('notes', event)} /><br/>
+                    <TextField value={this.state.date} variant="outlined" type="date" onChange={(event) => this.handleMeetupInputs('date', event)} /><br />
+                    <TextField value={this.state.start_time} variant="outlined" type="time" onChange={(event) => this.handleMeetupInputs('start_time', event)} />
+                    <TextField value={this.state.end_time} variant="outlined" type="time" onChange={(event) => this.handleMeetupInputs('end_time', event)} /><br />
+                    <TextField value={this.state.location} multiline rows="3" variant="outlined" type="text" placeholder="location" onChange={(event) => this.handleMeetupInputs('location', event)} />
+                    <TextField value={this.state.notes} multiline rows="3" variant="outlined" type="text" placeholder="notes..." onChange={(event) => this.handleMeetupInputs('notes', event)} /><br/>
                         <Button className={this.props.classes.buttons} variant="outlined" onClick={this.handleAddMeetup} >Add</Button>
                         <Button className={this.props.classes.buttons} variant="outlined" onClick={this.handleMeetup}>Cancel</Button>
                     
                     </div> }<br/>
                 {/* {JSON.stringify(this.props.meetups)} */}
+                {/* {JSON.stringify(this.state)} */}
                 
             </CardContent>
         )

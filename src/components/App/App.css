@@ -25,17 +25,19 @@ input {
 }
 
 .log-in, .log-out, .register {
-  background-color: #305f72;
+  background-color: white;
   border-radius: 4px;
   min-height: 50px;
   min-width: 100px;
   outline:0;
   cursor: pointer;
-  color: white;
+  color: #305f72;
+  margin-left: 10px;
 }
 
 .log-in:hover, .log-out:hover, .register:hover {
-  background-color: #5f6769;
+  background-color: #5588a3;
+  color: white;
 }
 
 /* This line makes the "Register" and "Login" buttons look like links */

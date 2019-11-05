@@ -79,10 +79,13 @@ function* getMeetups(action) {
 
 function* postMeetup(action) {
     try {
-        yield axios.post('/database/meetup/post', action.payload)
+        let response = yield axios.post('/database/meetup/post', action.payload)
+        console.log('post meetup response.data is:', response.data[0].clubs_id);
+        
         //YIELD PUT GET MEETUPS HERE
         yield put ({
-            try: 'GET_MEETUPS'
+            type: 'GET_MEETUPS',
+            payload: response.data[0].clubs_id
         })
     } catch (error) {
         console.log('error in post meetup saga', error);

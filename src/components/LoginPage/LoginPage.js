@@ -8,6 +8,7 @@ import { withStyles } from '@material-ui/styles';
 const styles = theme => ({
   textFields: {
     margin: '10px',
+    backgroundColor: 'white',
   }
 })
 

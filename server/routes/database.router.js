@@ -1,7 +1,6 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
-// const axios = require('axios');
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 //GET ALL BOOKCLUB DETAILS FOR ONE USER TO RENDER ON HOME PAGE
@@ -53,7 +52,7 @@ router.get('/discussion/:id', rejectUnauthenticated, (req, res) => {
     let club_id = req.params.id
     let queryText = `SELECT "discussion"."id", "content", "clubs_id", "user_id", "date", "username" FROM "discussion"
                     JOIN "user" ON "user"."id" = "discussion"."user_id"
-                    WHERE "clubs_id" = $1 ORDER BY "date";`;
+                    WHERE "clubs_id" = $1 ORDER BY "date" DESC;`;
     pool.query(queryText, [club_id])
     .then((result) => {
         console.log('in GET discussion:', result);
@@ -68,7 +67,7 @@ router.get('/discussion/:id', rejectUnauthenticated, (req, res) => {
 router.get('/meetup/get/:id', rejectUnauthenticated, (req, res) => {
     console.log('in get meetups:', req.params.id);
     let club_id = req.params.id
-    let queryText = `SELECT * from "meetups" WHERE "clubs_id" = $1;`;
+    let queryText = `SELECT * from "meetups" WHERE "clubs_id" = $1 ORDER BY "meetups"."date" DESC;`;
 
     pool.query(queryText,[club_id])
     .then ((result) => {
@@ -138,11 +137,11 @@ router.post('/meetup/post', rejectUnauthenticated, (req, res) => {
     let notes =  req.body.notes;
     let user_id = req.user.id;
     let queryText = `INSERT INTO "meetups" ("date", "start_time", "end_time", "location", "notes", "clubs_id", "user_id")
-                        VALUES ($1, $2, $3, $4, $5, $6, $7);`
+                        VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;`
     
     pool.query(queryText, [date, start_time, end_time, location, notes, club_id, user_id])
     .then((result) => {
-        res.sendStatus(201);
+        res.send(result.rows);
     }).catch((err) => {
         res.sendStatus(500)
     })
