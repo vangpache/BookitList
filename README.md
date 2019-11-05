@@ -10,6 +10,7 @@ Bookit List is an application designed for bookworms and learners alike. It is a
 - PostgreSQL
 - Material UI
 - [Good Reads API](https://www.goodreads.com/api)
+- [Cloudinary](https://cloudinary.com/)
 - a full list of dependencies can be found in `package.json`
 
 ## Preview the App:
