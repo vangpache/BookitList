@@ -10,19 +10,13 @@
 .nav {
   overflow: hidden;
   background-color: #e8e8e8;
-  /* background-image: linear-gradient(to top, #5588a3, #94ceca); */
-  /* background-image: linear-gradient(to top, #3c4245, #5f6769); */
-  
   border-radius: 15px;
   height: 100px;
 }
 
 .nav-link {
   float: left;
-  /* color: #9c8e8e; */
   background-color: #e8e8e8;
-  /* background-image: linear-gradient(to top, #5588a3, #94ceca); */
-  /* background-image: linear-gradient(to top, #3c4245, #5f6769); */
   text-align: center;
   padding: 40px 10px;
   text-decoration: none;

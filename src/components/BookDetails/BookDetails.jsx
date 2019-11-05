@@ -9,14 +9,19 @@ import { withStyles } from '@material-ui/styles';
 const styles = {
     gridBookDetails: {
         display: 'inline-block',
-        float: 'left'
+        float: 'left',
+        backgroundColor: '#f7be16',
+        width: '300px',
+        marginRight: '5px',
+        height: '500px'
     },
     gridMembers: {
         display: 'inline-block',
         margin: '30px'
     },
     button: {
-        margin: '10px'
+        margin: '10px',
+        backgroundColor: 'white'
     },
 }
 
@@ -69,16 +74,17 @@ class BookDetails extends Component {
         return (
 
             <div>
-                {/* <Grid item xs={6} className={this.props.classes.gridBookDetails} > */}
+                {/* <Grid item xs={6}  > */}
                  
-                            <CardContent> 
+                            <CardContent className={this.props.classes.gridBookDetails}> 
                                 <h4>{this.props.details.book_title} </h4>
                                 <h5>by: {this.props.details.author} </h5>
                                 <img src={this.props.details.image_url} alt="book cover"/>
                                 <p>{this.props.details.description}</p>
 
                         {this.props.details.admin_status ?
-                            <Button variant="outlined" onClick={() => this.handleEdit(this.props.match.params)}>Edit</Button> :
+                            <Button variant="outlined" onClick={() => this.handleEdit(this.props.match.params)}
+                            className={this.props.classes.button}>Edit</Button> :
                             <Button variant="outlined" onClick={() => this.handleLeave(this.props.match.params.id)}
                                 className={this.props.classes.button}>Leave Club</Button>}
 

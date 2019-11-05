@@ -11,6 +11,9 @@ const styles = {
     detailsMeetups: {
         display: 'inline-block',
         verticalAlign: 'top',
+    },
+    heading: {
+        display: 'inline-block',
     }
 }
 
@@ -42,31 +45,32 @@ class ClubPage extends Component {
 
 
             <div >
-                <h1>{this.props.details.name}</h1>
+                
                 
                 <Grid container spacing={3}>
+                    <Grid item xs={12}>
+                        <h1 className={this.props.classes.heading} >{this.props.details.name}</h1>
+                        {this.props.details.admin_status ? < UsernameSearch clubId={this.props.match.params} /> : <> </>}
+
+                    </Grid>
     
                     <Grid item xs={6}>
                         <Grid item={12}  >
                             <Grid item xs={6} className={this.props.classes.detailsMeetups}>
-                            {/* <Card> */}
                             <BookDetails details={this.props.details}  />
-                            {/* </Card> */}
                             </Grid>
 
                             <Grid item xs={6} className={this.props.classes.detailsMeetups}>
-                            {/* <Card> */}
                                 <Meetups clubId={this.props.match.params}/>
-                            {/* </Card> */}
                             </Grid>
                         </Grid>
                         
-                        <Grid container spacing={3}>
+                        {/* <Grid container spacing={3}>
                             <Grid item xs={12}>
                                 {this.props.details.admin_status ? < UsernameSearch clubId={this.props.match.params} /> : <> </> }
                                 
                             </Grid>
-                        </Grid>
+                        </Grid> */}
                         
                     </Grid>
         

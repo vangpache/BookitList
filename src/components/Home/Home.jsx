@@ -8,7 +8,8 @@ import { Grid } from '@material-ui/core';
 
 const styles = {
     notificationsGrid: {
-        // background: '#cddc39',
+        background: '#facf5a',
+        borderRadius: '5px'
         // height: 200,
     }
 }

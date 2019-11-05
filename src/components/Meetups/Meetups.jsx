@@ -3,7 +3,30 @@ import { connect } from 'react-redux';
 import { Button, CardContent, TextField } from '@material-ui/core';
 import Moment from 'react-moment';
 import moment from 'moment';
+import { withStyles } from '@material-ui/styles';
 
+
+const styles = {
+    meetupDetails: {
+        backgroundColor: '#e8e8e8',
+        width: '300px',
+        height: '500px'
+    },
+    meetupList: {
+        backgroundColor: 'white',
+        height: '100px',
+        overflowY: 'scroll',
+        paddingTop: '0px',
+        borderRadius: '3px',
+    },
+    meetupForm: {
+        paddingTop: '10px',
+    },
+    buttons: {
+        margin: '5px',
+        backgroundColor: 'white',
+    }
+}
 
 class Meetups extends Component {
     componentDidMount() {
@@ -18,7 +41,6 @@ class Meetups extends Component {
         notes: '',
         clubId: '',
         meetup: false,
-        moreInfo: false,
     }
 
     getMeetups = () => {
@@ -29,15 +51,6 @@ class Meetups extends Component {
     }
 
     handleMoreInfo = (event) => {
-        // if(!this.state.moreInfo) {
-        //     this.setState({
-        //         moreInfo: true
-        //     })
-        // } else {
-        //     this.setState({
-        //         moreInfo: false
-        //     })
-        // }
         event.currentTarget.classList.toggle('active');
     }
 
@@ -68,6 +81,7 @@ class Meetups extends Component {
             type: 'POST_MEETUP',
             payload: this.state
         })
+        //ADD CLEAR INPUT FIELDS 
     }
 
 
@@ -77,8 +91,9 @@ class Meetups extends Component {
 
         return (
 
-            <CardContent>
-                <h3>Next meetup:</h3>
+            <CardContent className={this.props.classes.meetupDetails}>
+                <h4>Next meetup:</h4>
+                <CardContent className={this.props.classes.meetupList} >
 
                 {this.props.meetups.map((meetup, i) => {
                     return (
@@ -99,18 +114,20 @@ class Meetups extends Component {
                         </>
                     )
                 })}
+                </CardContent>
     
                 {!this.state.meetup ?
-                    < Button variant="outlined" onClick={this.handleMeetup} >Add new meetup</Button> :
-            <>
+                    < Button className={this.props.classes.buttons} variant="outlined" onClick={this.handleMeetup} >Add new meetup</Button> :
+            <div className={this.props.classes.meetupForm}>
                     <TextField variant="outlined" type="date" onChange={(event) => this.handleMeetupInputs('date', event)} /><br />
                     <TextField variant="outlined" type="time" onChange={(event) => this.handleMeetupInputs('start_time', event)} />
                     <TextField variant="outlined" type="time" onChange={(event) => this.handleMeetupInputs('end_time', event)} /><br />
                     <TextField multiline rows="3" variant="outlined" type="text" placeholder="location" onChange={(event) => this.handleMeetupInputs('location', event)} />
                     <TextField multiline rows="3" variant="outlined" type="text" placeholder="notes..." onChange={(event) => this.handleMeetupInputs('notes', event)} /><br/>
-                    <Button variant="outlined" onClick={this.handleAddMeetup} >Add</Button><Button variant="outlined" onClick={this.handleMeetup}>Cancel</Button>
+                        <Button className={this.props.classes.buttons} variant="outlined" onClick={this.handleAddMeetup} >Add</Button>
+                        <Button className={this.props.classes.buttons} variant="outlined" onClick={this.handleMeetup}>Cancel</Button>
                     
-                    </> }<br/>
+                    </div> }<br/>
                 {/* {JSON.stringify(this.props.meetups)} */}
                 
             </CardContent>
@@ -125,4 +142,4 @@ const mapStateToProps = reduxStore => {
     }
 }
 
-export default connect(mapStateToProps)(Meetups);
+export default withStyles(styles) (connect(mapStateToProps)(Meetups));

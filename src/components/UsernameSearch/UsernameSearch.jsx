@@ -9,6 +9,17 @@ import { withStyles } from '@material-ui/styles';
 const styles = theme => ({
     addButton: {
         margin: '20px;'
+    },
+    heading: {
+        display: 'inline-block',
+        float: 'right',
+        // backgroundColor: 'red',
+        width: '400px'
+        // padding: '0px'
+    },
+    inviteHeading: {
+        display: 'inline-block',
+        paddingRight: '10px'
     }
 })
 
@@ -110,16 +121,16 @@ class UsernameSearch extends Component {
 
         return (
             <>
-            <Card>
-                <CardContent>
-                        <h1>Invite:</h1>
+                {/* <Card > */}
+                    <CardContent className={this.props.classes.heading}>
+                        {/* <h3 className={this.props.classes.inviteHeading}>Invite:</h3> */}
                         
                             <input variant="filled" type="text" placeholder="search for users..."
                                 ref={input => this.search = input} value={this.state.search.query}
-                                onChange={this.handleInputChange} />
+                                onChange={this.handleInputChange} /><br/>
 
                         {!this.state.search.query ?  
-                            <span>search for friends</span> :
+                            <span>invite friends to join this circle...</span> :
                             <span>{this.props.users.username}
                                 <Button variant="outlined" onClick={this.handleAddUser}
                                         className={this.props.classes.addButton} >Add user</Button></span>}
@@ -136,7 +147,7 @@ class UsernameSearch extends Component {
                         <Button variant="outlined" color="primary" onClick={() => this.handleInvites(this.props.clubId)}>Send Invites 
                         <SendIcon /></Button><br/>
                 </CardContent>
-            </Card>
+            {/* </Card> */}
                 
                     
                

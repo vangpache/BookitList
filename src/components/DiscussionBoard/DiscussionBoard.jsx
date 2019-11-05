@@ -7,12 +7,23 @@ import { Button, Card, CardContent, TextField  } from '@material-ui/core';
 import './DiscussionBoard.css';
 
 const styles = {
+    board: {
+        backgroundColor: '#305f72',
+        height: '500px'
+    },
     textField: {
-        border: '#ff9100'
+        backgroundColor: 'white',
+        overflowY: 'scroll',
+        height: '56px'
     },
     card: {
-        margin: '10px 0px 10px 0px'
+        margin: '10px 0px 10px 0px',
+        height: '230px',
+        overflowY: 'scroll',
     },
+    postButton: {
+        backgroundColor: '#f7be16'
+    }
 }
 
 class DiscussionBoard extends Component {
@@ -63,9 +74,9 @@ class DiscussionBoard extends Component {
 
             <div>
                 <Card>
-                    <CardContent>
+                    <CardContent className={this.props.classes.board} >
                         <div className="discussionHeadingMembersDiv">
-                        <div>
+                        <div >
                         <h2>Discussion Board</h2>
                         </div>
                         <div className="showMembers" >
@@ -86,7 +97,7 @@ class DiscussionBoard extends Component {
                                     onChange={this.handleChange} />
                         <Button className={this.props.classes.postButton} variant="outlined" onClick={this.handleClick} >Post</Button>
                         <Card className={this.props.classes.card} >
-                            <CardContent>
+                            <CardContent className={this.props.classes.cardContent}>
                                 {/* <p>user posts render here</p> */}
                                 {this.props.discussionBoard.map(post => (
                                     <p><span>{post.username}:</span> {post.content} <span> <Moment format="LLLL">{post.date}</Moment> </span></p> 

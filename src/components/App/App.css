@@ -8,8 +8,6 @@ body {
 }
 
 form {
-    /* background-image: linear-gradient(to top, #f7be16, #f2d6eb); */
-    /* background-image: linear-gradient(to top, #5588a3, #e8e8e8); */
     background-color: #305f72;
     width: 20%;
     height: 450px;
@@ -17,7 +15,6 @@ form {
     margin-bottom: 20px;
     padding: 25px;
     border-radius: 20px;
-    /* color: #5d1451; */
     color: white;
     border: white solid 1px;
 }
@@ -28,11 +25,8 @@ input {
 }
 
 .log-in, .log-out, .register {
-  /* background-color: #ff9100; */
-  /* background-color: #5d1451; */
   background-color: #305f72;
   border-radius: 4px;
-  /* color: #f8f8f8; */
   min-height: 50px;
   min-width: 100px;
   outline:0;
@@ -41,7 +35,6 @@ input {
 }
 
 .log-in:hover, .log-out:hover, .register:hover {
-  /* background-color: #745c97; */
   background-color: #5f6769;
 }
 
@@ -58,39 +51,30 @@ input {
 }
 
 .appContainer {
-    /* text-align: center; */
     margin: 30px;
 }
 
 .homePage {
     padding: 25px;
     margin: 5px;
-    background-color: #facf5a;
+    background-color: #f7be16;
     border-radius: 10px;
 }
 
 .userProfileBar {
-    /* background-color: #f7be16; */
     width: 250px;
     text-align: center;
     padding: 15px;
     background-image: linear-gradient(to top, #94ceca, #5588a3);
     border-radius: 10px;
-    margin: 5px;
-    /* color: #dfcdc3; */
-    
+    margin: 5px; 
 }
 
-.userProfileHome {
-    padding: 15px;
-    background-color: green;
-}
-
+/* sets the profile image as a circle */
 .profileImage {
     border-radius: 50%;
-    /* padding: 5px; */
     margin: 5px;
-    border: 5px solid white;
+    border: 3px solid white;
 }
 
 .homePageContainer {
@@ -105,7 +89,6 @@ input {
 }
 
 .searchBooksInput {
-    /* background-color: black; */
     margin-left: auto;
     margin-top: 10px;
     padding: 10px;
@@ -126,6 +109,10 @@ input {
 
 .ul {
     list-style: none;
+    height: 85px;
+    overflow-y: scroll;
+    padding-right: 20px;
+    padding-left: 10px;
     }
 
 .showMembers {
@@ -139,6 +126,7 @@ input {
     border-radius: 50%;
 }
 
+/* toggles the "see more" information for each club's meetup dates */
 .buttonLink {
     background: none;
     border: none;
@@ -147,10 +135,12 @@ input {
     color: blue;
 }
 
+/* toggles the "see more" information for each club's meetup dates */
 .buttonLink .lessInfo {
     display: none;
 }
 
+/* toggles the "see more" information for each club's meetup dates */
 .active .lessInfo {
     display: block;
 }
