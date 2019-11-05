@@ -57,8 +57,15 @@ CREATE TABLE "user" (
 ### Landing Page: Home Display of Current Reading Circles
 ![](public/images/Home-read.png)
 
+### User Profile Bar
+![](public/images/profileBar.png)
+![](public/images/profileBarEdit.png)
+
 ### User Features
 ![](public/images/features-crud.png)
+
+### Making edits
+![](public/images/edit.png)
 
 # Completed Features
 - Search for books and capture data
