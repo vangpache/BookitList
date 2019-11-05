@@ -68,15 +68,15 @@ CREATE TABLE "user" (
 ![](public/images/edit.png)
 
 # Completed Features
-- Search for books and capture data
+- Search for books and capture data via Good Reads API
 - Create new circles and invite users to join
 - Recieve in-app notifications of new invitations
 - Accept and Decline invites to circles
 - Post messages on a discussion board within each circle
 - Edit existing circles
+- implement a user profile bar and image upload/avatar capablity
 
 # Next Steps
-- implement a user profile and image upload/avatar capablity
 - implement email or text message ability 
 - implement the ability to archive completed or deleted circles
 - implement the ability to search books and link to more information
