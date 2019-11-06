@@ -1,12 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { GridList, GridListTile, GridListTileBar, IconButton, Table, TableBody, TableCell, TableRow  } from '@material-ui/core';
+import { GridList, GridListTile, IconButton, Table, TableBody, TableCell, TableRow  } from '@material-ui/core';
 import { MailOutline, Cancel, CheckCircle } from '@material-ui/icons';
+import CancelOutlined from '@material-ui/icons/CancelOutlined';
 import { withStyles } from '@material-ui/styles';
 import CreateNewSearchBar from '../CreateNewSearchBar/CreateNewSearchBar';
 
 
 const styles = {
+    iconRoot: {
+        '& > svg': {
+            margin: '5px',
+        },
+        float: 'right',
+    },
+    iconHover: {
+        '&:hover': {
+            color: 'red'
+        }
+    },
     iconbuttonAccept: {
         margin: '15px',
         fontSize: '1em',
@@ -34,7 +46,7 @@ const styles = {
         maxHeight: '300px',
         overflowY: 'scroll',
         borderRadius: '5px'
-    }
+    },
     // notification: {
     //     backgroundColor: '#ffd600',
     //     padding: '0px'
@@ -56,6 +68,12 @@ class Notifications extends Component {
         this.props.dispatch({
             type: 'DELETE_INVITE',
             payload: id
+        })
+    }
+
+    handleClearSearch = () => {
+        this.props.dispatch({
+            type: 'CLEAR_BOOKS_REDUCER'
         })
     }
 
@@ -96,7 +114,15 @@ class Notifications extends Component {
                 {/* {JSON.stringify(this.props.notifications)} */}
                 <div className="searchBooksInput">
                     <CreateNewSearchBar />
-                    <div className={this.props.classes.gridListDiv} >
+                    <div className={this.props.classes.gridListDiv}>
+
+                        {this.props.booksList.length > 0 && 
+                        <IconButton className={this.props.classes.iconRoot}>
+                            <CancelOutlined 
+                            className={this.props.classes.iconHover}
+                            color="error"
+                            onClick={this.handleClearSearch} /></IconButton>}
+
                     <GridList className={this.props.classes.gridList} cols={1} rows={1}>
                         {this.props.booksList.map(tile => (
                             <>
