@@ -127,10 +127,9 @@ class EditDetails extends Component {
                     <Grid item xs={6} >
                         <Grid container spacing={3}>
                             <Grid item xs={12}>
-    
                             <CreateNewSearchBar />
-    
                             </Grid>
+                            
                             <Grid item xs={12}>
                                 <Card>
                                     <CardContent className={this.props.classes.cardContent}>

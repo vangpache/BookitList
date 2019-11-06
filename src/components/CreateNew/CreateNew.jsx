@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Grid, Paper, TextField, Button } from '@material-ui/core';
+import { Card, CardContent, Grid, Paper, TextField, Button } from '@material-ui/core';
 import CreateNewSearchBar from '../CreateNewSearchBar/CreateNewSearchBar';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -15,24 +15,27 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 
 
 const styles = theme => ({
+    rootContainer: {
+        paddingLeft: '30px',
+        backgroundColor: '#f7be16',
+        borderRadius: '5px',
+    },
     root: {
         display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'space-around',
         overflow: 'hidden',
-        backgroundColor: theme.palette.background.paper,
+        // backgroundColor: theme.palette.background.paper,
     },
     paper: {
         padding: theme.spacing(2),
         textAlign: 'center',
     },
-    searchBarDiv: {
-        textAlign: 'center'
-    },
     gridList: {
-        flexWrap: 'nowrap',
+        // flexWrap: 'nowrap',
         // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
         transform: 'translateZ(0)',
+        overflowY: 'scroll'
     },
     title: {
         // color: theme.palette.primary.light,
@@ -43,8 +46,8 @@ const styles = theme => ({
             'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
     },
     textField: {
-        width: 275,
-        margin: '20px'
+        width: '500px',
+        marginLeft: '20px'
     },
     cancelButton: {
         margin: '20px',
@@ -54,10 +57,20 @@ const styles = theme => ({
         margin: '20px',
         float: 'right',
     },
-    showSelectionGrid: {
-        // margin: '5px',
-        // backgroundColor: 'red',
-        textAlign: 'center'
+    showSelectionDiv: {
+        textAlign: 'center',
+        height: '280px',
+        overflowY: 'scroll',
+        backgroundColor: '#e8e8e8',
+        paddingLeft: '20px',
+        borderRadius: '5px',
+        marginBottom: '10px',
+    },
+    cardContent: {
+        margin: 'auto',
+    },
+    card: {
+        marginTop: '20px'
     }
     
   
@@ -137,12 +150,20 @@ class CreateNew extends Component {
 
         })
     }
+    //ONCLICK OF CANCEL BUTTON RESETS BOOK DETAILS STATE TO EMPTY STRINGS
+    handleCancelBookSelection = () => {
+        this.setState({
+            book_title: '',
+            author: '',
+            image_url: ''
+        })
+    }
 
     render() {
 
       
         return (
-            <div>
+            <div className={this.props.classes.rootContainer}>
                 <h1 onClick={this.handleAutofill}>Create a New Circle:</h1>
                 <Grid container spacing={3}>
                     <Grid item xs={6} >
@@ -150,9 +171,19 @@ class CreateNew extends Component {
                           <Grid item xs={12}>
                                 <CreateNewSearchBar />
                           </Grid>
-                          <Grid item xs={7}>
-                                    <Paper>
-                                        {/* <CreateNewInputs state={this.props.state} /> */}
+                          <Grid item xs={12}>
+                                    <Card className={this.props.classes.card} >
+                                    <CardContent className={this.props.classes.cardContent}>
+                                        
+                                            {this.state.book_title ?
+                                                <div className={this.props.classes.showSelectionDiv}>
+                                                    <p>You chose this book:</p>
+                                                    <span>{this.state.book_title}</span><br />
+                                                    <span>author: {this.state.author}</span><br />
+                                                <img src={this.state.image_url} alt="book title cover" /><br/>
+                                                <button onClick={this.handleCancelBookSelection} >cancel</button>
+                                                </div> : <span></span>}
+                                            
                                             <TextField id="outlined-textarea" label="name of circle"
                                                 className={this.props.classes.textField}
                                                 margin="normal" variant="outlined" type="text"
@@ -171,15 +202,8 @@ class CreateNew extends Component {
                                                 <Button className={this.props.classes.cancelButton} variant="outlined" color="primary" onClick={this.handleCancel}>Cancel</Button>
                                                 <Button className={this.props.classes.createButton} variant="outlined" onClick={this.handleCreate} >Create New</Button>
                                             </div>
-                                    </Paper>
-                          </Grid>
-                          <Grid item xs={5} className={this.props.classes.showSelectionGrid} >
-                              {this.state.book_title ? 
-                              <>
-                              <p>You chose this book:</p>
-                                <span>{this.state.book_title}</span><br/>
-                                <span>author: {this.state.author}</span><br/>
-                                    <img src={this.state.image_url} alt="book title cover" /></> : <span></span>}
+                                    </CardContent>
+                                    </Card>
                           </Grid>
                         
                         </Grid>
