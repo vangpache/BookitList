@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { IconButton, InputBase, Paper, Table, TableBody, TableCell, TableRow  } from '@material-ui/core';
+import { GridList, GridListTile, GridListTileBar, IconButton, Table, TableBody, TableCell, TableRow  } from '@material-ui/core';
 import { MailOutline, Cancel, CheckCircle } from '@material-ui/icons';
-import SearchIcon from '@material-ui/icons/Search';
-import Book from '@material-ui/icons/Book';
 import { withStyles } from '@material-ui/styles';
+import CreateNewSearchBar from '../CreateNewSearchBar/CreateNewSearchBar';
+
 
 const styles = {
     iconbuttonAccept: {
@@ -12,14 +12,29 @@ const styles = {
         fontSize: '1em',
         color: 'green',
         background: 'white',
-        // backgroundColor: '#ffd600'
     },
     iconbuttonDecline: {
         margin: '15px',
         fontSize: '1em',
         color: 'red',
-        // backgroundColor: '#ffd600'
     },
+    bookCover: {
+        width: '120px'
+    },
+    bookDetails: {
+        display: 'inline-block',
+        padding: '5px',
+        verticalAlign: 'top',
+        maxWidth: '200px'
+        
+    },
+    gridListDiv: {
+        width: '400px',
+        backgroundColor: '#e8e8e8',
+        maxHeight: '300px',
+        overflowY: 'scroll',
+        borderRadius: '5px'
+    }
     // notification: {
     //     backgroundColor: '#ffd600',
     //     padding: '0px'
@@ -80,13 +95,24 @@ class Notifications extends Component {
                 </div>
                 {/* {JSON.stringify(this.props.notifications)} */}
                 <div className="searchBooksInput">
-                <Paper>
-                    <Book />
-                    <InputBase placeholder="search books..."/>
-                        <IconButton onClick={this.handleClick}>
-                            <SearchIcon />
-                        </IconButton>
-                </Paper>
+                    <CreateNewSearchBar />
+                    <div className={this.props.classes.gridListDiv} >
+                    <GridList className={this.props.classes.gridList} cols={1} rows={1}>
+                        {this.props.booksList.map(tile => (
+                            <>
+                            <GridListTile key={tile} onClick={() => this.handleClick(tile)} >
+                                <div className={this.props.classes.bookDetails} >
+                                <img className={this.props.classes.bookCover} src={tile.best_book.image_url._text} alt={tile.best_book.title._text} />
+                                </div>
+                                <div className={this.props.classes.bookDetails}>
+                                    <p> {tile.best_book.title._text}</p>
+                                    <p> by: {tile.best_book.author.name._text}</p>
+                                </div>
+                            </GridListTile>
+                            </>
+                        ))}
+                    </GridList>
+                    </div>
                 </div>
             </div>
         )
@@ -95,7 +121,8 @@ class Notifications extends Component {
 
 const mapStateToProps = reduxStore => {
     return {
-        notifications: reduxStore.notificationsReducer
+        notifications: reduxStore.notificationsReducer,
+        booksList: reduxStore.booksReducer,
     }
 }
 
