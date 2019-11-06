@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { GridList, GridListTile, IconButton, Table, TableBody, TableCell, TableRow  } from '@material-ui/core';
 import { MailOutline, Cancel, CheckCircle } from '@material-ui/icons';
 import CancelOutlined from '@material-ui/icons/CancelOutlined';
+import AddCircleOutlinedIcon from '@material-ui/icons/AddCircleOutlined';
 import { withStyles } from '@material-ui/styles';
 import CreateNewSearchBar from '../CreateNewSearchBar/CreateNewSearchBar';
 
@@ -133,6 +134,9 @@ class Notifications extends Component {
                                 <div className={this.props.classes.bookDetails}>
                                     <p> {tile.best_book.title._text}</p>
                                     <p> by: {tile.best_book.author.name._text}</p>
+                                    <IconButton>
+                                        <AddCircleOutlinedIcon fontSize="medium"  />
+                                    </IconButton> <span>Create New Circle</span>
                                 </div>
                             </GridListTile>
                             </>
