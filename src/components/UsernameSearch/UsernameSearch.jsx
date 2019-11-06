@@ -27,9 +27,9 @@ const styles = theme => ({
 class UsernameSearch extends Component {
 
     // componentDidUpdate(prevProps) {
-    //     // let invites = this.state.invited
-    //     if(prevProps.invited !== this.props.invited) {
-    //         this.handleAddUser();
+    //     if(prevProps.invited !== this.state.invited) {
+    //         console.log('changes');
+            
     //     }
     // }
 
@@ -122,8 +122,9 @@ class UsernameSearch extends Component {
         return (
             <>
                 {/* <Card > */}
+                {/* {JSON.stringify(this.props)} */}
                     <CardContent className={this.props.classes.heading}>
-                        {/* <h3 className={this.props.classes.inviteHeading}>Invite:</h3> */}
+                        
                         
                             <input variant="filled" type="text" placeholder="search for users..."
                                 ref={input => this.search = input} value={this.state.search.query}

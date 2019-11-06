@@ -65,13 +65,6 @@ class ClubPage extends Component {
                             </Grid>
                         </Grid>
                         
-                        {/* <Grid container spacing={3}>
-                            <Grid item xs={12}>
-                                {this.props.details.admin_status ? < UsernameSearch clubId={this.props.match.params} /> : <> </> }
-                                
-                            </Grid>
-                        </Grid> */}
-                        
                     </Grid>
         
                     <Grid item xs={6}>

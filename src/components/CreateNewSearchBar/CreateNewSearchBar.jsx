@@ -17,10 +17,13 @@ const styles = theme => ({
         padding: 5,
     },
     paper: {
-        width: 375
+        width: 375,
+  
     },
     divContainer: {
-        margin: 20,
+        backgroundColor: 'white',
+        width: '100%',
+        borderRadius: '5px'
     }
 });
 
@@ -53,14 +56,14 @@ class CreateNewSearchBar extends Component {
         const { classes } = this.props;
 
         return (
-            <div className={classes.divContainer} >
-                {/* <Paper className={classes.paper}> */}
+            <div className={this.props.classes.divContainer} >
+                <div>
                     <Book />
                     <InputBase className={classes.input} placeholder="search books..." onChange={this.handleSearchQuery}/>
                     <IconButton className={classes.iconButton} onClick={this.handleClick}>
                         <SearchIcon  />
                     </IconButton>
-                {/* </Paper>  */}
+                </div>
             </div>
               
          

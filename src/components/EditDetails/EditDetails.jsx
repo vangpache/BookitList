@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 // import UsernameSearch from '../UsernameSearch/UsernameSearch';
 
 import { withStyles } from '@material-ui/core/styles';
-import { Paper, Grid } from '@material-ui/core';
+import { Card, CardContent, Paper, Grid } from '@material-ui/core';
 import { classes } from 'istanbul-lib-coverage';
 
 
@@ -19,7 +19,6 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 const styles = {
     textField: {
         width: 500,
-        margin: '20px'
     },
     cancelButton: {
         margin: '20px',
@@ -28,7 +27,23 @@ const styles = {
     editButton: {
         margin: '20px',
         float: 'right',
-    } 
+    },
+    container: {
+        paddingLeft: '30px',
+        backgroundColor: '#f7be16',
+        borderRadius: '5px',
+    },
+    cardContent: {
+        margin: 'auto',
+    },
+    bookSelection: {
+        height: '280px',
+        overflowY: 'scroll',
+        backgroundColor: '#e8e8e8',
+        paddingLeft: '20px',
+        borderRadius: '5px',
+        marginBottom: '10px',
+    }
 }
 
 class EditDetails extends Component {
@@ -51,8 +66,6 @@ class EditDetails extends Component {
     }
 
     getClubPageDetails = () => {
-        console.log('in get club page details for id:', this.props.match.params.id);
-        //take the club Id passed and dispatch it to GET book details
         this.props.dispatch({
             type: 'USE_BOOK_ID',
             payload: this.props.match.params.id
@@ -60,7 +73,6 @@ class EditDetails extends Component {
     }
 
     handleClick = (tile) => {
-        console.log('book clicked');
         this.setState({
             cancelSelection: true,
             book_title: tile.best_book.title._text,
@@ -109,57 +121,61 @@ class EditDetails extends Component {
         return (
 
 
-            <div>
-                <h1 >Edit Club Details:</h1>
+            <div className={this.props.classes.container}>
+                <h1 >Edit Reading Circle:</h1>
                 <Grid container spacing={3}>
                     <Grid item xs={6} >
                         <Grid container spacing={3}>
                             <Grid item xs={12}>
-                        <Paper className={classes.paper} >
+    
                             <CreateNewSearchBar />
-                        </Paper>
+    
                             </Grid>
                             <Grid item xs={12}>
+                                <Card>
+                                    <CardContent className={this.props.classes.cardContent}>
+                                <div className={this.props.classes.bookSelection}>
+                                    {!this.state.cancelSelection ?
+                                        <div>
+                                            <h3>current book selection:</h3>
+                                            <p>
+                                            {this.props.details.book_title} < br />
+                                            by {this.props.details.author}<br /><br/>
+                                            <img src={this.props.details.image_url} alt="book cover" />
+                                                    </p>
+                                        </div> :
+                                        <div>
+                                            <h3>New book selection:</h3>
+                                            {this.state.book_title}<br />
+                                            by {this.state.author}<br />
+                                            <img src={this.state.image_url} alt="book cover" /><br />
+                                            <button onClick={this.handleCancelSelection}>cancel</button>
+                                        </div>
+                                    }
+                                </div>
 
+                                <div>
+                                    <label>Edit circle name:</label><br/>
                                 <TextField variant="outlined" type="text" margin="normal"
                                     id="outlined-textarea" className={this.props.classes.textField}
                                     placeholder="Name of cirlce / book title"
                                     defaultValue={this.props.details.name}
                                     onChange={(event) => this.handleChange('name', event)} />
                                 <br /><br />
+                                <label>Edit circle description:</label>
                                 <TextField variant="outlined" type="text" margin="normal"
                                     id="outlined-textarea" className={this.props.classes.textField}
                                     placeholder="Description"
                                     defaultValue={this.props.details.description}
                                     onChange={(event) => this.handleChange('description', event)} />
                                 <br /><br />
-                                <div>
-                                    
-                                    {/* {JSON.stringify(this.props.details)}<br/> */}
-                                    {!this.state.cancelSelection ?
-                                    <div>
-                                        <h3>current book selection:</h3>
-                                        { this.props.details.book_title } < br />
-                                        by {this.props.details.author}<br />
-                                    <img src={this.props.details.image_url} alt="book cover" />
-                                    </div> :
-                                    <div>
-                                    <h3>New book selection:</h3>
-                                    {this.state.book_title}<br />
-                                    by {this.state.author}<br />
-                                    <img src={this.state.image_url} alt="book cover" /><br/>
-                                    <button onClick={this.handleCancelSelection}>cancel</button>
-                                    </div>
-                                }
-                                    
                                 </div>
-
-                                {/* {JSON.stringify(this.state)} */}
                                 <div>
                                     <Button className={this.props.classes.cancelButton} variant="outlined" onClick={() => this.handleCancel(this.props.match.params.id)} >Cancel</Button>
                                     <Button className={this.props.classes.editButton} variant="outlined" onClick={this.handleCreate} >Make Edits</Button>
                                 </div>
-
+                                    </CardContent>
+                                </Card>
                             </Grid>
                         </Grid>
                     </Grid>
