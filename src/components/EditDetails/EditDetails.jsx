@@ -71,7 +71,12 @@ class EditDetails extends Component {
     }
     handleCancelSelection = () => {
         this.setState({
-            cancelSelection: false
+                book_title: this.props.details.book_title,
+                author: this.props.details.author,
+                image_url: this.props.details.image_url,
+                name: this.props.details.name,
+                description: this.props.details.description,
+                cancelSelection: false
         })
     }
 
@@ -149,7 +154,7 @@ class EditDetails extends Component {
                                     
                                 </div>
 
-                                {JSON.stringify(this.state)}
+                                {/* {JSON.stringify(this.state)} */}
                                 <div>
                                     <Button className={this.props.classes.cancelButton} variant="outlined" onClick={() => this.handleCancel(this.props.match.params.id)} >Cancel</Button>
                                     <Button className={this.props.classes.editButton} variant="outlined" onClick={this.handleCreate} >Make Edits</Button>
