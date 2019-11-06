@@ -34,16 +34,20 @@ const styles = {
 class EditDetails extends Component {
     componentDidMount() {
         this.getClubPageDetails();
-    }
-
-
-    state = {
-        clubId: this.props.match.params.id,
+        this.setState({
         book_title: this.props.details.book_title,
         author: this.props.details.author,
         image_url: this.props.details.image_url,
         name: this.props.details.name,
         description: this.props.details.description,
+        })
+    }
+
+
+    state = {
+        clubId: this.props.match.params.id,
+        cancelSelection: false
+        
     }
 
     getClubPageDetails = () => {
@@ -58,11 +62,16 @@ class EditDetails extends Component {
     handleClick = (tile) => {
         console.log('book clicked');
         this.setState({
-
+            cancelSelection: true,
             book_title: tile.best_book.title._text,
             author: tile.best_book.author.name._text,
             image_url: tile.best_book.image_url._text,
 
+        })
+    }
+    handleCancelSelection = () => {
+        this.setState({
+            cancelSelection: false
         })
     }
 
@@ -82,7 +91,6 @@ class EditDetails extends Component {
             payload: this.state,
             history: this.props.history
         })
-        // this.props.history.push('/club')
     }
 
     handleCancel = () => {
@@ -120,6 +128,28 @@ class EditDetails extends Component {
                                     defaultValue={this.props.details.description}
                                     onChange={(event) => this.handleChange('description', event)} />
                                 <br /><br />
+                                <div>
+                                    
+                                    {/* {JSON.stringify(this.props.details)}<br/> */}
+                                    {!this.state.cancelSelection ?
+                                    <div>
+                                        <h3>current book selection:</h3>
+                                        { this.props.details.book_title } < br />
+                                        by {this.props.details.author}<br />
+                                    <img src={this.props.details.image_url} alt="book cover" />
+                                    </div> :
+                                    <div>
+                                    <h3>New book selection:</h3>
+                                    {this.state.book_title}<br />
+                                    by {this.state.author}<br />
+                                    <img src={this.state.image_url} alt="book cover" /><br/>
+                                    <button onClick={this.handleCancelSelection}>cancel</button>
+                                    </div>
+                                }
+                                    
+                                </div>
+
+                                {JSON.stringify(this.state)}
                                 <div>
                                     <Button className={this.props.classes.cancelButton} variant="outlined" onClick={() => this.handleCancel(this.props.match.params.id)} >Cancel</Button>
                                     <Button className={this.props.classes.editButton} variant="outlined" onClick={this.handleCreate} >Make Edits</Button>

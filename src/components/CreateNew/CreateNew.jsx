@@ -16,7 +16,6 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 
 const styles = theme => ({
     root: {
-        // flexGrow: 1,
         display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'space-around',
